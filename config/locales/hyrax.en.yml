@@ -1,0 +1,155 @@
+---
+en:
+  blacklight:
+    search:
+      fields:
+        facet:
+          based_near_label_sim: Location
+          creator_sim: Creator
+          file_format_sim: Format
+          generic_type_sim: Type
+          keyword_sim: Keyword
+          language_sim: Language
+          publisher_sim: Publisher
+          subject_sim: Subject
+        index:
+          based_near_tesim: Location
+          contributor_tesim: Contributor
+          creator_tesim: Creator
+          date_created_tesim: Date Created
+          date_modified_dtsi: Date Modified
+          date_uploaded_dtsi: Date Uploaded
+          description_tesim: Description
+          file_format_tesim: File Format
+          identifier_tesim: Identifier
+          keyword_tesim: Keyword
+          language_tesim: Language
+          license_tesim: License
+          publisher_tesim: Publisher
+          rights_statement_tesim: Rights Statement
+          subject_tesim: Subject
+        show:
+          based_near_tesim: Location
+          contributor_tesim: Contributor
+          creator_tesim: Creator
+          date_created_tesim: Date Created
+          date_modified_dtsi: Date Modified
+          date_uploaded_dtsi: Date Uploaded
+          description_tesim: Description
+          file_format_tesim: File Format
+          identifier_tesim: Identifier
+          keyword_tesim: Keyword
+          language_tesim: Language
+          license_tesim: License
+          publisher_tesim: Publisher
+          rights_statement_tesim: Rights Statement
+          subject_tesim: Subject
+          title_tesim: Title
+  hyrax:
+    search:
+      button:
+        html: <span class="glyphicon glyphicon-search"></span> Go
+        text: Search
+      form:
+        option:
+          all:
+            label_long: All of %{application_name}
+            label_short: All
+          my_collections:
+            label_long: My Collections
+            label_short: My Collections
+          my_shares:
+            label_long: My Shares
+            label_short: My Shares
+          my_works:
+            label_long: My Works
+            label_short: My Works
+        q:
+          label: Search %{application_name}
+          placeholder: Search...
+    account_name: My Institution Account Id
+    directory:
+      suffix: "@example.org"
+    footer:
+      copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
+      service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
+    file_set:
+      browse_view: Browse View
+      show:
+        download: Download the file
+        downloadable_content:
+          audio_link: Download Audio Master
+          default_link: Download File
+          heading: Downloadable Content
+          image_link: Download Image
+          office_link: Download Original
+          ogg_link: Download Ogg
+          mp3_link: Download MP3
+          webm_link: Download WebM
+          pdf_link: Download PDF
+          video_link: Download Video
+    institution_name: M.E. Grenander Department of Special Collections and Archives, University at Albany, SUNY
+    institution_name_full: M.E. Grenander Department of Special Collections and Archives, University at Albany, SUNY
+    product_name: Hyrax
+    product_twitter_handle: "@SamveraRepo"
+  simple_form:
+    hints:
+      defaults:
+        archivesspace_record: 'Such as: e8946d46e2cc2c653c1f8729ce09d68e'
+        collection_number: 'Such as: apap101'       
+        record_parent: 'ASpace IDs of parent series, ordered Series -> Subseries.'
+        contributor: 'You, or the person digitizing or uploading the item.'
+        publisher: 'The person or group making the work available.'
+        related_url: ''
+        subject: 'Terms describing what the work is about.'
+        identifier: 'An original id number, such as a Job Number.'
+        source: 'Such as: Open Reel or Betacam'
+      dao:
+        description: 'Additional searchable description.'
+        title: ''
+        files: ''
+        processing_activity: 'A processing note that describes action taken upon the item during procesing.'
+      sip:
+        title: ''
+        collection: "The transferring office or department."
+        identifier: "A universally unique identifier created using the Python shortuuid library. Consists of the Creator-Identifier followed by a dash (-) and then the shortuuid."
+        description: "A description of the records provided by the donor."
+        contributor: "The person who initiated the transfer of the records."
+        donor_contact: "A point of contact for the person who initiated the transferof the records, such as an email address, office number, physical address or phone number."
+        source_location: "A filesystem path or system description that housed the records before transfer."
+        transfer_method: "A description of the method, usually an automated tool with a version"
+        transfer_extent: "A human readable extent of the transfer."
+        date_created: "Provides context and informs archivists and users the time in which the records were transfered."
+        date_posix: "Posix timestamp recorded at the point of transfer."
+        part_of: "The path for hte accession record in ASpace, such as '/accessions/1783'"
+        bagit_profile_identifier: "A URI that defines the validating BagIt Profile."
+    labels:
+      defaults:
+        archivesspace_record: 'ArchivesSpace Record ID'
+        description: 'Description'
+        collecting_area: 'Collecting Area'
+        record_parent: 'Parent Record(s) ID'
+        contributor: 'Technician'
+        date_digitized: 'Date Digitized'
+        master_format: 'Master Format'
+        source: 'Original Medium'
+        processing_activity: 'Digitization Specifications'
+      av:
+        extent: 'Duration'
+      dao:
+        coverage: 'Whole or Part?'
+        part_of: "ArchivesSpace Accession"
+        processing_activity: 'Processing Activity'
+      sip:
+        collection: "Records-Creator"
+        collection_number: "Creator-Identifier"
+        identifier: "Transfer-Identifier"
+        description: "Donor-Description"
+        contributor: "Records-Donor"
+        donor_contact: "Donor-Contact"
+        source_location: "Source-Location"
+        transfer_method: "Transfer-Method"
+        transfer_extent: "Transfer-Extent"
+        date_created: "Bagging-Date"
+        date_posix: "POSIX-Date"
+        bagit_profile_identifier: "BagIt-Profile-Identifier"

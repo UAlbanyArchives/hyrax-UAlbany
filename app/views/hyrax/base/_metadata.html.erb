@@ -1,0 +1,31 @@
+ <h4>ABOUT THIS ITEM</h4>
+ <dl class="work-show <%= dom_class(presenter) %>" <%# presenter.microdata_type_to_html %>>
+	
+	<%= render 'work_description', presenter: @presenter %>
+	<%= render 'work_coverage', presenter: @presenter %>
+    <%= render 'attribute_rows', presenter: presenter %>
+    <%= presenter.attribute_to_html(:embargo_release_date, render_as: :date, html_dl: true) %>
+    <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
+    <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>
+ </dl>
+ <h4>ITEM CONTEXT</h4>
+ <dl class="work-show <%= dom_class(presenter) %>"> 
+    <%= render 'item_context', presenter: @presenter %>
+ </dl>
+
+
+<div itemprop="https://schema.org/contentLocation" itemscope="" itemtype="https://schema.org/CivicStructure">
+	<meta itemprop="https://schema.org/name" content="M.E. Grenander Department of Special Collections & Archives"></meta>
+	<meta itemprop="https://schema.org/url" content="https://library.albany.edu/archive"></meta>
+	<meta itemprop="https://schema.org/telephone" content="(518) 437-3935"></meta>
+	<meta itemprop="openingHours" content="Mo,Tu,We,Th,Fr 09:00-05:00"></meta>
+	<div itemprop="https://schema.org/address" itemscope="" itemtype="https://schema.org/PostalAddress">
+		<meta itemprop="streetAddress">1400 Washington Ave</meta>
+		<meta itemprop="addressLocality">Albany</meta>
+		<meta itemprop="addressRegion">NY</meta>
+	</div>
+	<div itemprop="https://schema.org/geo" itemscope="" itemtype="https://schema.org/GeoCoordinates">
+		<meta itemprop="https://schema.org/latitude" content="42.6859115"></meta>
+		<meta itemprop="https://schema.org/longitude" content="-73.82652789999997"></meta>
+	</div>
+</div>

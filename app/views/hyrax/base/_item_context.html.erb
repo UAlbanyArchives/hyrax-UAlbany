@@ -1,0 +1,29 @@
+<%# presenter.attribute_to_html(:archivesspace_record) %>
+<%# presenter.attribute_to_html(:record_parent, render_as: :parent) %>
+
+<%# presenter.attribute_to_html(:collection_number, render_as: :faceted) %>
+
+<% if presenter.try(:record_parent) and presenter.try(:collection_number) %>
+	<% presenter.record_parent.reverse_each do | parent_id| %>
+		<div class="parent_context">
+			<div class="col-md-12 linearField">Part of</div>
+			<h4 class="parent_title"><a itemprop="isPartOf" class="record_parent" href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0].gsub ".", "-" %>aspace_<%= parent_id %>"><%= parent_id %></a>
+			</h4>
+			<div class="parent_description">
+				<h5>Scope and Contents</h5>
+			</div>
+		</div>
+	<% end %>
+<% end %>
+
+<% if presenter.try(:collection) and presenter.try(:collection_number) %>
+	<div class="linearField">Collection</div>
+	<ul class="tabular">
+		<li class="attribute attribute-collection">
+			<a itemprop="isPartOf" href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0].gsub '.', '-' %>"><%= presenter.collection[0] %></a>
+		</li>
+	</ul>
+<% end %>
+
+<%# presenter.attribute_to_html(:collection, render_as: :collection) %>
+<%= presenter.attribute_to_html(:collecting_area, render_as: :collecting_area) %>

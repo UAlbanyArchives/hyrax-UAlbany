@@ -1,0 +1,42 @@
+<div id="user_utility_links" class="row">
+  <div class="col-xs-12">
+    <div class="btn-group">
+      <%= render 'shared/locale_picker' if available_translations.size > 1 %>
+    </div>
+    <% if user_signed_in? %>
+      <div class="btn-group">
+        <%= link_to hyrax.dashboard_profile_path(current_user), class: "btn btn-primary dropdown-toggle",role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false} do %>
+            <span class="sr-only"><%= t("hyrax.toolbar.profile.sr_action") %></span>
+            <span class="hidden-xs">&nbsp;<%= current_user.name %></span>
+            <span class="sr-only"> <%= t("hyrax.toolbar.profile.sr_target") %></span>
+            <span class="fa fa-user"></span>
+            <span class="caret"></span>
+        <% end %>
+        <ul class="dropdown-menu">
+          <li><%= link_to t("hyrax.toolbar.dashboard.menu"), hyrax.dashboard_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to t("hyrax.toolbar.profile.logout"), main_app.destroy_user_session_path %></li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <% mailbox = UserMailbox.new(current_user) %>
+        <%= link_to(hyrax.notifications_path, 'aria-label' => mailbox.label(params[:locale]), class: 'notify-number btn btn-primary') do %>
+          <span class="fa fa-bell"></span>
+          <span class="count label invisible label-default"><%= mailbox.unread_count %></span>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="btn-group">
+        <%= link_to main_app.new_user_session_path, class: "btn btn-primary" do %>
+          <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> <%= t("hyrax.toolbar.profile.login") %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="btn-group">
+      <a href="http://169.226.92.29/bookmarks" class="btn btn-primary">Bookmarks</a>
+    </div>
+    <div class="btn-group">
+      <a href="http://169.226.92.29/search_history" class="btn btn-primary">History</a>
+    </div>
+  </div>
+</div>

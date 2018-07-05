@@ -1,0 +1,19 @@
+terms:
+  - id: Audio
+    term: Audio
+  - id: Bound Volume
+    term: Bound Volume
+  - id: Dataset
+    term: Dataset
+  - id: Document
+    term: Document
+  - id: Image
+    term: Image
+  - id: Mixed Materials
+    term: Mixed Materials
+  - id: Newspaper
+    term: Newspaper
+  - id: Video
+    term: Video
+  - id: Other
+    term: Other

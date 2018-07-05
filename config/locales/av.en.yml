@@ -1,0 +1,23 @@
+en:
+  hyrax:
+    icons:
+      av:     'fa fa-film'
+    select_type:
+      av:
+        description:        "Audiovisual (AV) material without an ArchivesSpace record"
+        name:               "Audiovisual (AV) Material"
+  blacklight:
+    search:
+      fields:
+        av:
+          show:
+            archivesspace_record: 'ArchivesSpace Record ID'
+            description: 'Description'
+            collecting_area: 'Collecting Area'
+            record_parent: 'Parent Record(s) ID'
+            contributor: 'Technician'
+            date_digitized: 'Date Digitized'
+            master_format: 'Master Format'
+            source: 'Original Medium'
+            processing_activity: 'Digitization Specifications'
+            extent: 'Duration'

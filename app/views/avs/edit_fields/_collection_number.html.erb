@@ -1,0 +1,12 @@
+<!-- app/views/records/edit_fields/_collection_number.html.erb-->
+<!-- item_helper: method(:include_current_value), -->
+<div class="row">
+	<div class="col-md-9">
+		<%= f.input :collection_number, required: f.object.required?(key),
+		  input_html: { class: 'form-control', multiple: false }
+		%>
+	</div>
+	<div class="col-md-1">
+		<a id="arclight_record_lookup" class="btn btn-primary">Load Record</a>
+	</div>
+</div>

@@ -1,0 +1,8 @@
+pt-BR:
+  hyrax:
+    icons:
+      av:     'fa fa-file-text-o'
+    select_type:
+      av:
+        description:        "Av trabalhos"
+        name:               "Av"

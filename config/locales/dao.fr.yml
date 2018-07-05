@@ -1,0 +1,8 @@
+fr:
+  hyrax:
+    icons:
+      dao:     'fa fa-file-text-o'
+    select_type:
+      dao:
+        description:        "Dao œuvres"
+        name:               "Dao"

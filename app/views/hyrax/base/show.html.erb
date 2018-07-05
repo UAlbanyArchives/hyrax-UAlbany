@@ -1,0 +1,63 @@
+<% provide :page_title, @presenter.page_title %>
+
+<%= render 'shared/citations' %>
+
+<% if breadcrumbs[1] %>
+  <% if breadcrumbs[1].try(:path) %>
+    <% if breadcrumbs[1].path.split("q=")[1] %>
+      <script>
+        $(document).ready(function(){
+          $('#pdfViewer').load(function() {
+            var pdfjsframe = document.getElementById('pdfViewer');
+            pdfjsframe.contentWindow.PDFViewerApplication.findBar.open()
+            $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val("<%= breadcrumbs[1].path.split("q=")[1].gsub '+', ' ' %>");
+            pdfjsframe.contentWindow.PDFViewerApplication.findBar.dispatchEvent('');
+          });
+        });
+      </script>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+<div class="row work-type">
+  <div class="col-xs-12 arclightBreadcrumbs">
+    <%= render 'work_type', presenter: @presenter %>
+  </div>
+  <div class="col-xs-12">&nbsp;</div>
+  <div class="col-xs-12" <%= @presenter.microdata_type_to_html %>>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= render 'work_title', presenter: @presenter %>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <%= render 'workflow_actions_widget', presenter: @presenter %>
+          <% if @presenter.universal_viewer? %>
+            <div class="col-sm-8">
+              <%= render 'representative_media', presenter: @presenter, viewer: true %>
+            </div>
+          <% else %>
+            <div class="col-sm-8 text-center">
+              <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
+            </div>
+          <% end %>
+          <div class="col-sm-4 metadataFields">
+            <%= render 'metadata', presenter: @presenter %>
+            <%= render 'citations', presenter: @presenter %>
+            <%= render 'social_media' %>
+          </div>
+          <div class="col-sm-12">
+            <% if @presenter.editor? %>
+              <%= render 'relationships', presenter: @presenter %>
+            <% end %>
+            <%= render 'items', presenter: @presenter %>
+            <%# TODO: we may consider adding these partials in the future %>
+            <%#= render 'sharing_with', presenter: @presenter %>
+            <%#= render 'user_activity', presenter: @presenter %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<!-- app/views/records/edit_fields/_collecting_area.html.erb-->
+<!-- item_helper: method(:include_current_value), -->
+<%= f.input :collecting_area, as: :select,
+    collection: CollectingAreasService.select_all_options,
+    include_blank: true,
+    input_html: { class: 'form-control' }
+%>

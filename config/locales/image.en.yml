@@ -1,0 +1,22 @@
+en:
+  hyrax:
+    icons:
+      image:     'fa fa-file-image-o'
+    select_type:
+      image:
+        description:        "Images without an ArchivesSpace record"
+        name:               "Image"
+  blacklight:
+    search:
+      fields:
+        image:
+          show:
+            archivesspace_record: 'ArchivesSpace Record ID'
+            description: 'Description'
+            collecting_area: 'Collecting Area'
+            record_parent: 'Parent Record(s) ID'
+            contributor: 'Technician'
+            date_digitized: 'Date Digitized'
+            master_format: 'Master Format'
+            source: 'Original Medium'
+            processing_activity: 'Digitization Specifications'

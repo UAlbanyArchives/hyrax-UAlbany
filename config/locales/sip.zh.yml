@@ -1,0 +1,10 @@
+zh:
+  hyrax:
+    icons:
+      sip:     'fa fa-file-text-o'
+    select_type:
+      sip:
+        # TODO: translate `human_name` into Chinese
+        description:        "Sip 作品"
+        name:               "Sip"
+        # TODO: translate `human_name` into Chinese

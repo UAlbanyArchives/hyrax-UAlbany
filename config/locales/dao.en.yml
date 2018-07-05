@@ -1,0 +1,25 @@
+en:
+  hyrax:
+    icons:
+      dao:     'fa fa-floppy-o'
+    select_type:
+      dao:
+        description:        "Works connected to ArchivesSpace records"
+        name:               "Digital Archival Objects"
+  blacklight:
+    search:
+      fields:
+        dao:
+          show:
+            archivesspace_record: 'ArchivesSpace Record ID'
+            description: 'Description'
+            collecting_area: 'Collecting Area'
+            record_parent: 'Parent Record(s) ID'
+            contributor: 'Technician'
+            date_digitized: 'Date Digitized'
+            master_format: 'Master Format'
+            source: 'Original Medium'
+            processing_activity: 'Digitization Specifications'
+            coverage: 'Whole or Part?'
+            part_of: "ArchivesSpace Accession"
+            processing_activity: 'Processing Activity'

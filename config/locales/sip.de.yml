@@ -1,0 +1,8 @@
+de:
+  hyrax:
+    icons:
+      sip:     'fa fa-file-text-o'
+    select_type:
+      sip:
+        description:        "Sip Werke"
+        name:               "Sip"

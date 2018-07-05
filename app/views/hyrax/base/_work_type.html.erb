@@ -1,0 +1,46 @@
+<!--<h1 class="work-type-tag">
+  <span class="<%= Hyrax::ModelIcon.css_class_for(presenter.model) %>" aria-hidden="true"></span>
+  <%= presenter.human_readable_type %>
+</h1>-->
+
+<% if presenter.collecting_area[0].to_s == "New York State Modern Political Archive" %>
+	<% @code = "apap" %>
+<% elsif presenter.collecting_area[0].to_s == "National Death Penalty Archive" %>
+	<% @code = "ndpa" %>
+<% elsif presenter.collecting_area[0].to_s == "German and Intellectual Émigré" %>
+	<% @code = "ger" %>
+<% elsif presenter.collecting_area[0].to_s == "Business and Literary Manuscripts" %>
+	<% @code = "mss" %>
+<% elsif presenter.collecting_area[0].to_s == "University Archives" %>
+	<% @code = "ua" %>
+<% end %>
+
+<% if @code %>
+	<%= link_to presenter.collecting_area[0], Hyrax::Application.config.arclight_url + "/repositories/" + @code %>
+<% end %>
+
+<% @collection_uri = presenter.collection_number[0].sub '.', '-' %>
+
+<div class="breadcrumb-indent-0 arclightReify">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>"><%= presenter.collection_number[0] %></a>
+</div>
+
+
+<% if presenter.respond_to? :record_parent %>
+	<% if presenter.record_parent != nil %>
+		<% presenter.record_parent.each_with_index do |parent_id, index| %>
+			<div class="breadcrumb-indent-<%= index + 1 %> arclightReify">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= parent_id %>"><%= presenter.record_parent[index] %></a>
+			</div>
+			<% if parent_id == presenter.record_parent.last %>
+				<div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= presenter.archivesspace_record[0] %>"><%= presenter.title[0] %></a>
+				</div>
+			<% end %>
+		<% end %>
+	<% else %>
+		<div class="breadcrumb-indent-1">&#187; <%= presenter.title[0] %></div>
+	<% end %>
+<% elsif presenter.respond_to? :archivesspace_record %>
+	<% if presenter.archivesspace_record != nil %>
+		<div class="breadcrumb-indent-1 arclightRecord">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= presenter.archivesspace_record[0] %>"><%= presenter.title[0] %></a>
+		</div>
+	<% end %>
+<% end %>

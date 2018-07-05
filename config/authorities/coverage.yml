@@ -1,0 +1,6 @@
+## config/authorities/coverage.yml
+terms:
+  - id: whole
+    term: whole
+  - id: part
+    term: part

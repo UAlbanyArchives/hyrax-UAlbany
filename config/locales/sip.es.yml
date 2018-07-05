@@ -1,0 +1,10 @@
+es:
+  hyrax:
+    icons:
+      sip:     'fa fa-file-text-o'
+    select_type:
+      sip:
+        # TODO: translate `human_name` into Spanish
+        description:        "Sip trabajos"
+        name:               "Sip"
+        # TODO: translate `human_name` into Spanish

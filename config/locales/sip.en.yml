@@ -1,0 +1,32 @@
+en:
+  hyrax:
+    icons:
+      sip:     'fa fa-file-archive-o'
+    select_type:
+      sip:
+        description:        "Submission Information Packages"
+        name:               "SIP"
+  blacklight:
+    search:
+      fields:
+        sip:
+          show:
+            archivesspace_record: 'ArchivesSpace Record ID'
+            collecting_area: 'Collecting Area'
+            record_parent: 'Parent Record(s) ID'
+            date_digitized: 'Date Digitized'
+            master_format: 'Master Format'
+            source: 'Original Medium'
+            processing_activity: 'Digitization Specifications'
+            collection: "Records-Creator"
+            collection_number: "Creator-Identifier"
+            identifier: "Transfer-Identifier"
+            description: "Donor-Description"
+            contributor: "Records-Donor"
+            donor_contact: "Donor-Contact"
+            source_location: "Source-Location"
+            transfer_method: "Transfer-Method"
+            transfer_extent: "Transfer-Extent"
+            date_created: "Bagging-Date"
+            date_posix: "POSIX-Date"
+            bagit_profile_identifier: "BagIt-Profile-Identifier"

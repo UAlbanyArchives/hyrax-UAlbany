@@ -1,0 +1,35 @@
+development:
+  admin:
+    - admin@albany.edu
+    - test@albany.edu
+    - mwolfe@albany.edu
+    - mmcmullen@albany.edu
+  archivist:
+    - archivist1@example.com
+
+test:
+  archivist:
+    - archivist1@example.com
+    - archivist2@example.com
+    - leland_himself@example.com
+  admin_policy_object_editor:
+    - archivist1@example.com
+  donor:
+    - donor1@example.com
+    - leland_himself@example.com
+  researcher:
+    - archivist1@example.com
+    - researcher1@example.com
+  patron:
+    - patron1@example.com
+    - leland_himself@example.com
+
+production:
+  admin:
+    - gwiedeman@albany.edu
+    - mwolfe@albany.edu
+    - bkeough@albany.edu
+    - jboyle@albany.edu
+    - mmcmullen@albany.edu
+  archivist:
+    - archivist1@example.com

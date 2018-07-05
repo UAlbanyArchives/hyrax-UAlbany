@@ -1,0 +1,12 @@
+## config/authorities/collecting_areas.yml
+terms:
+  - id: New York State Modern Political Archive
+    term: New York State Modern Political Archive
+  - id: National Death Penalty Archive
+    term: National Death Penalty Archive
+  - id: German and Jewish Intellectual Émigré Collections 
+    term: German and Jewish Intellectual Émigré Collections 
+  - id: Business, Literary, and Local History Manuscripts 
+    term: Business, Literary, and Local History Manuscripts 
+  - id: University Archives
+    term: University Archives

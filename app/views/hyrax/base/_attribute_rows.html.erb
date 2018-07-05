@@ -1,0 +1,43 @@
+
+<%# presenter.attribute_to_html(:coverage, render_as: :linear) %>
+<%= presenter.attribute_to_html(:date_created, render_as: :linear, work_type: presenter.human_readable_type, search_field: 'date_created_tesim') %>
+
+
+<%= presenter.attribute_to_html(:resource_type, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+
+<%= presenter.attribute_to_html(:creator, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:source, render_as: :linear, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:physical_dimensions, render_as: :linear, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:extent, render_as: :linear, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:date_digitized, render_as: :linear, work_type: presenter.human_readable_type, search_field: 'date_digitized_tesim') %>
+<%= presenter.attribute_to_html(:master_format, render_as: :linear, work_type: presenter.human_readable_type) %>
+
+<%= presenter.attribute_to_html(:publisher, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:language, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:identifier, render_as: :linear, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:keyword, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+
+<% if @presenter.editor? %>
+	<%= presenter.attribute_to_html(:accession, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+	<%= presenter.attribute_to_html(:date_modified, render_as: :linear, work_type: presenter.human_readable_type) %>
+	<%= presenter.attribute_to_html(:contributor, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+<% end %>
+
+<%= presenter.attribute_to_html(:subject, render_as: :faceted, work_type: presenter.human_readable_type) %>
+
+
+
+
+<%= presenter.attribute_to_html(:processing_activity, work_type: presenter.human_readable_type) %>
+
+
+
+<%= presenter.attribute_to_html(:donor_contact, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:source_location, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:transfer_method, render_as: :linear_faceted, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:transfer_extent, render_as: :linear, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:date_posix, render_as: :linear, work_type: presenter.human_readable_type) %>
+<%= presenter.attribute_to_html(:bagit_profile_identifier, work_type: presenter.human_readable_type) %>
+
+<%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, work_type: presenter.human_readable_type) %>
+<%# presenter.attribute_to_html(:date_modified, label: t('hyrax.base.show.last_modified')) %>
