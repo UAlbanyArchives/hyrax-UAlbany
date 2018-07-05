@@ -1,6 +1,11 @@
 # hyrax-UAlbany
 UAlbany's Hyrax instance
 
+## License
+[Hyrax license](https://github.com/samvera/hyrax/blob/master/LICENSE)
+All UAlbany modifications are in the public domain
+
+
 ## How UAlbany's Hyrax is different than stock Hyrax 2.1
 
 ### UAlbany styling assets
