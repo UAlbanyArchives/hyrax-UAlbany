@@ -7,8 +7,16 @@ class Dao < ActiveFedora::Base
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }
-  validates :archivesspace_record, presence: { message: 'DAOs must link to ArchivesSpace.' }
+  validates :archivesspace_record, presence: { message: 'DAOs must link to archival object in ArchivesSpace.' }
   validates_length_of :archivesspace_record, :minimum => 32, :maximum => 32, :allow_blank => false
+
+  validates :collecting_area, presence: { message: 'DAOs must belong to a collecting area.' }
+  validates :collection, presence: { message: 'DAOs must belong to a collection.' }
+  validates :collection_number, presence: { message: 'DAOs must have a collection number.' }
+  validates :coverage, presence: { message: 'DAOs must be considered the whole or only part of the linked archival object.' }
+  validates :date_created, presence: { message: 'DAOs must have a creation date.' }
+  validates :resource_type, presence: { message: 'DAOs must have a resource type.' }
+  validates :rights_statement, presence: { message: 'DAOs must have a rights statement.' }
 
 
   property :archivesspace_record, predicate: ::RDF::Vocab::DC.relation, multiple: false do |index|

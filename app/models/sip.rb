@@ -6,9 +6,21 @@ class Sip < ActiveFedora::Base
   self.indexer = SipIndexer
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
-  validates :title, presence: { message: 'Your work must have a title.' }
-  validates :collection, presence: { message: 'Your SIP must have a collection.' }
-  validates :identifier, presence: { message: 'Your SIP must have an identifier.' }
+  validates :title, presence: { message: 'A SIP must have a title.' }
+  validates :identifier, presence: { message: 'A SIP must have a transfer identifier.' }
+
+  validates :collecting_area, presence: { message: 'A SIP must belong to a collecting area.' }
+  validates :collection, presence: { message: 'A SIP must belong to a collection.' }
+  validates :collection_number, presence: { message: 'A SIP must have a creator ID (collection number).' }
+  validates :accession, presence: { message: 'A SIP must have an accession ID.' }
+  validates :contributor, presence: { message: 'A SIP must have a contributor (Records-Donor).' }
+  validates :source_location, presence: { message: 'A SIP must have a source_location.' }
+  validates :transfer_method, presence: { message: 'A SIP must have a transfer_method.' }
+  validates :transfer_extent, presence: { message: 'A SIP must have a transfer_extent.' }
+  validates :transfer_bytes, presence: { message: 'A SIP must have a transfer_bytes.' }
+  validates :date_created, presence: { message: 'A SIP must have a date_created (Bagging-Date).' }
+  validates :date_posix, presence: { message: 'A SIP must have a date_posix.' }
+  validates :bagit_profile_identifier, presence: { message: 'A SIP must have a bagit_profile_identifier.' }
 
   property :collecting_area, predicate: ::RDF::Vocab::DC.subject, multiple: false do |index|
     index.as :stored_searchable, :facetable

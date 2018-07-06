@@ -88,7 +88,7 @@ en:
           webm_link: Download WebM
           pdf_link: Download PDF
           video_link: Download Video
-    institution_name: M.E. Grenander Department of Special Collections and Archives, University at Albany, SUNY
+    institution_name: Institution
     institution_name_full: M.E. Grenander Department of Special Collections and Archives, University at Albany, SUNY
     product_name: Hyrax
     product_twitter_handle: "@SamveraRepo"
@@ -150,6 +150,7 @@ en:
         source_location: "Source-Location"
         transfer_method: "Transfer-Method"
         transfer_extent: "Transfer-Extent"
+        transfer_bytes: "Transfer-Bytes"
         date_created: "Bagging-Date"
         date_posix: "POSIX-Date"
         bagit_profile_identifier: "BagIt-Profile-Identifier"

@@ -7,7 +7,7 @@
                     role: "presentation" %>-->
 
       <!-- PDF.js iframe -->
-      <iframe id="pdfViewer" src="<%= pdfjs.full_path(file: hyrax.download_path(file_set))%>"></iframe>
+      <iframe id="pdfViewer" allowfullscreen webkitallowfullscreen src="<%= pdfjs.full_path(file: hyrax.download_path(file_set))%>"></iframe>
 
       <%= link_to t('hyrax.file_set.show.downloadable_content.pdf_link'),
                   hyrax.download_path(file_set),

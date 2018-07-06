@@ -6,9 +6,16 @@ class Image < ActiveFedora::Base
   self.indexer = ImageIndexer
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
-  validates :title, presence: { message: 'Your work must have a title.' }
-  #validates :archivesspace_record, presence: { message: 'DAOs must link to ArchivesSpace.' }
-  #validates_length_of :archivesspace_record, :minimum => 32, :maximum => 32, :allow_blank => false
+  validates :title, presence: { message: 'Images must have a title.' }
+  validates :collecting_area, presence: { message: 'Images must belong to a collecting area.' }
+  validates :collection, presence: { message: 'Images must belong to a collection.' }
+  validates :collection_number, presence: { message: 'Images must have a collection number.' }
+  validates :description, presence: { message: 'Images must have a description.' }
+  validates :subject, presence: { message: 'Images must have at least one subject.' }
+  validates :creator, presence: { message: 'Images must have a creator.' }
+  validates :contributor, presence: { message: 'Images must have a technician, or the person who digitided the item.' }
+  validates :resource_type, presence: { message: 'Images must have a resource type.' }
+  validates :rights_statement, presence: { message: 'Images must have a rights statement.' }
 
 
   property :archivesspace_record, predicate: ::RDF::Vocab::DC.relation, multiple: false do |index|

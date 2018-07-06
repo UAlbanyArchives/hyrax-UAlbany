@@ -21,6 +21,7 @@ config/secrets.yml
 config/blacklight.yml
 config/fedora.yml
 config/solr.yml
+config/database.yml
 config/application.rb
 
 # dotenv
