@@ -154,7 +154,8 @@ Also changes link-to in these to buttons, and added ones to download (labels are
 * app/controllers/catalog_controller.rb
 
 ### Allowed larger file uploads
-* app/assets/javascripts/fileupload/jquery.fileupload-validate.js (line 43, not ideal, but this is the only way I could get this to work)
+* in rvm gem, changed maxFileSize
+	* /usr/local/rvm/[rubyversion]@[gemset]/gems/hyrax-2.1.0/vendor/assets/javascripts/fileupload/jquery.fileupload-validate.js
 
 ### Limit delete rights (http://samvera.github.io/access-controls.html)
 * app/models/ability.rb
