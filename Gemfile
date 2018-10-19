@@ -68,12 +68,12 @@ group :development, :test do
 end
 
 gem 'riiif', '~> 1.1'
-
+gem 'pg'
 # Sidekiq for background jobs
 gem 'sidekiq'
 # pdfjs for displaying PDF files in views
 gem 'pdfjs_viewer-rails'
 # for virus scanning
-#gem 'clamav'
+gem 'clamav'
 # To manage users in the db
-#gem 'hydra-role-management'
+gem 'hydra-role-management'

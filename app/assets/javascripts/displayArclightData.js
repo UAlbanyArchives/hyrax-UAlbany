@@ -12,7 +12,8 @@ $( document ).on('turbolinks:load', function() {
 			  		$query = '.arclightReify:eq(' + String(i) + ')';
 			  		$parentLink = $('.arclightBreadcrumbs').children($query);
 		  			$urlRoot = $parentLink.children("a").attr("href").split("aspace_")[0];
-		  			$parentLink.children("a").attr("href", $urlRoot + data['response']['document']['parent_ssm'][i])
+		  			/*$parentLink.children("a").attr("href", $urlRoot + data['response']['document']['parent_ssm'][i])*/
+		  			$parentLink.children("a").attr("href", $urlRoot)
 		  			$parentLink.children("a").text(data['response']['document']['parent_unittitles_ssm'][i])
 			  	}
 			  }
@@ -62,7 +63,7 @@ $( document ).on('turbolinks:load', function() {
 				$(this).next("dd").children("a").each(function (index, element) {
 					$parentID = $(this).text();
 					$collectionID = $(this).parent("dd").prev().prev().children("a").text().replace(".", "-");
-					$uri = "http://arclightURL/catalog/" + $collectionID + "aspace_" + $parentID + "?format=json"
+					$uri = "http://169.226.92.29/catalog/" + $collectionID + "aspace_" + $parentID + "?format=json"
 					$.ajax({
 					  type: "GET",
 					  dataType: 'json',

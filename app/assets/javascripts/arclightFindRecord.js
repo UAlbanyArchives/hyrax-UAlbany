@@ -16,9 +16,9 @@ $(document).ready(function(){
     		$aspaceID = ""
     	}
     	if ($aspaceID.length < 1) {
-    		$arclightURL = "http://arclightURL/catalog/" + $collection + "?format=json"
+    		$arclightURL = "http://169.226.92.29/catalog/" + $collection.replace(".", "-") + "?format=json"
     	} else {
-    		$arclightURL = "http://arclightURL/catalog/" + $collection + "aspace_" + $aspaceID + "?format=json"
+    		$arclightURL = "http://169.226.92.29/catalog/" + $collection.replace(".", "-") + "aspace_" + $aspaceID + "?format=json"
     	}	
 		$.ajax({
 		  type: "GET",

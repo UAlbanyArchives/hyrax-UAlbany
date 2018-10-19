@@ -86,6 +86,8 @@ Hyrax.config do |config|
 
   # Store identifier minter's state in a file for later replayability
   # config.minter_statefile = '/tmp/minter-state'
+  # moved ID minter file away from /tmp (https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#identifier-state)
+  config.minter_statefile = '/home/gw234478/hyrax-UAlbany/hyraxData/minter-state'
 
   # Prefix for Redis keys
   # config.redis_namespace = "hyrax"
@@ -109,6 +111,7 @@ Hyrax.config do |config|
 
   # Stream realtime notifications to users in the browser
   # config.realtime_notifications = true
+  config.realtime_notifications = false
 
   # Location autocomplete uses geonames to search for named regions
   # Username for connecting to geonames
@@ -190,6 +193,8 @@ Hyrax.config do |config|
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
   # config.derivatives_path = Rails.root.join('tmp', 'derivatives')
+  # Moved derivatives path for all thumbs/converted files (webM, pdf, mp3, etc) (https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#derivatives)
+  config.derivatives_path = '/home/gw234478/hyrax-UAlbany/hyraxData/derivatives'
 
   # Should schema.org microdata be displayed?
   # config.display_microdata = true

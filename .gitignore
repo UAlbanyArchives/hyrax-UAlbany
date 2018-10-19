@@ -24,6 +24,9 @@ config/solr.yml
 config/database.yml
 config/application.rb
 
+hyraxData/
+fits.log
+
 # dotenv
 # TODO Comment out this rule if environment variables can be committed
 .env
