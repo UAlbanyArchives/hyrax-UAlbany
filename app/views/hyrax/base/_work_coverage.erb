@@ -1,9 +1,9 @@
 <% if presenter.try(:coverage) and presenter.try(:collection_number) and presenter.try(:archivesspace_record)%>
 	<% presenter.coverage.each do |coverage| %>
 		<% if coverage == "whole" %>
-			<p class="work_coverage">This is the whole <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0] %>aspace_<%= presenter.archivesspace_record[0] %>">item</a>.</p>
+			<p class="work_coverage">This is the whole <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0].gsub('.', '-') %>aspace_<%= presenter.archivesspace_record[0] %>">item</a>.</p>
 		<% elsif coverage == "part" %>
-			<p class="work_coverage">This is only part of the <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0] %>aspace_<%= presenter.archivesspace_record[0] %>">item</a>.</p>
+			<p class="work_coverage">This is only part of the <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0].gsub('.', '-') %>aspace_<%= presenter.archivesspace_record[0] %>">item</a>.</p>
 		<% else %>
 			<p class="work_coverage"><%= iconify_auto_link(coverage) %></p>
 		<% end %>
