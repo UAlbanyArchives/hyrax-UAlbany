@@ -136,7 +136,7 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
 	top: -3px;
 }
 
-#content-wrapper {
+#content-wrapper .work-type {
 	margin-top: 1rem;
 }
 
