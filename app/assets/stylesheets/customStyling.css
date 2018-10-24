@@ -136,8 +136,8 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
 	top: -3px;
 }
 
-#content-wrapper #user_utility_links {
-	margin-bottom: 1.5rem;
+#content-wrapper {
+	margin-top: 1rem;
 }
 
 .dropdown-menu > li > a:hover, .twitter-typeahead .tt-menu > li > a:hover, .dropdown-menu > li > a:focus, .twitter-typeahead .tt-menu > li > a:focus {
