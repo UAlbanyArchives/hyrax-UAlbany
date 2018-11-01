@@ -15,12 +15,12 @@ module Hyrax
       super.first || ""
     end
     
-    self.terms -= [:creator, :contributor, :publisher, :subject, :license, :identifier, :keyword, :based_near, :related_url, :source, :language, :description, :date_created]
+    self.terms -= [:creator, :contributor, :publisher, :identifier, :keyword, :based_near, :related_url, :source, :language, :description, :date_created]
     self.terms += [:record_parent, :collecting_area, :coverage, :date_created, :resource_type, :accession, :archivesspace_record, :collection_number, :collection, :description, :processing_activity, :extent, :language]
 
 
     self.required_fields -= [:title, :keyword, :rights_statement]
-    self.required_fields += [:collecting_area, :archivesspace_record, :collection_number, :collection, :coverage, :title, :date_created, :resource_type, :rights_statement]
+    self.required_fields += [:collecting_area, :archivesspace_record, :collection_number, :collection, :coverage, :title, :date_created, :resource_type, :license]
 
   end
 end

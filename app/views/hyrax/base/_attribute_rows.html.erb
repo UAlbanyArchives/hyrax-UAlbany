@@ -39,5 +39,7 @@
 <%= presenter.attribute_to_html(:date_posix, render_as: :linear, work_type: presenter.human_readable_type) %>
 <%= presenter.attribute_to_html(:bagit_profile_identifier, work_type: presenter.human_readable_type) %>
 
-<%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, work_type: presenter.human_readable_type) %>
+<% unless :license %>
+	<%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, work_type: presenter.human_readable_type) %>
+<% end %>
 <%# presenter.attribute_to_html(:date_modified, label: t('hyrax.base.show.last_modified')) %>

@@ -6,7 +6,7 @@
     <%= render 'attribute_rows', presenter: presenter %>
     <%= presenter.attribute_to_html(:embargo_release_date, render_as: :date, html_dl: true) %>
     <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
-    <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>
+    <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: false) %>
  </dl>
  <h4>ITEM CONTEXT</h4>
  <dl class="work-show <%= dom_class(presenter) %>"> 

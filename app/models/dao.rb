@@ -16,7 +16,7 @@ class Dao < ActiveFedora::Base
   validates :coverage, presence: { message: 'DAOs must be considered the whole or only part of the linked archival object.' }
   validates :date_created, presence: { message: 'DAOs must have a creation date.' }
   validates :resource_type, presence: { message: 'DAOs must have a resource type.' }
-  validates :rights_statement, presence: { message: 'DAOs must have a rights statement.' }
+  validates :license, presence: { message: 'DAOs must have a license.' }
 
 
   property :archivesspace_record, predicate: ::RDF::Vocab::DC.relation, multiple: false do |index|
