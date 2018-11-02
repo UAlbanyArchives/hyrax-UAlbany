@@ -1,0 +1,110 @@
+.searchSubnav {
+	background-color: #eaaa00;
+	margin-top: 0px !important;
+	padding: 0.5rem 1rem !important;
+	font-size: 1.5rem !important
+}
+
+.searchSubnav .container {
+	display: flex;
+	align-items: center;
+}
+
+.search-query-form {
+	flex: 1;
+}
+
+.search-query-form .input-group {
+	margin-bottom: 0px;
+}
+
+.arclightSearch {
+	display: none;
+}
+.allSearch {
+	display: none;
+}
+
+.searchSelect {
+	background-color: #EBE6F0 !important;
+	border-color: #EBE6F0 !important;
+	color: #46166B !important;
+	width: 160px !important;
+	display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+/* dropdown without text for small displays*/
+.noText {
+	display: none !important;
+	width: auto !important;
+	border-top-left-radius: 5px !important;
+	border-bottom-left-radius: 5px !important;
+}
+
+/* the How to search the Archives link */
+.searchSubnav .container .aboutSearch {
+	margin: 0px 20px;
+	color: #EBE6F0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	vertical-align: middle;
+}
+
+/* input and button focus colors */
+.input-group-btn.show > .searchSelect.dropdown-toggle:focus, .searchSelect:active:focus, .searchSelect.active:focus, .searchSelect:focus {
+	border-color: #46166B ;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
+}
+.searchSelect:active, .searchSelect:hover, .searchSelect.active, .show > .searchSelect.dropdown-toggle {
+	background-color: #46166B;
+	border-color: #46166B;
+	color: #EBE6F0;
+}
+.search-query-form .dropdown-item:hover, .search-query-form .dropdown-item:focus {
+	color: #EBE6F0;
+	background-color: #46166B;
+}
+.searchSubnav .search-query-form input:focus {
+  border-color: #46166B ;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
+}
+
+/* for js if header is fixed */
+.fixedSubnav {
+	position: fixed;
+	width: 100%;
+	top: 50px;
+	z-index: 1;
+}
+
+/* for small displays */
+@media only screen and (max-width: 765px) {
+	.searchSubnav .container .aboutSearch {
+		display:none;
+	}
+	.searchSubnav {
+		/*top: 107px;*/
+		position: fixed;
+		width: 100%;
+		z-index: 1;
+	}
+}
+@media only screen and (max-width: 575px) {
+	.searchSelect {
+		display: none !important;
+	}
+	.noText {
+		display: flex !important;
+	}
+}
+@media only screen and (max-width: 400px) {
+	.searchSubnav {
+		/*top: 50px;*/
+	}
+}
+
+.noText {
+	padding: 14px 10px !important;
+}

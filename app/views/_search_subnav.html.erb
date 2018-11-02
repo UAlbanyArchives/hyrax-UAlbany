@@ -1,0 +1,66 @@
+<div class="navbar navbar-expand-sm searchSubnav">
+
+	<div class="container">
+
+		<%= form_for("search", method: :get, html: {class: 'search-query-form allSearch'}) do |f| %>
+	      <div class="input-group">
+			<div class="input-group-btn">
+			    <button class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			   Everything <span class="caret"></span></button>
+			   <button class="btn btn-secondary dropdown-toggle searchSelect noText" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+			    <div class="dropdown-menu searchOptions">
+			      <li><a class="dropdown-item" data="allSearch" href="#">Everything</a></li>
+			      <li><a class="dropdown-item" data="arclightSearch" href="#">Collections</a></li>
+			      <li><a class="dropdown-item" data="hyraxSearch" href="#">Digital Selections</a></li>
+			    </div>
+			</div>
+			<input name="q" id="params-q" value="<%= @query %>" placeholder="Search everything..." class="search_q q form-control tt-input" type="text" />
+	        <div class="input-group-btn">
+				<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+		  	</div>
+		  </div>
+		<% end %>
+
+		<%= form_for("search", method: :get, :url => "http://169.226.92.29/", html: {class: 'search-query-form arclightSearch'}) do |f| %>
+	      <div class="input-group">
+			<div class="input-group-btn">
+			    <button class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			   Collections <span class="caret"></span></button>
+			   <button class="btn btn-secondary dropdown-toggle searchSelect noText" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+			    <div class="dropdown-menu searchOptions">
+			      <li><a class="dropdown-item" data="allSearch" href="#">Everything</a></li>
+			      <li><a class="dropdown-item" data="arclightSearch" href="#">Collections</a></li>
+			      <li><a class="dropdown-item" data="hyraxSearch" href="#">Digital Selections</a></li>
+			    </div>
+			</div>
+			<input name="q" id="params-q" value="<%= @query %>" placeholder="Search all collection records..." class="search_q q form-control tt-input" type="text" />
+	        <div class="input-group-btn">
+				<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+		  	</div>
+		  </div>
+		<% end %>
+
+		<%= form_for("search", method: :get, :url => "http://169.226.92.29:8080/catalog/", html: {class: 'search-query-form hyraxSearch'}) do |f| %>
+	      <div class="input-group">
+			<div class="input-group-btn">
+			    <button class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			   Digital Selections <span class="caret"></span></button>
+			   <button class="btn btn-secondary dropdown-toggle searchSelect noText" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+			    <div class="dropdown-menu searchOptions">
+			      <li><a class="dropdown-item" data="allSearch" href="#">Everything</a></li>
+			      <li><a class="dropdown-item" data="arclightSearch" href="#">Collections</a></li>
+			      <li><a class="dropdown-item" data="hyraxSearch" href="#">Digital Selections</a></li>
+			    </div>
+			</div>
+			<input name="q" id="params-q" value="<%= @query %>" placeholder="Search only online digital content..." class="search_q q form-control tt-input" type="text" />
+	        <div class="input-group-btn">
+				<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+		  	</div>
+		  </div>
+		<% end %>
+
+		<a class="aboutSearch" href="#">How to search the Archives</a>
+
+	</div>
+
+</div>
