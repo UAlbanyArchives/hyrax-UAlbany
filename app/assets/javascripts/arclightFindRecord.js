@@ -43,9 +43,12 @@ $(document).ready(function(){
 			  			$("#image_record_parent").val(data['response']['document']['parent_ssm'][i].split("_")[1])
 			  			$("#av_record_parent").val(data['response']['document']['parent_ssm'][i].split("_")[1])
 			  		} else {
-			  			$(".dao_record_parent").children("ul").append("<li class='field-wrapper input-group input-append'><input class='string multi_value optional form-control digital_archival_object_record_parent form-control multi-text-field' name='digital_archival_object[record_parent][]' value='" + data['response']['document']['parent_ssm'][i].split("_")[1] + "' id='digital_archival_object_record_parent' aria-labelledby='digital_archival_object_record_parent_label' type='text'><span class='input-group-btn field-controls'><button type='button' class='btn btn-link remove'><span class='glyphicon glyphicon-remove'></span><span class='controls-remove-text'>Remove</span> <span class='sr-only'> previous <span class='controls-field-name-text'> Record parent</span></span></button></span></li>")
-			  			$(".image_record_parent").children("ul").append("<li class='field-wrapper input-group input-append'><input class='string multi_value optional form-control digital_archival_object_record_parent form-control multi-text-field' name='digital_archival_object[record_parent][]' value='" + data['response']['document']['parent_ssm'][i].split("_")[1] + "' id='digital_archival_object_record_parent' aria-labelledby='digital_archival_object_record_parent_label' type='text'><span class='input-group-btn field-controls'><button type='button' class='btn btn-link remove'><span class='glyphicon glyphicon-remove'></span><span class='controls-remove-text'>Remove</span> <span class='sr-only'> previous <span class='controls-field-name-text'> Record parent</span></span></button></span></li>")
-			  			$(".av_record_parent").children("ul").append("<li class='field-wrapper input-group input-append'><input class='string multi_value optional form-control digital_archival_object_record_parent form-control multi-text-field' name='digital_archival_object[record_parent][]' value='" + data['response']['document']['parent_ssm'][i].split("_")[1] + "' id='digital_archival_object_record_parent' aria-labelledby='digital_archival_object_record_parent_label' type='text'><span class='input-group-btn field-controls'><button type='button' class='btn btn-link remove'><span class='glyphicon glyphicon-remove'></span><span class='controls-remove-text'>Remove</span> <span class='sr-only'> previous <span class='controls-field-name-text'> Record parent</span></span></button></span></li>")
+			  			$(".dao_record_parent").find(".add").click()
+			  			$(".dao_record_parent").last().val(data['response']['document']['parent_ssm'][i].split("_")[1])
+			  			$(".image_record_parent").find(".add").click()
+			  			$(".image_record_parent").last().val(data['response']['document']['parent_ssm'][i].split("_")[1])
+			  			$(".av_record_parent").find(".add").click()
+			  			$(".av_record_parent").last().val(data['response']['document']['parent_ssm'][i].split("_")[1])
 			  		}
 			  	}
 			} else {
