@@ -10,11 +10,25 @@
           $('#pdfViewer').load(function() {
             var pdfjsframe = document.getElementById('pdfViewer');
             pdfjsframe.contentWindow.PDFViewerApplication.findBar.open()
-            $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val("<%= breadcrumbs[1].path.split("q=")[1].gsub '+', ' ' %>");
+            $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val("<%= breadcrumbs[1].path.split("q=")[1].gsub('+', ' ').gsub('%20', ' ') %>");
             pdfjsframe.contentWindow.PDFViewerApplication.findBar.dispatchEvent('');
           });
         });
       </script>
+    <% else %>
+      <script>
+        $(document).ready(function(){
+          var query = new RegExp('[\?&]' + 'find' + '=([^&#]*)').exec(window.location.href);
+          if (query != '') {
+            $('#pdfViewer').load(function() {
+              var pdfjsframe = document.getElementById('pdfViewer');
+              pdfjsframe.contentWindow.PDFViewerApplication.findBar.open()
+              $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val(query[1].replace(/\+/g, ' ').replace(/\%20/g, ' '));
+              pdfjsframe.contentWindow.PDFViewerApplication.findBar.dispatchEvent('');
+            });
+          }
+        });
+      </script>        
     <% end %>
   <% end %>
 <% end %>

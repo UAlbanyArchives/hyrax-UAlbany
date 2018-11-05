@@ -31,7 +31,7 @@ $( document ).on('turbolinks:load', function() {
 				  success: function(data) {
 				  	parent = data['response']['document']
 				  	$(this).children(".parent_title").children(".record_parent").text(parent['normalized_title_ssm'][0])
-					if (parent['scopecontent_ssm'][0].length > 0) {
+					if (parent['scopecontent_ssm']) {
 						for (i = 0; i < parent['scopecontent_ssm'].length; i++) {
 				  			$(this).children(".parent_description").append("<p>" + parent['scopecontent_ssm'][i] + "</p>")
 				  		}
