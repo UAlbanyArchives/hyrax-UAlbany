@@ -15,7 +15,7 @@ class Image < ActiveFedora::Base
   validates :creator, presence: { message: 'Images must have a creator.' }
   validates :contributor, presence: { message: 'Images must have a technician, or the person who digitided the item.' }
   validates :resource_type, presence: { message: 'Images must have a resource type.' }
-  validates :rights_statement, presence: { message: 'Images must have a rights statement.' }
+  validates :license, presence: { message: 'Images must have a license.' }
 
 
   property :archivesspace_record, predicate: ::RDF::Vocab::DC.relation, multiple: false do |index|

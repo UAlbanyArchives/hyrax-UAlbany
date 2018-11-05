@@ -14,7 +14,7 @@ class Av < ActiveFedora::Base
   validates :creator, presence: { message: 'AV materials must have a creator.' }
   validates :contributor, presence: { message: 'AV materials must have a technician, or the person who digitided the item.' }
   validates :resource_type, presence: { message: 'AV materials must have a resource type.' }
-  validates :rights_statement, presence: { message: 'AV materials must have a rights statement.' }
+  validates :license, presence: { message: 'AV material must have a license.' }
 
 
   property :archivesspace_record, predicate: ::RDF::Vocab::DC.relation, multiple: false do |index|

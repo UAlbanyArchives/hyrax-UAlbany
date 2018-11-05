@@ -25,11 +25,11 @@ module Hyrax
       super.first || ""
     end
 
-    self.terms -= [:keyword, :rights_statement, :creator, :contributor, :license, :publisher, :language, :based_near, :related_url, :source, :identifier]
-    self.terms += [:collecting_area, :collection_number, :collection, :contributor, :creator, :resource_type, :rights_statement, :date_digitized, :master_format, :identifier, :archivesspace_record, :record_parent]
+    self.terms -= [:keyword, :creator, :contributor, :publisher, :language, :based_near, :related_url, :source, :identifier]
+    self.terms += [:collecting_area, :collection_number, :collection, :contributor, :creator, :resource_type, :date_digitized, :master_format, :identifier, :archivesspace_record, :record_parent]
 
-    self.required_fields -= [:keyword, :title, :rights_statement, :creator]
-    self.required_fields += [:collecting_area, :title, :collection_number, :collection, :description, :resource_type, :subject, :creator, :contributor, :rights_statement]
+    self.required_fields -= [:keyword, :title, :creator, :rights_statement]
+    self.required_fields += [:collecting_area, :title, :collection_number, :collection, :description, :resource_type, :subject, :creator, :contributor, :license]
 
 
   end
