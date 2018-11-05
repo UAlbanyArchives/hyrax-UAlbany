@@ -19,7 +19,7 @@
       <script>
         $(document).ready(function(){
           var query = new RegExp('[\?&]' + 'find' + '=([^&#]*)').exec(window.location.href);
-          if (query != '') {
+          if (query !== null) {
             $('#pdfViewer').load(function() {
               var pdfjsframe = document.getElementById('pdfViewer');
               pdfjsframe.contentWindow.PDFViewerApplication.findBar.open()
