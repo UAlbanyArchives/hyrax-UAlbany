@@ -88,9 +88,9 @@ en:
           webm_link: Download WebM
           pdf_link: Download PDF
           video_link: Download Video
-    institution_name: Institution
-    institution_name_full: M.E. Grenander Department of Special Collections and Archives, University at Albany, SUNY
-    product_name: Hyrax
+    institution_name: M.E. Grenander Department of Special Collections & Archives
+    institution_name_full: M.E. Grenander Department of Special Collections & Archives, University at Albany, SUNY
+    product_name: Digital Selections | M.E. Grenander Department of Special Collections & Archives
     product_twitter_handle: "@SamveraRepo"
   simple_form:
     hints:
