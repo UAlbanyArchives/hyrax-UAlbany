@@ -19,14 +19,9 @@
  *= require_self
  */
 
-@media screen and (min-width: 1400px) {
-	#content-wrapper {
-		width: 1300px;
-		max-width: 1300px;
-	}
-	footer.container {
-		width: 1300px;
-		max-width: 1300px;
+@media only screen and (min-width: 1500px) {
+	.container {
+		width: 1250px;
 	}
 }
 
