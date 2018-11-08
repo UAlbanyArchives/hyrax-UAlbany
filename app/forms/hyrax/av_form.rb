@@ -26,7 +26,7 @@ module Hyrax
     end
 
     self.terms -= [:keyword, :rights_statement, :subject, :creator, :contributor, :publisher, :language, :based_near, :related_url, :date_created, :source, :identifier]
-    self.terms += [:collecting_area, :collection_number, :collection, :contributor, :creator, :resource_type, :rights_statement, :subject, :date_created, :date_digitized, :master_format, :extent, :source, :physical_dimensions, :processing_activity, :identifier, :archivesspace_record, :record_parent]
+    self.terms += [:collecting_area, :collection_number, :collection, :contributor, :creator, :resource_type, :rights_statement, :subject, :date_created, :date_digitized, :accession, :master_format, :extent, :source, :physical_dimensions, :processing_activity, :identifier, :archivesspace_record, :record_parent]
 
     self.required_fields -= [:keyword, :title, :creator, :rights_statement]
     self.required_fields += [:collecting_area, :title, :collection_number, :collection, :description, :resource_type, :creator, :contributor, :license]

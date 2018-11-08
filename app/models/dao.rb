@@ -43,7 +43,7 @@ class Dao < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :accession, predicate: ::RDF::Vocab::DC.source do |index|
+  property :accession, predicate: ::RDF::Vocab::SCHEMA.identifier do |index|
     index.as :stored_searchable, :facetable
   end
 

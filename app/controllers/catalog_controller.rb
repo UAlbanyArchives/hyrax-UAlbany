@@ -80,7 +80,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name("collecting_area", :stored_searchable), label: "Collecting Area", link_to_search: solr_name("collecting_area", :facetable)
     config.add_index_field solr_name("collection_number", :stored_searchable), label: "Collection ID", link_to_search: solr_name("collection_number", :facetable)
     config.add_index_field solr_name("record_parent", :stored_searchable), label: "Parent Record(s)", link_to_search: solr_name("record_parent", :facetable)
-    config.add_index_field solr_name("accession", :stored_searchable), label: "Accession", link_to_search: solr_name("accession", :facetable)
+    #config.add_index_field solr_name("accession", :stored_searchable), label: "Accession", link_to_search: solr_name("accession", :facetable)
     config.add_index_field solr_name("description", :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link
     config.add_index_field solr_name("keyword", :stored_searchable), itemprop: 'keywords', link_to_search: solr_name("keyword", :facetable)
     config.add_index_field solr_name("subject", :stored_searchable), itemprop: 'about', link_to_search: solr_name("subject", :facetable)

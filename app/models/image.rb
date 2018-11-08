@@ -42,6 +42,10 @@ class Image < ActiveFedora::Base
     index.as :stored_searchable
   end
 
+  property :accession, predicate: ::RDF::Vocab::SCHEMA.identifier do |index|
+    index.as :stored_searchable, :facetable
+  end
+
   property :master_format, predicate: ::RDF::Vocab::SCHEMA.encodingFormat, multiple: false do |index|
     index.as :stored_searchable
   end

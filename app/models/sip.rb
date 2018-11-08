@@ -34,7 +34,7 @@ class Sip < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
-  property :accession, predicate: ::RDF::Vocab::DC.source do |index|
+  property :accession, predicate: ::RDF::Vocab::SCHEMA.identifier do |index|
     index.as :stored_searchable, :facetable
   end
 
@@ -58,7 +58,7 @@ class Sip < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :date_posix, predicate: ::RDF::Vocab::DC.dateSubmitted, multiple: false do |index|
+  property :date_posix, predicate: ::RDF::Vocab::SCHEMA.startDate, multiple: false do |index|
     index.as :stored_searchable
   end
 
