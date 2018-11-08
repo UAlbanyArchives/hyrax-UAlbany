@@ -10,7 +10,8 @@
           $('#pdfViewer').load(function() {
             var pdfjsframe = document.getElementById('pdfViewer');
             pdfjsframe.contentWindow.PDFViewerApplication.findBar.open()
-            $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val("<%= breadcrumbs[1].path.split("q=")[1].gsub('+', ' ').gsub('%20', ' ') %>");
+            var query = decodeURIComponent("<%= breadcrumbs[1].path.split("q=")[1].gsub('+', ' ') %>");
+            $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val(query);
             pdfjsframe.contentWindow.PDFViewerApplication.findBar.dispatchEvent('');
           });
         });
@@ -18,12 +19,12 @@
     <% else %>
       <script>
         $(document).ready(function(){
-          var query = new RegExp('[\?&]' + 'find' + '=([^&#]*)').exec(window.location.href);
+          var query = new RegExp('[\?&]' + 'find' + '=([^&#]*)').exec(window.location.href).replace(/\+/g, ' ');
           if (query !== null) {
             $('#pdfViewer').load(function() {
               var pdfjsframe = document.getElementById('pdfViewer');
               pdfjsframe.contentWindow.PDFViewerApplication.findBar.open()
-              $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val(query[1].replace(/\+/g, ' ').replace(/\%20/g, ' '));
+              $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val(decodeURIComponent(query));
               pdfjsframe.contentWindow.PDFViewerApplication.findBar.dispatchEvent('');
             });
           }
