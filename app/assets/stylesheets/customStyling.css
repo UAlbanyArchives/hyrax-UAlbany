@@ -206,3 +206,7 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
 .attribute-rights_statement .alert {
 	font-size: 12px;
 }
+
+.work-show .parent_context {
+	margin-bottom: 10px;
+}

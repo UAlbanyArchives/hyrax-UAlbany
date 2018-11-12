@@ -11,27 +11,29 @@
             var pdfjsframe = document.getElementById('pdfViewer');
             pdfjsframe.contentWindow.PDFViewerApplication.findBar.open()
             var query = decodeURIComponent("<%= breadcrumbs[1].path.split("q=")[1].gsub('+', ' ') %>");
-            $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val(query);
+            $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val(query.replace(/['"]+/g, ''));
             pdfjsframe.contentWindow.PDFViewerApplication.findBar.dispatchEvent('');
           });
         });
-      </script>
-    <% else %>
-      <script>
-        $(document).ready(function(){
-          var query = new RegExp('[\?&]' + 'find' + '=([^&#]*)').exec(window.location.href).replace(/\+/g, ' ');
-          if (query !== null) {
-            $('#pdfViewer').load(function() {
-              var pdfjsframe = document.getElementById('pdfViewer');
-              pdfjsframe.contentWindow.PDFViewerApplication.findBar.open()
-              $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val(decodeURIComponent(query));
-              pdfjsframe.contentWindow.PDFViewerApplication.findBar.dispatchEvent('');
-            });
-          }
-        });
-      </script>        
+      </script>           
     <% end %>
   <% end %>
+<% else %>
+  <script>
+    $(document).ready(function(){
+      if (window.location.search.indexOf('find') > -1) {
+        var query = new RegExp('[\?&]' + 'find' + '=([^&#]*)').exec(window.location.href)[1];
+        if (query !== null) {
+          $('#pdfViewer').load(function() {
+            var pdfjsframe = document.getElementById('pdfViewer');
+            pdfjsframe.contentWindow.PDFViewerApplication.findBar.open()
+            $(pdfjsframe.contentWindow.PDFViewerApplication.findBar.findField).val(decodeURIComponent(query).replace(/['"]+/g, ''));
+            pdfjsframe.contentWindow.PDFViewerApplication.findBar.dispatchEvent('');
+          });
+        }
+      }
+    });
+  </script>
 <% end %>
 
 
