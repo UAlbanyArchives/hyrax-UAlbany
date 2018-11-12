@@ -28,6 +28,7 @@
 		<% end %>
 
 		<%= form_tag "http://169.226.92.29/", method: :get, class: "search-query-form arclightSearch", role: "search" do %>
+		  <%= hidden_field_tag :search_field, 'all_fields' %>
 	      <div class="input-group">
 			<div class="input-group-btn">
 			    <button class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
