@@ -35,7 +35,7 @@ $( document ).on('turbolinks:load', function() {
 						for (i = 0; i < parent['scopecontent_ssm'].length; i++) {
 				  			$(this).children(".parent_description").append("<p>" + parent['scopecontent_ssm'][i] + "</p>")
 				  		}
-				  		$(".parent_description").css("display", "block");
+				  		$(this).children(".parent_description").css("display", "block");
 				  	}
 				  }
 				});
