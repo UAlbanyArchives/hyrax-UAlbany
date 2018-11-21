@@ -19,7 +19,23 @@ $(document).ready(function(){
     		$arclightURL = "http://lib-espy-ws-p101.its.albany.edu/collections/catalog/" + $collection.replace(".", "-") + "?format=json"
     	} else {
     		$arclightURL = "http://lib-espy-ws-p101.its.albany.edu/collections/catalog/" + $collection.replace(".", "-") + "aspace_" + $aspaceID + "?format=json"
-    	}	
+    	}
+        $collectionURL = "http://lib-espy-ws-p101.its.albany.edu/collections/catalog/" + $collection.replace(".", "-") + "?format=json"
+        $.ajax({
+          type: "GET",
+          dataType: 'json',
+          url: $collectionURL,
+          success: function(collectionData) {
+            $("#dao_collection").val(collectionData['response']['document']['title_ssm'][0])
+            $("#image_collection").val(collectionData['response']['document']['title_ssm'][0])
+            $("#av_collection").val(collectionData['response']['document']['title_ssm'][0])
+          },
+          error: function(){
+            $("#dao_collection").addClass("has-error")
+            $("#image_collection").addClass("has-error")
+            $("#av_collection").addClass("has-error")
+          }
+        });
 		$.ajax({
 		  type: "GET",
 		  dataType: 'json',
@@ -35,9 +51,7 @@ $(document).ready(function(){
 			if ('parent_ssm' in data['response']['document']) {
 			  	for (i = 0; i < data['response']['document']['parent_ssm'].length; i++) {
 			  		if (i == 0) {
-			  			$("#dao_collection").val(data['response']['document']['parent_unittitles_ssm'][i].split(",")[0])
-			  			$("#image_collection").val(data['response']['document']['parent_unittitles_ssm'][i].split(",")[0])
-			  			$("#av_collection").val(data['response']['document']['parent_unittitles_ssm'][i].split(",")[0])
+                        
 			  		} else if (i == 1) {
 			  			$("#dao_record_parent").val(data['response']['document']['parent_ssm'][i].split("_")[1])
 			  			$("#image_record_parent").val(data['response']['document']['parent_ssm'][i].split("_")[1])
