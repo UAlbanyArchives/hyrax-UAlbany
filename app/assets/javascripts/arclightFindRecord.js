@@ -16,9 +16,9 @@ $(document).ready(function(){
     		$aspaceID = ""
     	}
     	if ($aspaceID.length < 1) {
-    		$arclightURL = "http://169.226.92.29/catalog/" + $collection.replace(".", "-") + "?format=json"
+    		$arclightURL = "http://lib-espy-ws-p101.its.albany.edu/collections/catalog/" + $collection.replace(".", "-") + "?format=json"
     	} else {
-    		$arclightURL = "http://169.226.92.29/catalog/" + $collection.replace(".", "-") + "aspace_" + $aspaceID + "?format=json"
+    		$arclightURL = "http://lib-espy-ws-p101.its.albany.edu/collections/catalog/" + $collection.replace(".", "-") + "aspace_" + $aspaceID + "?format=json"
     	}	
 		$.ajax({
 		  type: "GET",

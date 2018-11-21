@@ -63,7 +63,7 @@ $( document ).on('turbolinks:load', function() {
 				$(this).next("dd").children("a").each(function (index, element) {
 					$parentID = $(this).text();
 					$collectionID = $(this).parent("dd").prev().prev().children("a").text().replace(".", "-");
-					$uri = "http://169.226.92.29/catalog/" + $collectionID + "aspace_" + $parentID + "?format=json"
+					$uri = "http://lib-espy-ws-p101.its.albany.edu/collections/catalog/" + $collectionID + "aspace_" + $parentID + "?format=json"
 					$.ajax({
 					  type: "GET",
 					  dataType: 'json',
