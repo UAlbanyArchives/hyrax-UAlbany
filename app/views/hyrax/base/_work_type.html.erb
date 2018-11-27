@@ -31,8 +31,13 @@
 			<div class="breadcrumb-indent-<%= index + 1 %> arclightReify">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= parent_id %>"><%= presenter.record_parent[index] %></a>
 			</div>
 			<% if parent_id == presenter.record_parent.last %>
-				<div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= presenter.archivesspace_record[0] %>"><%= presenter.title[0] %></a>
-				</div>
+                <% if presenter.archivesspace_record.present? %>
+                    <div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= presenter.archivesspace_record[0] %>"><%= presenter.title[0] %></a>
+                    </div>
+                <% else %>
+                    <div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <%= presenter.title[0] %>
+                    </div>
+                <% end %>
 			<% end %>
 		<% end %>
 	<% else %>
