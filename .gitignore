@@ -27,6 +27,8 @@ config/database.yml
 config/application.rb
 
 hyraxData/
+lib/import/*
+lib/complete/*
 fits.log
 
 # dotenv
