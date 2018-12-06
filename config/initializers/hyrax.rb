@@ -194,7 +194,8 @@ Hyrax.config do |config|
   # If you use a multi-server architecture, this MUST be a shared volume
   # config.derivatives_path = Rails.root.join('tmp', 'derivatives')
   # Moved derivatives path for all thumbs/converted files (webM, pdf, mp3, etc) (https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#derivatives)
-  config.derivatives_path = '/home/gw234478/hyrax-UAlbany/hyraxData/derivatives'
+  # Moved to environments/production.rb and development.rb
+  # config.derivatives_path = '/home/gw234478/hyrax-UAlbany/hyraxData/derivatives'
 
   # Should schema.org microdata be displayed?
   # config.display_microdata = true

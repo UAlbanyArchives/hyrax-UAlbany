@@ -25,6 +25,9 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+  
+  # Where to put derivatives
+  config.derivatives_path = '/home/gw234478/hyrax-UAlbany/hyraxData/derivatives'
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
