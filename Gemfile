@@ -78,5 +78,5 @@ gem 'hydra-role-management'
 group :production do
     gem 'pg'
     # for virus scanning
-    #gem 'clamav'
+    gem 'clamav'
 end

@@ -143,6 +143,7 @@ GEM
       mime-types (>= 1.16)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
+    clamav (0.4.1)
     clipboard-rails (1.7.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -155,6 +156,8 @@ GEM
     connection_pool (2.2.2)
     crass (1.0.4)
     daemons (1.2.6)
+    darlingtonia (0.3.0)
+      active-fedora (>= 11.0, <= 12.99)
     declarative (0.0.10)
     declarative-option (0.1.0)
     deprecation (1.0.0)
@@ -759,7 +762,9 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara (~> 2.13)
+  clamav
   coffee-rails (~> 4.2)
+  darlingtonia (~> 0.1)
   devise
   devise-guests (~> 0.6)
   fcrepo_wrapper
@@ -789,4 +794,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.6
+   1.16.5
