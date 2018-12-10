@@ -20,7 +20,7 @@ namespace :import do
         now = Hyrax::TimeService.time_in_utc
         obj.date_uploaded = now
         
-        direct_upload = AdminSet.find("0z708w40c")
+        direct_upload = AdminSet.find("mp48sc763")
         obj.admin_set = direct_upload
         resp = obj.save
         
@@ -50,13 +50,14 @@ namespace :import do
   
     task sheet: :environment do     
 
-        depositor = "gwiedeman@albany.edu"
-        importPath = Rails.root.join('lib', 'import')
-        completePath = Rails.root.join('lib', 'complete')
+        depositor = "importer@albany"
+        importPath = "/media/Library/ESPYderivatives/import"
+        completePath = "/media/Library/ESPYderivatives/complete"
+        binaryPath = "/media/Library/ESPYderivatives/files"
         Dir.foreach(importPath) do |sheet|
             if sheet.end_with? ".tsv"
-                filePath = Rails.root.join(importPath, sheet)
-                outputFile = File.open(Rails.root.join(completePath, sheet), mode: 'wb')
+                filePath = File.join(importPath, sheet)
+                outputFile = File.open(File.join(completePath, sheet), mode: 'wb')
                 headers = CSV.read(filePath, headers: true, col_sep: "\t").headers
                 #puts headers
                 outputFile << headers
@@ -73,7 +74,7 @@ namespace :import do
                     file_list = row[2].split('|')
                     #puts file_list
                     file_list.each do |filename|
-                        import_files << Rails.root.join(importPath, filename)
+                        import_files << File.join(binaryPath, filename)
                     end
                     puts import_files
                     
