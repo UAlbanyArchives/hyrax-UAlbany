@@ -87,7 +87,13 @@ Hyrax.config do |config|
   # Store identifier minter's state in a file for later replayability
   # config.minter_statefile = '/tmp/minter-state'
   # moved ID minter file away from /tmp (https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#identifier-state)
-  config.minter_statefile = '/home/gw234478/hyrax-UAlbany/hyraxData/minter-state'
+  config.minter_statefile = Rails.root.join('hyraxData', 'minter-state')
+  
+  if Rails.env.development?
+    config.derivatives_path = Rails.root.join('hyraxData', 'derivatives')
+  else
+    config.derivatives_path = '/media/Library/ESPYderivatives/derivatives'
+  end
 
   # Prefix for Redis keys
   # config.redis_namespace = "hyrax"
