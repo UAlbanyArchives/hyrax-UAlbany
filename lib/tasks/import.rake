@@ -50,7 +50,7 @@ namespace :import do
   
     task sheet: :environment do     
 
-        depositor = "importer@albany"
+        depositor = "importer@albany.edu"
         importPath = "/media/Library/ESPYderivatives/import"
         completePath = "/media/Library/ESPYderivatives/complete"
         binaryPath = "/media/Library/ESPYderivatives/files"
