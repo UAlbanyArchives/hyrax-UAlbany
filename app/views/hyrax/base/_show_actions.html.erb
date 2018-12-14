@@ -4,9 +4,11 @@
   <% end %>
   <% if presenter.editor? %>
       <%= link_to "Edit", edit_polymorphic_path([main_app, presenter]), class: 'btn btn-default' %>
-      <%= link_to "Delete", [main_app, presenter], class: 'btn btn-danger', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
       <% if presenter.member_presenters.size > 1 %>
           <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, presenter]), class: 'btn btn-default' %>
+      <% end %>
+      <% if presenter.admin? %>
+        <%= link_to "Delete", [main_app, presenter], class: 'btn btn-danger', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
       <% end %>
       <% if presenter.valid_child_concerns.length > 0 %>
         <!--<div class="btn-group">
