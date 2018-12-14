@@ -28,3 +28,8 @@
 .navbar {
 	border-radius: 0px !important;
 }
+
+.embededPDF {
+    width: 100%;
+    height: 800px;
+}
