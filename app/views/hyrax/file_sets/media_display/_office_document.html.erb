@@ -8,7 +8,7 @@
 
       <!-- PDF.js iframe -->
       <!--<iframe id="pdfViewer" allowfullscreen webkitallowfullscreen src="<%= pdfjs.full_path(file: hyrax.download_path(file_set) + "&file=pdf") %>"></iframe>-->
-      <iframe src=<%= hyrax.download_path(file_set) %> class="embededPDF"></iframe>
+      <iframe src=<%= hyrax.download_path(file_set) + "&file=pdf" %> class="embededPDF"></iframe>
 
       <%= link_to t('hyrax.file_set.show.downloadable_content.office_link'),
                   hyrax.download_path(file_set),
