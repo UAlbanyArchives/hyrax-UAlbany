@@ -32,7 +32,9 @@ Rails.application.routes.draw do
   end
 
   require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
 
