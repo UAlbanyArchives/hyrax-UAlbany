@@ -57,10 +57,10 @@ namespace :import do
         Dir.foreach(importPath) do |sheet|
             if sheet.end_with? ".tsv"
                 filePath = File.join(importPath, sheet)
-                outputFile = File.open(File.join(completePath, sheet), mode: 'wb')
                 headers = CSV.read(filePath, headers: true, col_sep: "\t").headers
                 #puts headers
-                outputFile << headers
+                output = []
+                output << headers
                 
                 file = File.open(filePath, "r:ISO-8859-1")
                 importData = CSV.parse(file, headers: true, encoding: 'r:ISO-8859-1', col_sep: "\t", skip_blanks: true).reject { |row| row.all?(&:nil?) } 
@@ -112,7 +112,7 @@ namespace :import do
 
                         obj = Av.find(work_id)
                         row[1] = "avs/" + obj.id.to_s
-                        outputFile << row
+                        output << row
                     
                     elsif row[0].downcase == "image"
                     
@@ -131,7 +131,7 @@ namespace :import do
 
                         obj = Image.find(work_id)
                         row[1] = "images/" + obj.id.to_s
-                        outputFile << row
+                        output << row
                     
                     else
                     
@@ -157,8 +157,12 @@ namespace :import do
                     puts "Success!"
                 
                 end                  
-                file.close            
-                outputFile.close            
+                file.close   
+                CSV.open(File.join(completePath, sheet), "wb", {col_sep: "\t"}) do |outputFile|
+                    output.each do |line|
+                        outputFile << line
+                    end
+                end          
                 #FileUtils.mv(filePath, completePath)
             end
         end   
