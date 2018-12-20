@@ -9,10 +9,16 @@ terms:
     term: Document
   - id: Image
     term: Image
+  - id: Map
+    term: Map
   - id: Mixed Materials
     term: Mixed Materials
-  - id: Newspaper
-    term: Newspaper
+  - id: Pamphlet
+    term: Pamphlet
+  - id: Periodical
+    term: Periodical
+  - id: Slides
+    term: Slides
   - id: Video
     term: Video
   - id: Other
