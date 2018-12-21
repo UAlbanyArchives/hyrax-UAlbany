@@ -53,6 +53,7 @@ namespace :import do
         depositor = "importer@albany.edu"
         importPath = "/media/Library/ESPYderivatives/import"
         completePath = "/media/Library/ESPYderivatives/complete"
+        finishPath = "/media/Library/ESPYderivatives/finished"
         binaryPath = "/media/Library/ESPYderivatives/files"
         Dir.foreach(importPath) do |sheet|
             if sheet.end_with? ".tsv"
@@ -89,7 +90,7 @@ namespace :import do
                     item_attributes['date_created'] = [row[11]]
                     item_attributes['resource_type'] = [row[12]]
                     item_attributes['license'] = [row[13]]
-                    item_attributes['rights_statment'] = [row[14]] if row[14].respond_to? :length
+                    item_attributes['rights_statement'] = [row[14]] if row[14].respond_to? :length
                     item_attributes['subject'] = row[15].split('|') if row[15].respond_to? :length
                     
                     if row[0].downcase == "av"
@@ -149,7 +150,7 @@ namespace :import do
                         
                         obj = Dao.find(work_id)
                         row[1] = "daos/" + obj.id.to_s
-                        outputFile << row
+                        output << row
                     
                     end
                     
@@ -163,7 +164,7 @@ namespace :import do
                         outputFile << line
                     end
                 end          
-                #FileUtils.mv(filePath, completePath)
+                FileUtils.mv(filePath, finishPath)
             end
         end   
 
