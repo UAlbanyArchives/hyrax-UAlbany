@@ -60,8 +60,9 @@ namespace :import do
                 filePath = File.join(importPath, sheet)
                 headers = CSV.read(filePath, headers: true, encoding: 'windows-1251:utf-8', col_sep: "\t").headers
                 #puts headers
-                output = []
-                output << headers
+                CSV.open(File.join(completePath, sheet), "ab", {col_sep: "\t"}) do |outputFile|
+                    outputFile << headers
+                end
                 
                 file = File.open(filePath, "r:ISO-8859-1")
                 importData = CSV.parse(file, headers: true, encoding: 'windows-1251:utf-8', col_sep: "\t", skip_blanks: true).reject { |row| row.all?(&:nil?) } 
@@ -93,6 +94,7 @@ namespace :import do
                     item_attributes['rights_statement'] = [row[14]] if row[14].respond_to? :length
                     item_attributes['subject'] = row[15].split('|') if row[15].respond_to? :length
                     
+                    outputFile = CSV.open(File.join(completePath, sheet), "ab", {col_sep: "\t"})
                     if row[0].downcase == "av"
                     
                         item_attributes['creator'] = [row[16]]
@@ -113,7 +115,7 @@ namespace :import do
 
                         obj = Av.find(work_id)
                         row[1] = "avs/" + obj.id.to_s
-                        output << row
+                        outputFile << row
                     
                     elsif row[0].downcase == "image"
                     
@@ -132,7 +134,7 @@ namespace :import do
 
                         obj = Image.find(work_id)
                         row[1] = "images/" + obj.id.to_s
-                        output << row
+                        outputFile << row
                     
                     else
                     
@@ -150,20 +152,19 @@ namespace :import do
                         
                         obj = Dao.find(work_id)
                         row[1] = "daos/" + obj.id.to_s
-                        output << row
+                        outputFile << row
+                        
                     
                     end
+                    outputFile.close
                     
                     attach_files(obj, import_files, depositor)
                     puts "Success!"
                 
-                end                  
+                end                
                 file.close   
-                CSV.open(File.join(completePath, sheet), "wb", {col_sep: "\t"}) do |outputFile|
-                    output.each do |line|
-                        outputFile << line
-                    end
-                end          
+                
+         
                 FileUtils.mv(filePath, finishPath)
             end
         end   
