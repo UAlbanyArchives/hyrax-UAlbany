@@ -50,9 +50,15 @@
 	border-bottom-right-radius: 0px !important;
 }
 
+.fa-file-pdf-o {
+    color: red;
+    font-size: 2.1rem;
+}
+
 iframe#pdfViewer {
 	width: 100%;
-	height: 800px;	
+	height: 800px;
+    display: none;
 }
 
 @media only screen and (max-width: 999px) {
@@ -73,6 +79,12 @@ iframe#pdfViewer {
 	iframe#pdfViewer {
 		height: 400px;
 	}
+}
+
+@media only screen and (min-width: 992px) {
+    iframe#pdfViewer {
+        display: block;
+    }
 }
 
 div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{

@@ -8,15 +8,18 @@
 
       <!-- PDF.js iframe -->
       <!--<iframe id="pdfViewer" allowfullscreen webkitallowfullscreen src="<%= pdfjs.full_path(file: hyrax.download_path(file_set))%>"></iframe>-->
-      <iframe src=<%= hyrax.download_path(file_set) %> class="embededPDF"></iframe>
+      <iframe id="pdfViewer" src=<%= hyrax.download_path(file_set) %> class="embededPDF"></iframe>
 
       <%= link_to t('hyrax.file_set.show.downloadable_content.pdf_link'),
                   hyrax.download_path(file_set),
                   data: { turbolinks: false },
                   target: :_blank,
                   id: "file_download",
-                  class: "btn btn-default",
-                  data: { label: file_set.id } %>
+                  class: "btn btn-default btn-lg",
+                  data: { label: file_set.id } do %>
+        <i class="fa fa-file-pdf-o"></i>
+      <% end %>
+      
     </div>
 <% else %>
     <div>

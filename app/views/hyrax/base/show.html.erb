@@ -56,11 +56,11 @@
               <%= render 'representative_media', presenter: @presenter, viewer: true %>
             </div>
           <% else %>
-            <div class="col-sm-8 text-center">
+            <div class="col-sm-12 col-md-8 text-center">
               <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
             </div>
           <% end %>
-          <div class="col-sm-4 metadataFields">
+          <div class="col-sm-12 col-md-4 metadataFields">
             <%= render 'metadata', presenter: @presenter %>
             <%= render 'citations', presenter: @presenter %>
             <%= render 'social_media' %>
