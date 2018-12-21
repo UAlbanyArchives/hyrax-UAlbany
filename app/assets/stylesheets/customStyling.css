@@ -51,14 +51,31 @@
 }
 
 .fa-file-pdf-o {
-    color: red;
+    color: #d32f2f;
     font-size: 2.1rem;
 }
+
+.fa-file-word-o {
+    color: #2a5699;
+    font-size: 2.1rem;
+}
+
+.fa-file-excel-o {
+    color: #207245;
+    font-size: 2.1rem;
+}
+
+.fa-file-powerpoint-o {
+    color: #cb4a32;
+    font-size: 2.1rem;
+}
+
 
 iframe#pdfViewer {
 	width: 100%;
 	height: 800px;
     display: none;
+    margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 999px) {

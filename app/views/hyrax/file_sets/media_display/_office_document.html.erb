@@ -10,23 +10,33 @@
       <!--<iframe  allowfullscreen webkitallowfullscreen src="<%= pdfjs.full_path(file: hyrax.download_path(file_set) + "&file=pdf") %>"></iframe>-->
       <iframe id="pdfViewer" src=<%= hyrax.download_path(file_set) + "&file=pdf" %> class="embededPDF"></iframe>
 
-      <%= link_to t('hyrax.file_set.show.downloadable_content.pdf_link'),
-                  hyrax.download_path(file_set) + "&file=pdf",
+      <%= link_to hyrax.download_path(file_set) + "&file=pdf",
                   data: { turbolinks: false },
                   target: :_blank,
                   id: "file_download",
                   class: "btn btn-default btn-lg",
                   data: { label: file_set.id } do %>
         <i class="fa fa-file-pdf-o"></i>
+        <%= t('hyrax.file_set.show.downloadable_content.pdf_link') %>
       <% end %>
                   
-      <%= link_to t('hyrax.file_set.show.downloadable_content.office_link'),
-                  hyrax.download_path(file_set),
+      <%= link_to hyrax.download_path(file_set),
                   data: { turbolinks: false },
                   target: :_blank,
                   id: "file_download",
                   class: "btn btn-default btn-lg",
-                  data: { label: file_set.id } %>
+                  data: { label: file_set.id } do %>
+            <% if file_set.title.includes? "docx" || file_set.title.includes? "doc" %>
+                <i class="fa fa-file-word-o"></i>
+            <% elsif file_set.title.includes? "xls" || file_set.title.includes? "xlsx" %>
+                <i class="fa fa-file-excel-o"></i>
+            <% elsif file_set.title.includes? "ppt" || file_set.title.includes? "pptx" %>
+                <i class="fa fa-file-powerpoint-o"></i>
+            <% else %>
+                <i class="fa fa-file-text"></i>
+            <% end %>
+            <%= t('hyrax.file_set.show.downloadable_content.office_link') %>
+      <% end %>
     </div>
     
 <% else %>
