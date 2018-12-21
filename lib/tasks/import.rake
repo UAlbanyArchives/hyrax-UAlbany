@@ -58,13 +58,13 @@ namespace :import do
         Dir.foreach(importPath) do |sheet|
             if sheet.end_with? ".tsv"
                 filePath = File.join(importPath, sheet)
-                headers = CSV.read(filePath, headers: true, col_sep: "\t").headers
+                headers = CSV.read(filePath, headers: true, encoding: 'windows-1251:utf-8', col_sep: "\t").headers
                 #puts headers
                 output = []
                 output << headers
                 
                 file = File.open(filePath, "r:ISO-8859-1")
-                importData = CSV.parse(file, headers: true, encoding: 'r:ISO-8859-1', col_sep: "\t", skip_blanks: true).reject { |row| row.all?(&:nil?) } 
+                importData = CSV.parse(file, headers: true, encoding: 'windows-1251:utf-8', col_sep: "\t", skip_blanks: true).reject { |row| row.all?(&:nil?) } 
                 
                 importData.each do |row|
                 
