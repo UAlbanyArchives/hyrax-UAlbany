@@ -26,16 +26,16 @@
                   id: "file_download",
                   class: "btn btn-default btn-lg",
                   data: { label: file_set.id } do %>
-            <% if file_set.title.includes? "docx" || file_set.title.includes? "doc" %>
+            <% if file_set.title.include?("docx") || file_set.title.include?("doc")%>
                 <i class="fa fa-file-word-o"></i>
-            <% elsif file_set.title.includes? "xls" || file_set.title.includes? "xlsx" %>
+            <% elsif file_set.title.include?("xls")|| file_set.title.include?("xlsx")%>
                 <i class="fa fa-file-excel-o"></i>
-            <% elsif file_set.title.includes? "ppt" || file_set.title.includes? "pptx" %>
+            <% elsif file_set.title.include?("ppt")|| file_set.title.include?("pptx")%>
                 <i class="fa fa-file-powerpoint-o"></i>
             <% else %>
                 <i class="fa fa-file-text"></i>
+                <%= t('hyrax.file_set.show.downloadable_content.office_link') %>
             <% end %>
-            <%= t('hyrax.file_set.show.downloadable_content.office_link') %>
       <% end %>
     </div>
     
