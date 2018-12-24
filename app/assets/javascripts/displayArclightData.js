@@ -12,8 +12,11 @@ $( document ).on('turbolinks:load', function() {
 			  		$query = '.arclightReify:eq(' + String(i) + ')';
 			  		$parentLink = $('.arclightBreadcrumbs').children($query);
 		  			$urlRoot = $parentLink.children("a").attr("href").split("aspace_")[0];
-		  			/*$parentLink.children("a").attr("href", $urlRoot + data['response']['document']['parent_ssm'][i])*/
-		  			$parentLink.children("a").attr("href", $urlRoot)
+		  			if ( i == 0 ) {
+						$parentLink.children("a").attr("href", $urlRoot)
+					} else {
+						$parentLink.children("a").attr("href", $urlRoot + data['response']['document']['parent_ssm'][i])
+		  			}
 		  			$parentLink.children("a").text(data['response']['document']['parent_unittitles_ssm'][i])
 			  	}
 			  }
