@@ -19,6 +19,7 @@ $( document ).on('turbolinks:load', function() {
 		  			}
 		  			$parentLink.children("a").text(data['response']['document']['parent_unittitles_ssm'][i])
 			  	}
+				$(".arclightRecord").children("a").text(data['response']['document']['normalized_title_ssm'][0]);
 			  }
 			});
 			$('.parent_context').each(function (index, element) {

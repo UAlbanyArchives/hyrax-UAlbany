@@ -26,23 +26,34 @@
 
 
 <% if presenter.respond_to? :record_parent %>
+
 	<% if presenter.record_parent != nil %>
 		<% presenter.record_parent.each_with_index do |parent_id, index| %>
 			<div class="breadcrumb-indent-<%= index + 1 %> arclightReify">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= parent_id %>"><%= presenter.record_parent[index] %></a>
 			</div>
 			<% if parent_id == presenter.record_parent.last %>
                 <% if presenter.archivesspace_record.present? %>
-                    <div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= presenter.archivesspace_record[0] %>"><%= presenter.title[0] %></a>
-                    </div>
+					<% if presenter.respond_to? :coverage %>
+						<% if presenter.coverage[0] != "whole" %>
+							<div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= presenter.archivesspace_record[0] %>"><%= presenter.archivesspace_record[0] %></a></div>
+							<div class="breadcrumb-indent-<%= index + 3 %>">&#187; <%= presenter.title[0] %></div>
+						<% else %>
+							<div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= presenter.archivesspace_record[0] %>"><%= presenter.title[0] %>, <%= presenter.date_created[0] %></a>
+							</div>
+						<% end %>
+					<% else %>
+						<div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= presenter.archivesspace_record[0] %>"><%= presenter.archivesspace_record[0] %></a></div>
+						<div class="breadcrumb-indent-<%= index + 3 %>">&#187; <%= presenter.title[0] %></div>
+					<% end %>
                 <% else %>
-                    <div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <%= presenter.title[0] %>
-                    </div>
+                    <div class="breadcrumb-indent-<%= index + 2 %> arclightRecord">&#187; <%= presenter.title[0] %></div>
                 <% end %>
 			<% end %>
 		<% end %>
 	<% else %>
 		<div class="breadcrumb-indent-1">&#187; <%= presenter.title[0] %></div>
 	<% end %>
+	
 <% elsif presenter.respond_to? :archivesspace_record %>
 	<% if presenter.archivesspace_record != nil %>
 		<div class="breadcrumb-indent-1 arclightRecord">&#187; <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= @collection_uri %>aspace_<%= presenter.archivesspace_record[0] %>"><%= presenter.title[0] %></a>
