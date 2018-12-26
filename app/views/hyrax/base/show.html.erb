@@ -2,6 +2,7 @@
 
 <%= render 'shared/citations' %>
 
+<% if 1 == 2 %> 
 <% if breadcrumbs[1] %>
   <% if breadcrumbs[1].try(:path) %>
     <% if breadcrumbs[1].path.split("q=")[1] %>
@@ -34,6 +35,7 @@
       }
     });
   </script>
+<% end %>
 <% end %>
 
 
