@@ -33,9 +33,11 @@ namespace :import do
         
         files = []
         files += [import_files] if import_files
-        puts files.class
+		
         import_files.each do |f|
             fs = FileSet.new
+			
+			puts "\t\tUploading " + File.basename(f)
                        
             fs.title = [File.basename(f)]
             actor = ::Hyrax::Actors::FileSetActor.new(fs, user)
@@ -53,10 +55,12 @@ namespace :import do
         depositor = "importer@albany.edu"
         importPath = "/media/Library/ESPYderivatives/import"
         completePath = "/media/Library/ESPYderivatives/complete"
-        finishPath = "/media/Library/ESPYderivatives/finished"
+        finishPath = "/media/Library/ESPYderivatives/used"
         binaryPath = "/media/Library/ESPYderivatives/files"
         Dir.foreach(importPath) do |sheet|
             if sheet.end_with? ".tsv"
+				puts Time.now.to_s + " Reading sheet: " + sheet
+			
                 filePath = File.join(importPath, sheet)
                 headers = CSV.read(filePath, headers: true, encoding: 'windows-1251:utf-8', col_sep: "\t").headers
                 #puts headers
@@ -78,7 +82,7 @@ namespace :import do
                     file_list.each do |filename|
                         import_files << File.join(binaryPath, filename)
                     end
-                    puts import_files
+                    #puts import_files
                     
                     item_attributes['accession'] = [row[3]]
                     item_attributes['collecting_area'] = row[4]
@@ -107,14 +111,20 @@ namespace :import do
                         item_attributes['physical_dimensions'] = row[23] if row[23].respond_to? :length
                         
                         #puts item_attributes
-                        puts "Uploading " + item_attributes['title'][0]
+                        puts "\tIngesting " + item_attributes['title'][0]
+						if row[7].respond_to? :length
+							puts "\t\tASpace: " + row[7]
+						else
+							puts "\t\tIdentifier: " + row[17] if row[17].respond_to? :length
+						end
                         
                         work_id = ingest_work("av", item_attributes, depositor)
-                        puts "object created"
-                        puts work_id
-
-                        obj = Av.find(work_id)
-                        row[1] = "avs/" + obj.id.to_s
+                        #puts "object created"
+						obj = Av.find(work_id)
+						
+						new_uri = "avs/" + work_id
+                        puts "\t\tnow: " + new_uri
+                        row[1] = new_uri
                         outputFile << row
                     
                     elsif row[0].downcase == "image"
@@ -127,13 +137,19 @@ namespace :import do
                         
                         #puts item_attributes
                         puts "Uploading " + item_attributes['title'][0]
+						if row[7].respond_to? :length
+							puts "\t\tASpace: " + row[7]
+						else
+							puts "\t\tIdentifier: " + row[17] if row[17].respond_to? :length
+						end
                        
                         work_id = ingest_work("image", item_attributes, depositor)
-                        puts "object created"
-                        puts work_id
-
-                        obj = Image.find(work_id)
-                        row[1] = "images/" + obj.id.to_s
+                        #puts "object created"
+						obj = Image.find(work_id)
+						
+						new_uri = "images/" + work_id
+                        puts "\t\tnow: " + new_uri
+                        row[1] = new_uri
                         outputFile << row
                     
                     else
@@ -145,13 +161,15 @@ namespace :import do
                     
                         #puts item_attributes
                         puts "Uploading " + item_attributes['title'][0]
+                        puts "\t\tASpace: " + row[7] if row[7].respond_to? :length
                        
                         work_id = ingest_work("dao", item_attributes, depositor)
-                        puts "object created"
-                        puts work_id
-                        
-                        obj = Dao.find(work_id)
-                        row[1] = "daos/" + obj.id.to_s
+                        #puts "object created"
+						obj = Dao.find(work_id)
+						
+						new_uri = "daos/" + work_id
+                        puts "\t\tnow: " + new_uri
+                        row[1] = new_uri
                         outputFile << row
                         
                     
@@ -159,7 +177,7 @@ namespace :import do
                     outputFile.close
                     
                     attach_files(obj, import_files, depositor)
-                    puts "Success!"
+                    puts "\t\tSuccess!"
                 
                 end                
                 file.close   
@@ -172,3 +190,4 @@ namespace :import do
     end
 
 end
+
