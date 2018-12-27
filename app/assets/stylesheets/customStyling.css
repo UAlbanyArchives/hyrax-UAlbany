@@ -70,12 +70,15 @@
     font-size: 2.1rem;
 }
 
-
 iframe#pdfViewer {
 	width: 100%;
 	height: 800px;
     display: none;
     margin-bottom: 20px;
+}
+
+.no-preview img, .no-preview p {
+	display: none;
 }
 
 @media only screen and (max-width: 999px) {
@@ -100,6 +103,9 @@ iframe#pdfViewer {
 
 @media only screen and (min-width: 992px) {
     iframe#pdfViewer {
+        display: block;
+    }
+    .no-preview img, .no-preview p {
         display: block;
     }
 }
@@ -238,4 +244,8 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
 
 .work-show .parent_context {
 	margin-bottom: 10px;
+}
+
+#sidebar .sidenav {
+	padding-bottom: 10px;
 }

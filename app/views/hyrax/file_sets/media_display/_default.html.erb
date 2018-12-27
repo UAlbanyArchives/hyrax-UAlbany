@@ -1,0 +1,14 @@
+<div class="no-preview">
+  <p><%= t('hyrax.works.show.no_preview') %></p>
+  <% if Hyrax.config.display_media_download_link? %>
+	<img class="img-responsive center-block" src="<%= Hyrax::WorkThumbnailPathService.default_image %>" />
+	  <%= link_to hyrax.download_path(file_set),
+		  id: "file_download",
+		  class: "btn btn-default btn-lg",
+		  data: { label: file_set.id },
+		  target: "_new" do %>
+		  <i class="fa fa-download"></i>
+		  <%= t('hyrax.file_set.show.download') %>
+	  <% end %>
+  <% end %>
+</div>

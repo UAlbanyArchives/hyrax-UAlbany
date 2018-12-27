@@ -8,7 +8,7 @@
 			<% @query = current_search_parameters %>
 		<% end %>
 
-		<%= form_tag "http://lib-espy-ws-p101.its.albany.edu/search", method: :get, class: "search-query-form allSearch", role: "search" do %>
+		<%= form_tag "https://archives.albany.edu/search", method: :get, class: "search-query-form allSearch", role: "search" do %>
 	      <div class="input-group">
 			<div class="input-group-btn">
 			    <button class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,7 +27,7 @@
 		  </div>
 		<% end %>
 
-		<%= form_tag "http://lib-espy-ws-p101.its.albany.edu/collections", method: :get, class: "search-query-form arclightSearch", role: "search" do %>
+		<%= form_tag "https://archives.albany.edu/collections", method: :get, class: "search-query-form arclightSearch", role: "search" do %>
 		  <%= hidden_field_tag :search_field, 'all_fields' %>
 	      <div class="input-group">
 			<div class="input-group-btn">
