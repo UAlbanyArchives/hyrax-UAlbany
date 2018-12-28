@@ -94,7 +94,7 @@ span.glyphicon-triangle-top {
 }
 
 #bs-example-navbar-collapse-1{
-	background-image: url("http://library.albany.edu/speccoll/findaids/eresources/static/icons/ua/mainHeadingLarge.png");
+	background-image: url("https://archives.albany.edu/static/icons/ua/mainHeadingLarge.png");
 	background-size: 935px 60px;
 	background-repeat: no-repeat;
 	background-position: 0px -0px;
@@ -374,7 +374,7 @@ span.glyphicon-triangle-top {
 
 @media only screen and (max-width: 991px) {
   #bs-example-navbar-collapse-1 {
-	  background-image: url("http://library.albany.edu/speccoll/findaids/eresources/static/icons/ua/mainHeading.png");
+	  background-image: url("https://archives.albany.edu/static/icons/ua/mainHeading.png");
 	  background-size: 710px 60px;
   }
   #searchBox {
@@ -433,7 +433,7 @@ span.glyphicon-triangle-top {
        background-image: none;
    }
    .navbar-header {
-	background-image: url("http://library.albany.edu/speccoll/findaids/eresources/static/icons/ua/mainHeadingSmall.png");
+	background-image: url("https://archives.albany.edu/static/icons/ua/mainHeadingSmall.png");
    	background-position: 0px 8px;
    	width: 100%;
    	margin-left: 0px !important;
@@ -504,7 +504,7 @@ span.glyphicon-triangle-top {
 
 @media only screen and (max-width: 400px) {
   .navbar-header {
-	background-image: url("http://library.albany.edu/speccoll/findaids/eresources/static/icons/ua/mainHeadingTiny.png");
+	background-image: url("https://archives.albany.edu/static/icons/ua/mainHeadingTiny.png");
 	background-size: 105% 45px !important;
 	background-position: 0px 3px;
 	min-height: 50px !important;
