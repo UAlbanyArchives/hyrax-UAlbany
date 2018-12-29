@@ -1,4 +1,4 @@
-$( document ).on('turbolinks:load', function() {
+$(document).ready(function(){
 	if ($(".arclightBreadcrumbs")[0]) {
 		if ($(".arclightRecord")[0]) {
 			$arclightURI = $(".arclightRecord").children("a").attr("href") + "?format=json";
