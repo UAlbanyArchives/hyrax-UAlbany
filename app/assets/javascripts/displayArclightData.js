@@ -60,7 +60,7 @@ $(document).ready(function(){
 });
 
 /*on the Search Results page, this will reify the parent id(s) with the correct titles using Arclight*/
-$( document ).on('turbolinks:load', function() {
+$(document).ready(function(){
 	if ($(".dl-horizontal")[0]) {
 		$('dt').each(function (index, element) {
 			if ($(this).text() == "Parent Record(s):") {
