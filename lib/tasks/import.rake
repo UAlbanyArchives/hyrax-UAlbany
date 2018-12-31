@@ -107,7 +107,7 @@ namespace :import do
                         item_attributes['master_format'] = row[19] if row[19].respond_to? :length
                         item_attributes['date_digitized'] = row[20] if row[20].respond_to? :length
                         item_attributes['source'] = [row[21]] if row[21].respond_to? :length
-                        item_attributes['extent'] = [row[22]] if row[22].respond_to? :length
+                        item_attributes['extent'] = row[22].split('|') if row[22].respond_to? :length
                         item_attributes['physical_dimensions'] = row[23] if row[23].respond_to? :length
                         
                         #puts item_attributes
@@ -155,8 +155,8 @@ namespace :import do
                     else
                     
                         item_attributes['coverage'] = row[16].downcase
-                        item_attributes['processing_activity'] = [row[17]] if row[17].respond_to? :length
-                        item_attributes['extent'] = [row[18]] if row[18].respond_to? :length
+                        item_attributes['processing_activity'] = row[17].split('|') if row[17].respond_to? :length
+                        item_attributes['extent'] = row[18].split('|') if row[18].respond_to? :length
                         item_attributes['language'] = [row[19]] if row[19].respond_to? :length
                     
                         #puts item_attributes
