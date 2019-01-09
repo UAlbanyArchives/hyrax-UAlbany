@@ -1,17 +1,15 @@
 namespace :reindex do
-  desc "updates the index by collectionID"
-  task :collection, [:id] do |task, args|
-	count = 0
-    Dao.where("collection_number": args.id).each do |dao|
-	
-		fs = dao.members[0]
-		fs.update_index
-		
-		count += 1
-		puts count
-	
-	end
-	
+  desc "reindexes"
+  task accession: :environment do
+  
+	Dao.where("accession": "ua395-DpdVWtrwppUpJur3vAWnBU").each do |dao|
+        dao.members.each do |fs|
+            puts fs.id
+            fs.update_index
+        end
+    end
+    puts "done"	
   end
 
 end
+
