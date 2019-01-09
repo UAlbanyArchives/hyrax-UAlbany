@@ -184,7 +184,28 @@ namespace :import do
         end   
 
     end
-
+    
+    task files: :environment do
+    
+        depositor = "importer@albany.edu"
+        user = User.find_by_user_key(depositor)
+        
+        binaryPath = "/media/Library/ESPYderivatives/files"
+        
+        dao = Dao.find(ENV["object"])
+        
+        import_files = []
+        ENV["files"].split("|").each do |filename|
+	    puts "importing " + filename
+            import_files << File.join(binaryPath, filename)
+        end
+        
+        attach_files(dao, import_files, user)
+        puts "-->  Success!"
+            
+    end
+    
 end
+
 
 
