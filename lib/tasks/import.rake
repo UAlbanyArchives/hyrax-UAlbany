@@ -80,7 +80,11 @@ namespace :import do
                     file_list = row[2].split('|')
                     #puts file_list
                     file_list.each do |filename|
-                        import_files << File.join(binaryPath, filename)
+			if File.file?(File.join(binaryPath, row[5], filename))
+				import_files << File.join(binaryPath, row[5], filename)			
+			else
+                        	import_files << File.join(binaryPath, filename)
+			end
                     end
                     #puts import_files
                     
@@ -101,14 +105,15 @@ namespace :import do
                     outputFile = CSV.open(File.join(completePath, sheet), "ab", {col_sep: "\t"})
                     if row[0].downcase == "av"
                     
-                        item_attributes['creator'] = [row[16]]
+                        item_attributes['creator'] = row[16].split("|")
                         item_attributes['identifier'] = [row[17]]
                         item_attributes['contributor'] = [row[18]]
                         item_attributes['master_format'] = row[19] if row[19].respond_to? :length
                         item_attributes['date_digitized'] = row[20] if row[20].respond_to? :length
-                        item_attributes['source'] = [row[21]] if row[21].respond_to? :length
-                        item_attributes['extent'] = row[22].split('|') if row[22].respond_to? :length
-                        item_attributes['physical_dimensions'] = row[23] if row[23].respond_to? :length
+                        item_attributes['source'] = [row[23]] if row[23].respond_to? :length
+                        item_attributes['extent'] = row[21].split('|') if row[21].respond_to? :length
+                        item_attributes['physical_dimensions'] = row[22] if row[22].respond_to? :length
+			item_attributes['processing_activity'] = [row[24]] if row[24].respond_to? :length
                         
                         #puts item_attributes
                         puts "\tIngesting " + item_attributes['title'][0]
@@ -128,7 +133,7 @@ namespace :import do
                     
                     elsif row[0].downcase == "image"
                     
-                        item_attributes['creator'] = [row[16]]
+                        item_attributes['creator'] = row[16].split("|")
                         item_attributes['identifier'] = [row[17]]
                         item_attributes['contributor'] = [row[18]]
                         item_attributes['master_format'] = row[19] if row[19].respond_to? :length
@@ -196,7 +201,6 @@ namespace :import do
         
         import_files = []
         ENV["files"].split("|").each do |filename|
-	    puts "importing " + filename
             import_files << File.join(binaryPath, filename)
         end
         
