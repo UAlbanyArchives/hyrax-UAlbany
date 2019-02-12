@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm searchSubnav">
+<div id="searchSub" class="navbar navbar-expand-sm searchSubnav">
 
 	<div class="container">
     
@@ -8,67 +8,29 @@
 			<% @query = current_search_parameters %>
 		<% end %>
 
-		<%= form_tag "https://archives.albany.edu/search", method: :get, class: "search-query-form allSearch", role: "search" do %>
-	      <div class="input-group">
-			<div class="input-group-btn">
-			    <button class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			   Everything <span class="caret"></span></button>
-			   <button class="btn btn-secondary dropdown-toggle searchSelect noText" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
-			    <div class="dropdown-menu searchOptions">
-			      <li><a class="dropdown-item" data="allSearch" href="#">Everything</a></li>
-			      <li><a class="dropdown-item" data="arclightSearch" href="#">Collections</a></li>
-			      <li><a class="dropdown-item" data="hyraxSearch" href="#">Digital Selections</a></li>
-			    </div>
-			</div>
-			<input name="q" id="params-q" value="<%= @query %>" placeholder="Search everything..." class="search_q q form-control tt-input" type="text" />
-	        <div class="input-group-btn">
-				<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-		  	</div>
-		  </div>
-		<% end %>
-
-		<%= form_tag "https://archives.albany.edu/collections", method: :get, class: "search-query-form arclightSearch", role: "search" do %>
-		  <%= hidden_field_tag :search_field, 'all_fields' %>
-	      <div class="input-group">
-			<div class="input-group-btn">
-			    <button class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			   Collections <span class="caret"></span></button>
-			   <button class="btn btn-secondary dropdown-toggle searchSelect noText" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
-			    <div class="dropdown-menu searchOptions">
-			      <li><a class="dropdown-item" data="allSearch" href="#">Everything</a></li>
-			      <li><a class="dropdown-item" data="arclightSearch" href="#">Collections</a></li>
-			      <li><a class="dropdown-item" data="hyraxSearch" href="#">Digital Selections</a></li>
-			    </div>
-			</div>
-			<input name="q" id="params-q" value="<%= @query %>" placeholder="Search all collection records..." class="search_q q form-control tt-input" type="text" />
-	        <div class="input-group-btn">
-				<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-		  	</div>
-		  </div>
-		<% end %>
-
 		<%= form_tag search_form_action, method: :get, class: "search-query-form hyraxSearch", role: "search" do %>
 		  <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
   		  <%= hidden_field_tag :search_field, 'all_fields' %>
 	      <div class="input-group">
+            <input name="q" id="params-q" value="<%= @query %>" placeholder="Search only online digital content..." class="search_q q form-control tt-input" type="text" />
+            <input type="hidden" name="search_field" id="search_field" value="all_fields" />
 			<div class="input-group-btn">
-			    <button class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    <button id="currentSelection" class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			   Digital Selections <span class="caret"></span></button>
 			   <button class="btn btn-secondary dropdown-toggle searchSelect noText" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
-			    <div class="dropdown-menu searchOptions">
-			      <li><a class="dropdown-item" data="allSearch" href="#">Everything</a></li>
-			      <li><a class="dropdown-item" data="arclightSearch" href="#">Collections</a></li>
-			      <li><a class="dropdown-item" data="hyraxSearch" href="#">Digital Selections</a></li>
+			    <div class="dropdown-menu dropdown-menu-right searchOptions">
+			      <li><a class="dropdown-item" id="allSearch" data="allSearch" href="#">Everything</a></li>
+			      <li><a class="dropdown-item" id="arclightSearch" data="arclightSearch" href="#">Collections</a></li>
+			      <li><a class="dropdown-item" id="hyraxSearch" data="hyraxSearch" href="#">Digital Selections</a></li>
 			    </div>
 			</div>
-			<input name="q" id="params-q" value="<%= @query %>" placeholder="Search only online digital content..." class="search_q q form-control tt-input" type="text" />
 	        <div class="input-group-btn">
 				<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
 		  	</div>
 		  </div>
 		<% end %>
 
-		<a class="aboutSearch" href="#">How to search the Archives</a>
+		<a class="aboutSearch" href="/search"><i class="fa fa-question-circle"></i> Search Help</a>
 
 	</div>
 

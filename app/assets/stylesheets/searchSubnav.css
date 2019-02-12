@@ -1,83 +1,142 @@
 .searchSubnav {
-	background-color: #eaaa00;
-	margin-top: 0px !important;
-	padding: 0.5rem 1rem !important;
-	font-size: 1.5rem !important;
-	margin-bottom: 0px !important;
+	background-color: #642a90;
+	min-height: 20px;
+	padding: 2rem 1rem;
+	z-index: 9;
+	top: 0px;
+	transition: all ease .25s;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    font-size: 16px !important;
 }
 
 .searchSubnav .container {
-	display: flex;
-	align-items: center;
+	padding-left: 5%;
+	padding-right: 2.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .search-query-form {
 	flex: 1;
 }
 
-.search-query-form .input-group {
-	margin-bottom: 0px;
+.input-group {
+    margin-bottom: 0px !important;
 }
 
-.arclightSearch {
-	display: none;
-}
-.allSearch {
-	display: none;
+.searchSubnav .input-group .form-control {
+    font-size: 16px !important;
 }
 
 .searchSelect {
-	background-color: #EBE6F0 !important;
-	border-color: #EBE6F0 !important;
-	color: #46166B !important;
-	width: 160px !important;
-	display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
+	background-color: #EBE6F0;
+	border-color: #ced4da;
+	color: #46166B;
+	width: 160px;
+	display: flex;
+    justify-content: space-between;
+	align-items: center;
+	font-size: .85em;
+	border-radius: 0px !important;
+    text-align: left !important;
 }
+
+.searchSelect .caret {
+    float: right;
+    margin: 8px 0px;
+}
+
+.noText > .caret {
+    margin: 0px;
+}
+
+/*.search-query-form .dropdown-menu {
+	font-size: .85em;
+}*?
 /* dropdown without text for small displays*/
 .noText {
 	display: none !important;
-	width: auto !important;
-	border-top-left-radius: 5px !important;
-	border-bottom-left-radius: 5px !important;
+	width: auto;
+    padding: 14px 10px !important;
 }
 
 /* the How to search the Archives link */
 .searchSubnav .container .aboutSearch {
 	margin: 0px 20px;
 	color: #EBE6F0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	vertical-align: middle;
+	font-size: .75em;
+}
+
+.searchSubnav .btn-primary {
+	background-color: #9e68c7;
+	border-color: #9e68c7;
+}
+
+.searchSubnav .twitter-typeahead {
+	flex: 1 !important;
+}
+
+.searchSubnav .tt-input {
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	background-color: #EBE6F0;
 }
 
 /* input and button focus colors */
-.input-group-btn.show > .searchSelect.dropdown-toggle:focus, .searchSelect:active:focus, .searchSelect.active:focus, .searchSelect:focus {
+.input-group-prepend.show > .searchSelect.dropdown-toggle:focus, .searchSelect:active:focus, .searchSelect.active:focus, .searchSelect:focus {
 	border-color: #46166B ;
 	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
 }
 .searchSelect:active, .searchSelect:hover, .searchSelect.active, .show > .searchSelect.dropdown-toggle {
-	background-color: #46166B;
-	border-color: #46166B;
-	color: #EBE6F0;
+	background-color: #9e68c7;
+	border-color: #9e68c7 !important;;
+	color: #EBE6F0 !important;
 }
 .search-query-form .dropdown-item:hover, .search-query-form .dropdown-item:focus {
-	color: #EBE6F0;
-	background-color: #46166B;
+	color: #EBE6F0!important;
+	background-color: #642a90;
 }
 .searchSubnav .search-query-form input:focus {
   border-color: #46166B ;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
 }
+.searchSubnav .btn-secondary:not(:disabled):not(.disabled):active:focus, .searchSubnav .btn-secondary:not(:disabled):not(.disabled).active:focus, 
+.searchSubnav .show > .btn-secondary.dropdown-toggle:focus {
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #46166B ;
+}
+
+.dropdown-menu, .twitter-typeahead .tt-menu {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+#alight-utils {
+	position: relative;
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-bottom: 15px;
+}
+
+#alight-utils a {
+	font-size: .75em;
+}
 
 /* for js if header is fixed */
 .fixedSubnav {
-	position: fixed;
+	position: fixed !important;
 	width: 100%;
-	top: 50px;
 	z-index: 1;
+    top: 52px;
+}
+
+.subnavSpacer {
+	margin-top: 186px;
 }
 
 /* for small displays */
@@ -85,14 +144,19 @@
 	.searchSubnav .container .aboutSearch {
 		display:none;
 	}
+    #stickysearchBox {
+		display:none;
+	}
 	.searchSubnav {
-		/*top: 107px;*/
-		position: fixed;
+		/*top: 107px;
+		position: fixed;*/
 		width: 100%;
-		z-index: 1;
 	}
 }
 @media only screen and (max-width: 575px) {
+    .searchSubnav {
+        top: 109px !important;
+    }
 	.searchSelect {
 		display: none !important;
 	}
@@ -102,10 +166,6 @@
 }
 @media only screen and (max-width: 400px) {
 	.searchSubnav {
-		/*top: 50px;*/
+		top: 50px;
 	}
-}
-
-.noText {
-	padding: 14px 10px !important;
 }
