@@ -28,3 +28,100 @@
 .navbar {
 	border-radius: 0px !important;
 }
+
+.btn-primary, .btn-primary * {
+    color: #ffffff !important;
+}
+
+.row a {
+    color: #642a90;
+}
+
+a:hover {
+	color: #006c68;
+}
+
+#sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle {
+    color: #642a90;
+} 
+
+/*#sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle:hover {
+    color: #006c68;
+} */
+
+.footer a {
+    color: #ffffff;
+}
+
+.panel-body a {
+    color: #642a90;
+}
+
+.panel-body a:hover {
+    color: #006c68;
+}
+
+.btn-default:focus {
+    border-color: #642a90;
+}
+        
+.btn-default {
+    color: #642a90;
+}
+
+.btn-default:hover {
+    color: #006c68;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #642a90;
+}
+
+.pagination > li > a:hover, .pagination > li > span:hover {
+    color: #006c68;
+}
+
+.pagination .active span {
+    background-color: #642a90;
+}
+
+.pagination .active span:hover {
+    background-color: #642a90;
+}
+
+.page_links a {
+    color: #642a90;
+}
+
+.page_links:hover a {
+    color: #006c68;
+}
+
+#startOverLink {
+    color: #642a90;
+}
+
+#startOverLink:hover {
+    color: #006c68;
+}
+
+.btn-info {
+	background-color: #006c68;
+}
+
+body {
+	background: #e2e1e0;
+	font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+footer {
+	background-color: #46166B;
+	margin-top: 25px;
+}
+
+.footRight img {
+	max-width: 300px;
+	margin-bottom: 15px;
+}

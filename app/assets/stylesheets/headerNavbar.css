@@ -596,6 +596,7 @@ span.glyphicon-triangle-top {
 
 .footRight {
 	float: right;
+    text-align: left;
 }
 
 

@@ -5,26 +5,27 @@ namespace :rotate do
     
     task logs: :environment do     
         
-        logPath = "/media/Library/ESPYderivatives/logs"
+        logPath = "/media/Library/ESPYderivatives/log"
         currentLog = File.join(logPath, "access.log")
         outPath = File.join(logPath, "old")
         ipFile = File.join(logPath, "localIP.txt")
         
         FileUtils.mv(currentLog, outPath)
+        sleep(5)
         logFile = File.join(outPath, "access.log")
         
         ipList = []
         File.open(ipFile, "r") do |f|
             f.each_line do |line|
-                ipList += line
+                ipList << line
             end
         end
         
         analyticsFile = File.join(logPath, "analytics.log")
         
-        File.open(analyticsFile, "a") do |outFile|
-            File.open(logFile, "r") do |f|
-                f.each_line do |line|
+        File.open(logFile, "r") do |f|
+            f.each_line do |line|
+                unless line.include? "?file=thumbnail"
                     ip = line.split(" ")[0]
                     unless ipList.include? ip
                         timestamp = line.split(" ")[3] + " " + line.split(" ")[4]
@@ -36,19 +37,19 @@ namespace :rotate do
                                 collection = url.split("/collections/catalog/")[1].split("aspace_")[0]
                             else
                                 if url.include? "?"
-                                    collection = url.split("?")[0].split("/collections/catalog/")[1]
+                                    collection = url.split("?")[0].split("/collections/catalog/")[1].gsub("-", ".")
                                 else
-                                    collection = url.split("/collections/catalog/")[1]
+                                    collection = url.split("/collections/catalog/")[1].gsub("-", ".")
                                 end
                             end
                         end
                         if url.include? "?"
                             noParams = url.split("?")[0]
-                        else:
+                        else
                             noParams = url
                         end
-                        if url.start_with? "/download/"
-                            fsID = noParams.split("/download/")[1]
+                        if url.start_with? "/downloads/"
+                            fsID = noParams.split("/downloads/")[1]
                             collection = FileSet.find(fsID).parent.collection_number
                         end
                         if url.start_with? "/concern/"
@@ -56,11 +57,14 @@ namespace :rotate do
                             objectID = noParams.split("/")[2]
                             collection = ""
                         end
+                        File.open(analyticsFile, "a") do |outFile|
+                            outFile.write(ip + "|" + timestamp + "|" + url + "|" + referer + "|" + collection + "\n")
+                        end
                     end
-                    outFile.write(ip + "|" + timestamp + "|" + url + "|" + referer + "|" + collection)
                 end
             end
         end
+        
         File.rename(logFile, File.join(outPath, Time.now.getutc.to_s.gsub(":", "-") + ".log"))
   
 
