@@ -145,7 +145,7 @@
 /* for small displays */
 @media only screen and (max-width: 765px) {
 	.searchSubnav {
-        top: 109px;
+        top: 107px;
     }
     .searchSubnav .container .aboutSearch {
 		display:none;

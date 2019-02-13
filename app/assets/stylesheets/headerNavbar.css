@@ -74,6 +74,7 @@ span.glyphicon-triangle-top {
 	z-index: 1000;
 	padding: 0px;
     border-color: transparent;
+    border: none !important;
 }
 
 .navbar li.divider {
