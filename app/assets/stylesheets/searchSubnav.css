@@ -2,12 +2,15 @@
 	background-color: #642a90;
 	min-height: 20px;
 	padding: 2rem 1rem;
-	z-index: 9;
+	z-index: 9 !important;
 	top: 0px;
-	transition: all ease .25s;
     margin-top: 0px !important;
     margin-bottom: 0px !important;
     font-size: 16px !important;
+}
+
+.subnavTransition {
+    transition: all ease .25s;
 }
 
 .searchSubnav .container {
@@ -141,7 +144,10 @@
 
 /* for small displays */
 @media only screen and (max-width: 765px) {
-	.searchSubnav .container .aboutSearch {
+	.searchSubnav {
+        top: 109px;
+    }
+    .searchSubnav .container .aboutSearch {
 		display:none;
 	}
     #stickysearchBox {
@@ -154,9 +160,6 @@
 	}
 }
 @media only screen and (max-width: 575px) {
-    .searchSubnav {
-        top: 109px !important;
-    }
 	.searchSelect {
 		display: none !important;
 	}

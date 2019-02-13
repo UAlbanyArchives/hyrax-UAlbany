@@ -6,7 +6,7 @@ window.addEventListener('load', function() {
     var hyraxSearchURL = "https://archives.albany.edu/catalog";
 
     //query selector for search form
-    var searchForm = document.getElementsByClassName('search_q');
+    var searchForm = document.getElementsByClassName('search-query-form');
     var searchPlaceholder = document.getElementById('params-q');
     var currentSelection = document.getElementById('currentSelection');
 
@@ -55,13 +55,15 @@ window.addEventListener('load', function() {
 
 window.addEventListener('load', function() {
     $('#toggleSearch').click( function() {
+        $('#searchSub').addClass('subnavTransition');
         $("#searchSub").toggleClass("fixedSubnav");
         $("#content-wrapper").toggleClass("subnavSpacer");
     } );
 
     $(window).scroll(function () {
         var top_offset = $(window).scrollTop();
-        if (top_offset == 0) {
+        if (top_offset < 57) {
+            $('#searchSub').removeClass('subnavTransition');
             $('#searchSub').removeClass('fixedSubnav');
             $('#content-wrapper').removeClass('subnavSpacer');
          }

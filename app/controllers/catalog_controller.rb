@@ -45,13 +45,12 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("collecting_area", :facetable), label: "Collecting Area", limit: 5
     config.add_facet_field solr_name("collection", :facetable), label: "Collection", limit: 5
     #config.add_facet_field solr_name("collection_number", :facetable), label: "Collection ID", limit: 5
-    config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
+    config.add_facet_field solr_name("resource_type", :facetable), label: "Resource type", limit: 5
     config.add_facet_field solr_name("subject", :facetable), limit: 5
-    config.add_facet_field solr_name("creator", :facetable), label: "Creator", limit: 5
-    config.add_facet_field solr_name("accession", :facetable), label: "Accession", limit: 5
+    config.add_facet_field solr_name("creator", :facetable), label: "Creator", limit: 5    
     #config.add_facet_field solr_name("record_parent", :facetable), label: "Parent Record", limit: 5
     # End Added these
-    config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
+    #config.add_facet_field solr_name("human_readable_type", :facetable), label: "Model", limit: 5
     #config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
     #config.add_facet_field solr_name("creator", :facetable), limit: 5
     #config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
@@ -59,6 +58,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("language", :facetable), limit: 5
     config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
+    config.add_facet_field solr_name("accession", :facetable), label: "Accession", limit: 5
     config.add_facet_field solr_name('member_of_collection_ids', :symbol), limit: 5, label: 'Collections', helper_method: :collection_title_by_id
 
     # The generic_type isn't displayed on the facet list
@@ -78,7 +78,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name("collection", :stored_searchable), label: "Collection", link_to_search: solr_name("collection", :facetable)
     #config.add_index_field solr_name("creator", :stored_searchable), itemprop: 'creator', link_to_search: solr_name("creator", :facetable)
     config.add_index_field solr_name("collecting_area", :stored_searchable), label: "Collecting Area", link_to_search: solr_name("collecting_area", :facetable)
-    config.add_index_field solr_name("collection_number", :stored_searchable), label: "Collection ID", link_to_search: solr_name("collection_number", :facetable)
+    #config.add_index_field solr_name("collection_number", :stored_searchable), label: "Collection ID", link_to_search: solr_name("collection_number", :facetable)
     config.add_index_field solr_name("record_parent", :stored_searchable), label: "Parent Record(s)", link_to_search: solr_name("record_parent", :facetable)
     #config.add_index_field solr_name("accession", :stored_searchable), label: "Accession", link_to_search: solr_name("accession", :facetable)
     config.add_index_field solr_name("description", :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link
@@ -97,7 +97,7 @@ class CatalogController < ApplicationController
     #config.add_index_field solr_name("resource_type", :stored_searchable), label: "Resource Type", link_to_search: solr_name("resource_type", :facetable)
     config.add_index_field solr_name("file_format", :stored_searchable), link_to_search: solr_name("file_format", :facetable)
     #config.add_index_field solr_name("identifier", :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
-    config.add_index_field solr_name("identifier", :stored_searchable), field_name: 'identifier'
+    #config.add_index_field solr_name("identifier", :stored_searchable), field_name: 'identifier'
     config.add_index_field solr_name("embargo_release_date", :stored_sortable, type: :date), label: "Embargo release date", helper_method: :human_readable_date
     config.add_index_field solr_name("lease_expiration_date", :stored_sortable, type: :date), label: "Lease expiration date", helper_method: :human_readable_date
     # solr fields to be displayed in the show (single result) view

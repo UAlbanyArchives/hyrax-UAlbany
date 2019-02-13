@@ -61,8 +61,8 @@ a:hover {
     color: #006c68;
 }
 
-.btn-default:focus {
-    border-color: #642a90;
+.btn:focus {
+    outline: 2px auto #eeb211;
 }
         
 .btn-default {

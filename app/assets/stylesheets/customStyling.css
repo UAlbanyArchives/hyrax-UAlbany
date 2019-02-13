@@ -142,7 +142,7 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
 }
 
 #user_utility_links * {
-	font-size: 16px;
+	font-size: 12px;
 }
 
 #user_utility_links .btn-primary:active, .field-controls .add:active, td.toggle input[type="submit"].active:active, .btn-primary.active, .field-controls .active.add, td.toggle input.active[type="submit"], .open > .btn-primary.dropdown-toggle, .field-controls .open > .dropdown-toggle.add, td.toggle .open > input.dropdown-toggle[type="submit"].active {
@@ -262,10 +262,7 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
 }
 
 .panel-default {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-radius: 5px !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
 }
 
@@ -285,10 +282,6 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
     border-top-left-radius: 5px !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
 }
-
-/*.collapse-toggle {
-    border-radius: 0;
-}*/
 
 .top-panel-heading {
     border: none;
