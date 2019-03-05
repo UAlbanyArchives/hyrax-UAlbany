@@ -306,6 +306,10 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
     color: #856404;
 }
 
+.panel .panel-heading h2 small {
+    color: #333333;
+}
+
 @media only screen and (min-width: 769px) {
 
     .top-panel-heading {

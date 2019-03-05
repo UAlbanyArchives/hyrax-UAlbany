@@ -4,10 +4,18 @@
       <div class="col-sm-8">
         <h2 itemprop="name">
         <% if index == 0 %>
-          <%= title %>
+          <% if presenter.date_created[0].present? %>
+            <%= title %>, <small><%= presenter.date_created[0] %></small>
+          <% else %>
+            <%= title %>
+          <% end %>
           <small class="text-muted"><%= presenter.permission_badge %> <%= presenter.workflow.badge %></small>
         <% else %>
-          <%= title %>
+          <% if presenter.date_created[0].present? %>
+            <%= title %>, <small><%= presenter.date_created[0] %></small>
+          <% else %>
+            <%= title %>
+          <% end %>
         <% end %>
         </h2>
       </div>
@@ -17,11 +25,21 @@
     <% else %>
       <div class="col-sm-12">
         <% if index == 0 %>
-          <h2 itemprop="name"><%= title %>
-            <!--<small class="text-muted"><%= presenter.permission_badge %> <%= presenter.workflow.badge %></small>-->
-          </h2>
+          <% if presenter.date_created[0].present? %>
+              <h2 itemprop="name"><%= title %>, <small><%= presenter.date_created[0] %></small>
+                <!--<small class="text-muted"><%= presenter.permission_badge %> <%= presenter.workflow.badge %></small>-->
+              </h2>
+          <% else %>
+              <h2 itemprop="name"><%= title %>
+                <!--<small class="text-muted"><%= presenter.permission_badge %> <%= presenter.workflow.badge %></small>-->
+            </h2>
+          <% end %>
         <% else %>
-          <h2 itemprop="name"><%= title %></h2>
+          <% if presenter.date_created[0].present? %>
+            <h2 itemprop="name"><%= title %>, <small><%= presenter.date_created[0] %></small></h2>
+          <% else %>
+            <h2 itemprop="name"><%= title %></h2>
+          <% end %>
         <% end %>
       </div>
     <% end %>
