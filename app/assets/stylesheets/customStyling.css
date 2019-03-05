@@ -292,3 +292,59 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
     border-bottom: 1px solid #f8e1a5;
     margin-bottom: 10px;
 }
+
+.arclightBreadcrumbs div {
+    padding-left: 1.5em;
+    text-indent:-1.5em;
+}
+
+.panel-heading .panel-title {
+    width: 100%;
+}
+
+@media only screen and (min-width: 769px) {
+
+    .top-panel-heading {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .facets .facets-heading {
+        font-size: 24px;
+        font-weight: 700;
+    }
+    
+    .facet_limit {
+        margin-bottom: 1rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+
+    .spc-footer {
+        margin: 0px 0px 25px 0px;
+        font-size: 9pt;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .footRight {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #efb310;
+    }
+    .footRight p {
+        padding-right: 33%;
+    }
+
+    .spc-footer a {
+        margin: 15px 0 0 0;
+        display: block;
+    }
+
+    .spc-footer .footerLogo a {
+        margin: auto;
+        display: inline-block;
+    }
+}

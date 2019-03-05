@@ -75,8 +75,12 @@ gem 'pdfjs_viewer-rails'
 # To manage users in the db
 gem 'hydra-role-management'
 
+gem 'pg'
 group :production do
-    gem 'pg'
     # for virus scanning
     #gem 'clamav'
 end
+
+gem "bootstrap-sass", ">= 3.4.1"
+gem "rack", ">= 2.0.6"
+gem "rubyzip", ">= 1.2.2"
