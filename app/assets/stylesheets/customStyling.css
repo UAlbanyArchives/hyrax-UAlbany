@@ -302,6 +302,10 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
     width: 100%;
 }
 
+.work_coverage i.fa {
+    color: #856404;
+}
+
 @media only screen and (min-width: 769px) {
 
     .top-panel-heading {

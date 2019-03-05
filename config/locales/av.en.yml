@@ -11,6 +11,7 @@ en:
       fields:
         av:
           show:
+            resource_type: 'Type'
             archivesspace_record: 'ArchivesSpace Record ID'
             description: 'Description'
             collecting_area: 'Collecting Area'

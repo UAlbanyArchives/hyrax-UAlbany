@@ -12,7 +12,7 @@ en:
           language_sim: Language
           publisher_sim: Publisher
           subject_sim: Subject
-          resource_type_sim: Format
+          resource_type_sim: Type
         index:
           based_near_tesim: Location
           contributor_tesim: Contributor

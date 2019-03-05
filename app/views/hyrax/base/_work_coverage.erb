@@ -3,7 +3,8 @@
 		<% if coverage == "whole" %>
 			<p class="work_coverage">This is the whole <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0].gsub('.', '-') %>aspace_<%= presenter.archivesspace_record[0] %>">item</a>.</p>
 		<% elsif coverage == "part" %>
-			<p class="work_coverage">This is only part of the <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0].gsub('.', '-') %>aspace_<%= presenter.archivesspace_record[0] %>">item</a>.</p>
+			<p class="work_coverage alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+ This is only part of the <a href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0].gsub('.', '-') %>aspace_<%= presenter.archivesspace_record[0] %>">item</a>. The remaining portion may be <a href="/catalog?f[record_parent_sim][]=<%= presenter.archivesspace_record[0] %>">here</a>, or it may not be digitized and only available <a href="https://library.albany.edu/archive/remoteRequest?link=/concern/<%= presenter.human_readable_type.downcase %>s/<%= presenter.id %>&title=The remaining portion of <%= presenter.title[0] %>&collection=<%= presenter.collection[0] %>">on request</a>.</p>
 		<% else %>
 			<p class="work_coverage"><%= iconify_auto_link(coverage) %></p>
 		<% end %>
