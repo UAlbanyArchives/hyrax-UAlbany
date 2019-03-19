@@ -6,6 +6,8 @@ namespace :add do
       
     task accessions: :environment do
     
+        puts Time.now.getutc.to_s
+        
         importPath = "/media/Library/ESPYderivatives/processNewUploads"
         filePath = File.join(importPath, "newHyraxAccessions.tsv")
         completePath = File.join(importPath, "complete", Time.now.getutc.to_s.gsub(":","-") + "newHyraxAccessions.tsv")
