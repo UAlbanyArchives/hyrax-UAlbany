@@ -1,66 +1,295 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<head>
-  <title>We're sorry, but something went wrong (500)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8; charset=UTF-8" />
+		<title>M.E. Grenander Department of Special Collections &amp; Archives</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" href="https://archives.albany.edu/static/icons/ua/mainLogo.ico"></link>
+		<script type="text/javascript" src="https://archives.albany.edu/static/js/jquery-2.2.3.min.js"></script>
+		<link rel="stylesheet" href="https://archives.albany.edu/static/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+		<script type="text/javascript" src="https://archives.albany.edu/static/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://archives.albany.edu/static/css/ua/headerNavbar.css" type="text/css"></link>
+		<link rel="stylesheet" href="https://archives.albany.edu/static/css/ua/browseNav.css" type="text/css"></link>
+		<link rel="stylesheet" href="https://archives.albany.edu/static/css/ua/searchSubnav.css" type="text/css"></link>
+		<link rel="stylesheet" href="https://archives.albany.edu/static/css/simple-sidebar.css" type="text/css"></link>
+		<link rel="stylesheet" href="https://archives.albany.edu/static/css/ua/oneColumn.css" type="text/css"></link>
+        
+        
+		<script type="text/javascript" src="https://archives.albany.edu/static/js/searchHandler.js"></script>
+		<script type="text/javascript" src="https://archives.albany.edu/static/js/bgRandom.js"></script>
+		<script type="text/javascript" src="https://library.albany.edu/angelfish.js"></script>
+		<script type="text/javascript">
+		  agf.pageview();
+		</script>
+		<script>
+			$(document).ready(function(){
+				$('#requestBrowse').on('shown.bs.modal', function (e) {
+					var id = $(e.relatedTarget).attr('id');
+					var scheduleHref = $("#scheduleVisit").attr("href");
+					var requestHref = $("#remoteRequest").attr("href");
+					var pageTitle = document.getElementsByTagName("title")[0].innerHTML;
+					$("#scheduleVisit").attr("href", scheduleHref + '?col=Browse page for ' + pageTitle + '&amp;id=' + id);
+					$("#remoteRequest").attr("href", requestHref + '?col=Browse page for ' + pageTitle + '&amp;id=' + id);
+				 });
+			});
+		</script>	
+	</head>
+	<body data-spy="scroll" data-target="#browseNav">
+		
+		<div id="page-content-wrapper">
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+			<!-- Navigation -->
+			<nav class="navbar navbar-inverse navbar-top" role="navigation">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"/>
+							<span class="icon-bar"/>
+							<span class="icon-bar"/>
+						</button>
+						<!--<a class="navbar-brand" href="https://library.albany.edu/archive/"><img src="icons/ua/mainLogo.png" height="75px" /></a>-->
+						<div class="navbar-brand">
+							<a class="logo" data-toggle="tooltip" title="Archives Home" href="https://library.albany.edu/archive/">
+								<img src="https://archives.albany.edu/static/icons/ua/mainLogo.png" />
+							</a><a data-toggle="tooltip" title="UAlbany Libraries" class="ualbany" href="https://library.albany.edu/">
+								<img src="https://archives.albany.edu/static/icons/ua/ualbany.png" />
+							</a>
+							<a class="smallLogo" data-toggle="tooltip" title="Archives Home" href="https://library.albany.edu/archive/"><img src="https://archives.albany.edu/static/icons/ua/mainLogo.png"></img></a>
+						</div>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav" id="topNavMenu">
+							<!--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">UAlbany <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="https://www.albany.edu/">UAlbany, SUNY</a></li><li><a href="https://library.albany.edu/">University Libraries</a></li></ul></li>-->
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Collections <span class="caret"/>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="https://library.albany.edu/archive/collections">About Collections</a>
+									</li>
+									<li>
+										<a href="https://archives.albany.edu/static/apap.html">NY State Modern Political Archive</a>
+									</li>
+									<li>
+										<a href="https://archives.albany.edu/static/91.html">National Death Penalty Archive</a>
+									</li>
+									<li>
+										<a href="https://archives.albany.edu/static/ger.html">German Intellectual Émigré</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/ua">University Archives</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/mathes">Mathes Childrens Literature</a>
+									</li>
+									<li>
+										<a href="https://archives.albany.edu/static/mss.html">Business and Literary Manuscripts</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/books">Rare Books</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="https://archives.albany.edu/static/alpha.html">A-Z Complete List of Collections</a>
+									</li>
+									<li>
+										<a href="https://archives.albany.edu/static/subjects.html">Subject Guides to Collections</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/historicalresources/">Find Other Historical Repositories</a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Digital Selections <span class="caret"/>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="https://library.albany.edu/archive/digitalselections">About Digital Selections</a></li>
+                                    <li><a href="https://archives.albany.edu/catalog?f[resource_type_sim][]=Image">Digital Photograph Collections</a></li>
+                                    <li><a href="https://archives.albany.edu/catalog?f[collection_sim][]=Student+Newspapers+Collection">Search Student Newspaper (ASP) Archive</a></li>
+                                    <li><a href="https://archives.albany.edu/catalog?f[collection_sim][]=University+Photograph+Collection">University Photographs</a></li>
+                                    <li><a href="https://archives.albany.edu/catalog?f[collection_sim][]=United+University+Professions+(UUP)+Records">United University Professions</a></li>
+                                    <li><a href="https://library.albany.edu/archive/milnedigitalcollections">Milne School</a></li>
+                                    <li><a href="https://archives.albany.edu/collections/catalog/apap138">WAMC Northeast Public Radio</a></li>
+                                    <li><a href="https://archives.albany.edu/catalog?f[collection_sim][]=Marcia+Brown+Papers">Marcia Brown</a></li>
+                                    <li><a href="https://archives.albany.edu/catalog?f[collection_sim][]=Civil+Service+Employees+Association%2C+Inc.+(CSEA)%2C+American+Federation+of+State%2C+County%2C+and+Municipal+Employees+(AFSCME)+Local+1000+Records">Civil Service Employees Association (CSEA)</a></li>
+                                    <li><a href="https://archives.albany.edu/catalog?f[collection_sim][]=Norman+Studer+Papers">Norman Studer</a></li>
+                                    <li><a href="https://archives.albany.edu/collections/catalog/apap015aspace_90e13b5a023aefdb6ab5d1de295703fc">CSEA Newspaper Archive</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exhibits <span class="caret"/>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="https://library.albany.edu/archive/chronology">Chronological History of UAlbany</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/onthemake">University on the Make, 1960-1970</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/seeger">Remembering Pete Seeger</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/exhibitmilne">The Milne School Murals</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/speccoll/findaids/eresources/html/campusbuildings/index.htm">Campus Buildings Historical Tour <span class="glyphicon glyphicon-new-window"></span></a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/speccoll/findaids/eresources/html/marciabrown/index.htm">Marcia Brown Exhibit and Resource Website <span class="glyphicon glyphicon-new-window"></span></a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/speccoll/findaids/eresources/html/secretlives/index.htm">The Secret Lives of Toys and Their Friends <span class="glyphicon glyphicon-new-window"></span></a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/exhibits">More...</a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Donors &amp; Records <span class="caret"/>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="https://library.albany.edu/archive/outside_donors">Outside Donations of Records</a></li>
+									<li><a href="https://library.albany.edu/archive/giving">Giving to the Archives</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="https://library.albany.edu/archive/ua/transferform">Transfer University Records</a></li>
+									<li><a href="https://library.albany.edu/archive/ua/faq">University Records FAQ</a></li>
+									<li><a href="https://library.albany.edu/archive/ua/recordsCharts">University Records Charts</a></li>
+									<!--<li><a href="https://library.albany.edu/archive/ua/recordsLaws">About SUNY Records Laws</a></li>-->
+									<li><a href="https://wiki.albany.edu/display/public/askit/Information+Security+Domains%2C+Supporting+Protocols+and+Procedures">About CIO Data Classification System <span class="glyphicon glyphicon-new-window"></span></a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"/>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="https://library.albany.edu/archive/mission">Mission &amp; Purpose</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/visit">Visiting the Archives</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/directions">Hours and Directions</a>
+									</li>
+									<li>
+										<a href="https://liblogs.albany.edu/grenander/">News</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/reference">Make a Request</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/publish_cite">Publishing &amp; Citing</a>
+									</li>
+									<li>
+										<a href="https://library.albany.edu/archive/staff">Staff</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="https://library.albany.edu/archive/reference">Contact</a>
+							</li>
+							    <div id="stickysearchBox">
+							<a role="button" id="toggleSearch" class="btn"><i class="fa fa-search"></i></a>
+						  </div>
+						</ul>
+					</div>
+				</div>
+			</nav>
+            
+        <div id="searchSub" class="navbar navbar-expand-sm searchSubnav">
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+         <div class="container">
+            
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+                <form class="search-query-form hyraxSearch" role="search" action="https://archives.albany.edu/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓"></input>
+                  
+                    <input type="hidden" name="search_field" id="search_field" value="all_fields"></input>
+                      <div class="input-group">
+                        <input name="q" id="params-q" value="" placeholder="Search everything..." class="search_q q form-control tt-input" type="text"></input>
+                        <input type="hidden" name="search_field" id="search_field" value="all_fields"></input>
+                        <div class="input-group-btn">
+                            <button id="currentSelection" class="btn btn-secondary dropdown-toggle searchSelect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Everything<span class="caret"></span>
+                           </button>
+                           <button class="btn btn-secondary dropdown-toggle searchSelect noText" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right searchOptions">
+                              <li><a class="dropdown-item" id="allSearch" data="allSearch" href="#">Everything</a></li>
+                              <li><a class="dropdown-item" id="arclightSearch" data="arclightSearch" href="#">Collections</a></li>
+                              <li><a class="dropdown-item" id="hyraxSearch" data="hyraxSearch" href="#">Digital Selections</a></li>
+                            </div>
+                        </div>
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                          </div>
+                      </div>
+                </form>
+                <a class="aboutSearch" href="https://archives.albany.edu/search"><i class="fa fa-question-circle"></i> Search Help</a>
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
-</head>
+            </div>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
-</body>
+        </div>
+
+		<div id="mainContent" class="container">
+            <div id="contentColumn" class="col-md-12 col-lg-10 col-lg-offset-1">
+            <h1 style="text-align:center;">500</h1>
+            <h3>We're sorry, but something went wrong. Maybe this dog will help.</h3> <a class="btn btn-primary" href="https://library.albany.edu/archive/reference">Contact Us</a>
+            <p>&nbsp;</p>
+            <img width="100%" alt="Image of a dog on the field with students playing baseball." src="https://archives.albany.edu/downloads/w0892j025" />
+            </div>
+		</div>
+		
+		<div class="container">
+			<div class="row">
+				<div class="footer col-md-12 text-center text-muted">
+					<div class="spc-footer">
+				<div class="footLeft">
+					<p>Open to the public Monday-Friday, 9am-5pm</p>
+					<p>Closed for some state holidays and winter intersession</p>
+					<p>Located on the top floor of the Science Library on the Uptown Campus</p>
+					<p><a href="https://library.albany.edu/archive/directions">Hours and Directions</a></p>
+				</div>
+				<div class="footRight">
+					<p>M. E. Grenander Department of Special Collections &amp; Archives</p>
+					<p>Science Library 350</p>
+					<p>1400 Washington Avenue</p>
+					<p>Albany, NY 12222</p>
+					<p>(518) 437-3935</p>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" tabindex="-1" role="dialog" id="requestBrowse">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+				<h4 class="modal-title">Request the materials you selected:</h4>
+			  </div>
+			  <div class="modal-body">
+				<p>Archival materials can be view in-person in our reading room, located on the top floor of the Science Library on the Uptown Campus. Making an appointment is not neccessary, but it may help us ensure the items are available when you arrive.</p>
+				<p>We can also deliver digital scans for remote research for a fee.</p>
+				<div class="alert alert-warning">
+				  <strong>Unprocessed Collection</strong> The collection is unprocessed and is likely disorganized. Individual items may be difficult to find. Often we are unable to fulfill remote requests for unprocessed material.
+				</div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<a type="button" class="btn btn-primary" id="scheduleVisit" href="https://library.albany.edu/archive/scheduleVisit">Schedule a Visit</a>
+				<a type="button" class="btn btn-primary" id="remoteRequest" href="https://library.albany.edu/archive/remoteRequest">Make Remote Request</a>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		</div>
+		
+	</body>
 </html>
