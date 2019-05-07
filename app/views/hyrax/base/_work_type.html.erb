@@ -19,9 +19,9 @@
     <% if @code == "ua" %>
         <%= link_to presenter.collecting_area[0], "https://library.albany.edu/archive/ua" %>
     <% elsif @code == "ndpa" %>
-        <%= link_to presenter.collecting_area[0], "https://archives.albany.edu/static/91.html" %>
+        <%= link_to presenter.collecting_area[0], "https://archives.albany.edu/browse/91.html" %>
     <% else %>
-        <%= link_to presenter.collecting_area[0], "https://archives.albany.edu/static/" + @code + ".html" %>
+        <%= link_to presenter.collecting_area[0], "https://archives.albany.edu/browse/" + @code + ".html" %>
     <% end %>
 <% end %>
 
