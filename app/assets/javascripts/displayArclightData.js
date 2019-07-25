@@ -67,7 +67,7 @@ $(document).ready(function(){
 				$(this).next("dd").children("a").each(function (index, element) {
 					$parentID = $(this).text();
 					$collectionID = $(this).parent("dd").prev().prev().children("a").text().replace(".", "-");
-					$uri = "https://archives.albany.edu/collections/catalog/" + $collectionID + "aspace_" + $parentID + "?format=json"
+					$uri = "https://archives.albany.edu/description/catalog/" + $collectionID + "aspace_" + $parentID + "?format=json"
 					$.ajax({
 					  type: "GET",
 					  dataType: 'json',

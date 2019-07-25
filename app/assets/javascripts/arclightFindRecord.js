@@ -16,11 +16,11 @@ $(document).ready(function(){
     		$aspaceID = ""
     	}
     	if ($aspaceID.length < 1) {
-    		$arclightURL = "https://archives.albany.edu/collections/catalog/" + $collection.replace(".", "-") + "?format=json"
+    		$arclightURL = "https://archives.albany.edu/description/catalog/" + $collection.replace(".", "-") + "?format=json"
     	} else {
-    		$arclightURL = "https://archives.albany.edu/collections/catalog/" + $collection.replace(".", "-") + "aspace_" + $aspaceID + "?format=json"
+    		$arclightURL = "https://archives.albany.edu/description/catalog/" + $collection.replace(".", "-") + "aspace_" + $aspaceID + "?format=json"
     	}
-        $collectionURL = "https://archives.albany.edu/collections/catalog/" + $collection.replace(".", "-") + "?format=json"
+        $collectionURL = "https://archives.albany.edu/description/catalog/" + $collection.replace(".", "-") + "?format=json"
         $.ajax({
           type: "GET",
           dataType: 'json',
