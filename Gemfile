@@ -67,6 +67,9 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+#until hydra-derivatives bug is fixed (https://github.com/samvera/hydra-derivatives/pull/185)
+gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives.git'
+
 gem 'riiif', '~> 1.1'
 # Sidekiq for background jobs
 gem 'sidekiq'
