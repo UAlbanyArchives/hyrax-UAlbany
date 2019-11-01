@@ -53,7 +53,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'hyrax', '2.5.1'
+gem 'hyrax', '2.6.0'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
@@ -68,7 +68,9 @@ group :development, :test do
 end
 
 #until hydra-derivatives bug is fixed (https://github.com/samvera/hydra-derivatives/pull/185)
-gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives.git'
+#gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives.git'
+# to prevent browse-everything > 1 from requiring browse_everything_providers.yml and crashing (https://github.com/samvera/hyrax/issues/4140)
+gem 'browse-everything', '< 1.0.0'
 
 gem 'riiif', '~> 1.1'
 # Sidekiq for background jobs
@@ -86,4 +88,5 @@ end
 
 gem "bootstrap-sass", ">= 3.4.1"
 gem "rack", ">= 2.0.6"
-gem "rubyzip", ">= 1.2.2"
+gem 'rubyzip','>= 1.3.0'
+gem 'simple_form', '>= 5.0.0'
