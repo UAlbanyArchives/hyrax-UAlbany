@@ -68,7 +68,7 @@ group :development, :test do
 end
 
 #until hydra-derivatives bug is fixed (https://github.com/samvera/hydra-derivatives/pull/185)
-#gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives.git'
+gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives.git'
 # to prevent browse-everything > 1 from requiring browse_everything_providers.yml and crashing (https://github.com/samvera/hyrax/issues/4140)
 gem 'browse-everything', '< 1.0.0'
 
