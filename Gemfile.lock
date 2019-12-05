@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/gwiedeman/hydra-derivatives.git
-  revision: 1c87e962d5bc306c5111dd4a580f3f539799fd9c
+  revision: 9948559410f8a799b36a9263a13f78edc0c43a89
   specs:
     hydra-derivatives (3.5.0)
       active-fedora (>= 11.3.1, < 14)
