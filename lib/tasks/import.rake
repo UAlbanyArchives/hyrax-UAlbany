@@ -77,14 +77,15 @@ namespace :import do
                     import_files = []
                     file_list = []
                     
-                    file_list = row[2].split('|')
+                    clean_files = row[2].strip!
+                    file_list = clean_files.split('|')
                     #puts file_list
                     file_list.each do |filename|
-			if File.file?(File.join(binaryPath, row[5], filename.strip!))
-				import_files << File.join(binaryPath, row[5], filename.strip!)			
-			else
-                        	import_files << File.join(binaryPath, filename.strip!)
-			end
+                        if File.file?(File.join(binaryPath, row[5], filename))
+                            import_files << File.join(binaryPath, row[5], filename)			
+                        else
+                            import_files << File.join(binaryPath, filename)
+                        end
                     end
                     #puts import_files
                     
@@ -201,7 +202,7 @@ namespace :import do
         
         import_files = []
         ENV["files"].split("|").each do |filename|
-            import_files << File.join(binaryPath, filename.strip!)
+            import_files << File.join(binaryPath, filename)
         end
         
         attach_files(dao, import_files, user)
