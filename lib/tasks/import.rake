@@ -35,13 +35,13 @@ namespace :import do
         import_files.each do |f|
             fs = FileSet.new
 			
-			puts "\t\tUploading " + File.basename(f.strip!)
+			puts "\t\tUploading " + File.basename(f)
                        
             fs.title = [File.basename(f)]
             fs.set_edit_groups(["content-admin"],[])
             actor = ::Hyrax::Actors::FileSetActor.new(fs, user)
             actor.create_metadata()
-            actor.create_content(File.open(f.strip!))
+            actor.create_content(File.open(f))
             actor.attach_to_work(work)
             
         end
@@ -81,7 +81,7 @@ namespace :import do
                     #puts file_list
                     file_list.each do |filename|
 			if File.file?(File.join(binaryPath, row[5], filename))
-				import_files << File.join(binaryPath, row[5], filename)			
+				import_files << File.join(binaryPath, row[5], filename.strip!)			
 			else
                         	import_files << File.join(binaryPath, filename)
 			end
