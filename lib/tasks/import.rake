@@ -61,12 +61,14 @@ namespace :import do
 				puts "\t" + Time.now.to_s + " Reading sheet: " + sheet
 			
                 filePath = File.join(importPath, sheet)
-                headers = CSV.read(filePath, headers: true, col_sep: "\t").headers
+                file = File.open(filePath)
+                headers = CSV.parse(file, headers: true, col_sep: "\t").headers
                 if File.file?(filePath)
                     CSV.open(File.join(completePath, sheet), "ab", {col_sep: "\t"}) do |outputFile|
                         outputFile << headers
                     end
                 end
+                file.close
                 
                 file = File.open(filePath)
                 importData = CSV.parse(file, headers: true, col_sep: "\t", skip_blanks: true).reject { |row| row.all?(&:nil?) } 
