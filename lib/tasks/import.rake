@@ -76,10 +76,11 @@ namespace :import do
                     item_attributes = {}
                     import_files = []
                     file_list = []
-                    
+                    puts row
                     clean_files = row[2].strip!
+                    puts clean_files
                     file_list = clean_files.split('|')
-                    #puts file_list
+                    puts file_list
                     file_list.each do |filename|
                         if File.file?(File.join(binaryPath, row[5], filename))
                             import_files << File.join(binaryPath, row[5], filename)			
