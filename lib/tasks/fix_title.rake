@@ -35,18 +35,23 @@ namespace :fix do
 
   desc "fix unicode issues in ua435"
   task ua435: :environment do
-	require 'net/http'
+    require 'openssl'
     
-    obj = Dao.find("rr172g10t")
-    ref_id = obj.archivesspace_record
-    url = "https://archives.albany.edu/description/catalog/ua435aspace_" + ref_id
+    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
     
-    req = Net::HTTP::Get.new(url)
-    res = Net::HTTP.start(url) {|http|
-      http.request(req)
-    }
-    puts res.body
-    
+    Dao.where("accession": "ua435_nDmescjNLkkjigbozTXSTY").each do |obj|
+        ref_id = obj.archivesspace_record
+        url = "https://archives.albany.edu" + "/description/catalog/ua435aspace_" + ref_id + "?format=json"
+        
+        uri = URI(url)
+        response = Net::HTTP.get(uri)
+        data = JSON.parse(response)
+        title = data["response"]["document"]["title_ssm"][0]
+        
+        obj.title = []
+        obj.title << title
+        obj.save
+    end
 	
   end
 
