@@ -33,4 +33,21 @@ namespace :fix do
 	
   end
 
+  desc "fix unicode issues in ua435"
+  task ua435: :environment do
+	require 'net/http'
+    
+    obj = Dao.find("rr172g10t")
+    ref_id = obj.archivesspace_record
+    url = "https://archives.albany.edu/description/catalog/ua435aspace_" + ref_id
+    
+    req = Net::HTTP::Get.new(url)
+    res = Net::HTTP.start(url) {|http|
+      http.request(req)
+    }
+    puts res.body
+    
+	
+  end
+
 end
