@@ -39,9 +39,11 @@ namespace :fix do
     
     OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
     
+    count = 0
     Dao.where("accession": "ua435_nDmescjNLkkjigbozTXSTY").each do |obj|
         ref_id = obj.archivesspace_record
         url = "https://archives.albany.edu" + "/description/catalog/ua435aspace_" + ref_id + "?format=json"
+        count = count + 1
         
         uri = URI(url)
         response = Net::HTTP.get(uri)
@@ -51,6 +53,8 @@ namespace :fix do
         obj.title = []
         obj.title << title
         obj.save
+        
+        puts count.to_s + ": " + obj.id.to_s
     end
 	
   end
