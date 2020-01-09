@@ -32,6 +32,19 @@ namespace :fix do
 	end
 	
   end
+  
+  desc "changes apap301 to ndpa"
+  task apap301: :environment do
+	count = 0
+	Dao.where("collection_number": "apap301").each do |record|
+        count += 1
+        puts count
+        record.collecting_area = "National Death Penalty Archive"
+        record.save
+        puts "Saved " + record.id.to_s
+	end
+	
+  end
 
   desc "fix unicode issues in ua435"
   task ua435: :environment do
