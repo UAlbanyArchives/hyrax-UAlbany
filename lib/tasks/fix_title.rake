@@ -36,10 +36,10 @@ namespace :fix do
   desc "changes apap301 to ndpa"
   task apap301: :environment do
 	count = 0
-	Dao.where("collection_number": "apap301").where("collecting_area: "New York State Modern Political Archive").each do |record|
+	Dao.where("collection_number": "apap301").where("collecting_area": "New York State Modern Political Archive").each do |record|
         count += 1
         puts count
-	unless record.collecting_area == "National Death Penalty Archive"
+        unless record.collecting_area == "National Death Penalty Archive"
         	record.collecting_area = "National Death Penalty Archive"
         	record.save
         	puts "Saved " + record.id.to_s
