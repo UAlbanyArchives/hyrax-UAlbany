@@ -22,7 +22,7 @@ module Hyrax
               %(<a itemprop="license" href=#{ERB::Util.h(value)} target="_blank">#{label}</a>)
             else
               label = Hyrax.config.rights_statement_service_class.new.label(value) { value }
-            %(<a itemprop="license" href=#{ERB::Util.h(value)} target="_blank">#{label}</a><div class="alert alert-warning"><a href="https://library.albany.edu/archive/reference">Contact Us</a> for questions or additional rights.</div>)
+            %(<a itemprop="license" href=#{ERB::Util.h(value)} target="_blank">#{label}</a><div class="alert alert-warning"><a href="https://albany.libwizard.com/f/contactus?i_have_a_questi=Special%20Collections%20%26%20Archives">Contact Us</a> for questions or additional rights.</div>)
             end
           end
         end

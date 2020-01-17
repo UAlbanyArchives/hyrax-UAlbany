@@ -20,7 +20,7 @@ module Hyrax
             if value == "http://creativecommons.org/publicdomain/mark/1.0/"
               %(<div class="row"><div class="col-sm-8"><a href=#{ERB::Util.h(value)} target="_blank">#{Hyrax.config.license_service_class.new.label(value)}</a></div><div class="col-sm-4"><a href="#{ERB::Util.h(value)}"><img alt="#{Hyrax.config.license_service_class.new.label(value)}" src="/#{Hyrax.config.license_service_class.new.label(value)}.png"/></a></div></div>)
             else
-              %(<div class="row"><div class="col-sm-8"><a href=#{ERB::Util.h(value)} target="_blank">#{Hyrax.config.license_service_class.new.label(value)}</a></div><div class="col-sm-4"><a href="#{ERB::Util.h(value)}"><img alt="#{Hyrax.config.license_service_class.new.label(value)}" src="/#{Hyrax.config.license_service_class.new.label(value)}.png"/></a></div></div><div class="alert alert-warning"><a href="https://library.albany.edu/archive/reference">Contact Us</a> for questions or additional rights.</div>)
+              %(<div class="row"><div class="col-sm-8"><a href=#{ERB::Util.h(value)} target="_blank">#{Hyrax.config.license_service_class.new.label(value)}</a></div><div class="col-sm-4"><a href="#{ERB::Util.h(value)}"><img alt="#{Hyrax.config.license_service_class.new.label(value)}" src="/#{Hyrax.config.license_service_class.new.label(value)}.png"/></a></div></div><div class="alert alert-warning"><a href="https://albany.libwizard.com/f/contactus?i_have_a_questi=Special%20Collections%20%26%20Archives">Contact Us</a> for questions or additional rights.</div>)
             end
           end
         end
