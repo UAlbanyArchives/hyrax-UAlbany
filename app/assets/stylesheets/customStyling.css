@@ -310,6 +310,10 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
     color: #333333;
 }
 
+.work-show .work_description {
+    white-space: pre-wrap;
+}
+
 @media only screen and (min-width: 769px) {
 
     .top-panel-heading {
