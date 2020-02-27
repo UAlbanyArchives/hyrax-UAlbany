@@ -6,7 +6,7 @@ namespace :export do
   task espy: :environment do
     total_count = Dao.where("collection_number": "apap301").count
   
-    CSV.open("/nhome/gw234478/espyIDs.csv", "wb") do |csv|
+    CSV.open("/var/www/hyrax-UAlbany/espyIDs.csv", "wb") do |csv|
         csv << ["dao_id", "fs_ids", "filenames"]
         count = 0
         Dao.where("collection_number": "apap301").each do |dao|
