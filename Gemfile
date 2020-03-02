@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
 gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
@@ -67,14 +67,14 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
-#until hydra-derivatives bug is fixed (https://github.com/samvera/hydra-derivatives/pull/185)
+#until hydra-derivatives bugfix is released (https://github.com/samvera/hydra-derivatives/pull/211)
 gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives.git'
 # to prevent browse-everything > 1 from requiring browse_everything_providers.yml and crashing (https://github.com/samvera/hyrax/issues/4140)
 gem 'browse-everything', '< 1.0.0'
 
 gem 'riiif', '~> 1.1'
 # Sidekiq for background jobs
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.1.3'
 # pdfjs for displaying PDF files in views
 gem 'pdfjs_viewer-rails'
 # To manage users in the db
@@ -86,7 +86,9 @@ group :production do
     #gem 'clamav'
 end
 
+# these are manual updates for vulnerabilities
 gem "bootstrap-sass", ">= 3.4.1"
 gem "rack", ">= 2.0.6"
-gem 'rubyzip','>= 1.3.0'
+gem 'rubyzip','>= 2.0.0'
 gem 'simple_form', '>= 5.0.0'
+gem 'nokogiri', '>= 1.10.9'
