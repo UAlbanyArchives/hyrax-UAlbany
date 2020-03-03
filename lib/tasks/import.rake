@@ -63,10 +63,10 @@ namespace :import do
                 filePath = File.join(importPath, sheet)
                 begin
                     file = File.open(filePath)
-                    headers = CSV.parse(filePath, headers: true, col_sep: "\t").headers
+                    headers = CSV.parse(file, headers: true, col_sep: "\t").headers
                 rescue
                     file = File.open(filePath, "r:ISO-8859-1")
-                    headers = CSV.parse(filePath, headers: true, encoding: 'windows-1251:utf-8', col_sep: "\t").headers
+                    headers = CSV.parse(file, headers: true, encoding: 'windows-1251:utf-8', col_sep: "\t").headers
                 end
                 if File.file?(filePath)
                     CSV.open(File.join(completePath, sheet), "ab", {col_sep: "\t"}) do |outputFile|
