@@ -205,13 +205,8 @@ namespace :import do
     end
     
     task check: :environment do     
-
-        depositor = "importer@albany.edu"
-        user = User.find_by_user_key(depositor)
-        
+       
         importPath = "/media/Library/ESPYderivatives/import"
-        completePath = "/media/Library/ESPYderivatives/complete"
-        finishPath = "/media/Library/ESPYderivatives/used"
         binaryPath = "/media/Library/ESPYderivatives/files"
         Dir.foreach(importPath) do |sheet|
             if sheet.end_with? ".tsv"
@@ -239,7 +234,7 @@ namespace :import do
                         if File.file?(File.join(binaryPath, row[5], filename))		
                         elsif File.file?(File.join(binaryPath, filename))
                         else
-                            puts "ERROR: " filename + " does not exist in " + binaryPath.to_s
+                            puts "ERROR: " + filename.to_s + " does not exist in " + binaryPath.to_s
                         end
                     end
                     
