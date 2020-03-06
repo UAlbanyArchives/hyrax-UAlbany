@@ -242,11 +242,11 @@ namespace :import do
                     end
                     
                 end                
-                file.close                  
+                file.close
+                if errors < 1
+                   puts "Success! All files look good to go."
+                end                
                 
-            end
-            if errors < 1
-               puts "Success! All files look good to go."
             end
         end   
 
