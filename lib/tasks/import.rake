@@ -209,6 +209,8 @@ namespace :import do
         importPath = "/media/Library/ESPYderivatives/import"
         binaryPath = "/media/Library/ESPYderivatives/files"
         Dir.foreach(importPath) do |sheet|
+        
+            errors = 0
             if sheet.end_with? ".tsv"
 				puts "\t" + Time.now.to_s + " Reading sheet: " + sheet
 			
@@ -230,17 +232,21 @@ namespace :import do
                     file_list = clean_files.split('|')
                     #puts file_list
                     file_list.each do |filename|
-                        puts "Checking for " + filename.to_s
+                        #puts "Checking for " + filename.to_s
                         if File.file?(File.join(binaryPath, row[5], filename))		
                         elsif File.file?(File.join(binaryPath, filename))
                         else
+                            errors += 1
                             puts "ERROR: " + filename.to_s + " does not exist in " + binaryPath.to_s
                         end
                     end
                     
                 end                
-                file.close   
+                file.close                  
                 
+            end
+            if errors < 1
+               puts "Success! All files look good to go."
             end
         end   
 
