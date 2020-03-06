@@ -204,6 +204,53 @@ namespace :import do
 
     end
     
+    task check: :environment do     
+
+        depositor = "importer@albany.edu"
+        user = User.find_by_user_key(depositor)
+        
+        importPath = "/media/Library/ESPYderivatives/import"
+        completePath = "/media/Library/ESPYderivatives/complete"
+        finishPath = "/media/Library/ESPYderivatives/used"
+        binaryPath = "/media/Library/ESPYderivatives/files"
+        Dir.foreach(importPath) do |sheet|
+            if sheet.end_with? ".tsv"
+				puts "\t" + Time.now.to_s + " Reading sheet: " + sheet
+			
+                filePath = File.join(importPath, sheet)                
+                begin
+                    file = File.open(filePath)
+                    importData = CSV.parse(file, headers: true, col_sep: "\t", skip_blanks: true).reject { |row| row.all?(&:nil?) } 
+                rescue
+                    file = File.open(filePath, "r:ISO-8859-1")
+                    importData = CSV.parse(file, headers: true, col_sep: "\t", skip_blanks: true).reject { |row| row.all?(&:nil?) } 
+                end
+                
+                importData.each do |row|
+                
+                    file_list = []
+                    
+                    clean_files = row[2]
+                    clean_files.strip!
+                    file_list = clean_files.split('|')
+                    #puts file_list
+                    file_list.each do |filename|
+                        puts "Checking for " + filename.to_s
+                        if File.file?(File.join(binaryPath, row[5], filename))		
+                        elsif File.file?(File.join(binaryPath, filename))
+                        else
+                            puts "ERROR: " filename + " does not exist in " + binaryPath.to_s
+                        end
+                    end
+                    
+                end                
+                file.close   
+                
+            end
+        end   
+
+    end
+    
     task files: :environment do
     
         depositor = "importer@albany.edu"
