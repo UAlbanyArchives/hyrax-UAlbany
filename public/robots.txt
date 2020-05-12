@@ -2,3 +2,9 @@
 
 User-agent: AhrefsBot
 Disallow:/
+
+User-agent: UT-Dorkbot
+Disallow:/
+
+User-agent: UT-Dorkbot/1.0
+Disallow:/
