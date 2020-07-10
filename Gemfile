@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.6.2'
+gem 'rails', '~> 5.2.4.3'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
@@ -53,11 +53,11 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'hyrax', '2.6.0'
+# hyrax gems
+gem 'hyrax', '2.8.0'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
-
 gem 'rsolr', '>= 1.0'
 gem 'jquery-rails'
 gem 'devise', '~> 4.7.1'
@@ -66,12 +66,10 @@ group :development, :test do
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'
 end
-
 #until hydra-derivatives bugfix is released (https://github.com/samvera/hydra-derivatives/pull/211)
 gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives.git'
 # to prevent browse-everything > 1 from requiring browse_everything_providers.yml and crashing (https://github.com/samvera/hyrax/issues/4140)
 gem 'browse-everything', '< 1.0.0'
-
 gem 'riiif', '~> 1.1'
 # Sidekiq for background jobs
 gem 'sidekiq', '~> 5.1.3'
