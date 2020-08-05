@@ -8,3 +8,9 @@ Disallow:/
 
 User-agent: UT-Dorkbot/1.0
 Disallow:/
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: *
+Disallow: /patron/
