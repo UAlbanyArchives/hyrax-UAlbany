@@ -54,7 +54,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # hyrax gems
-gem 'hyrax', '2.9.0'
+gem 'hyrax', '2.8.0'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
