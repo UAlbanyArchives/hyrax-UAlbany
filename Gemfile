@@ -54,7 +54,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # hyrax gems
-gem 'hyrax', '2.8.0'
+gem 'hyrax', '2.9.0'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
@@ -83,6 +83,9 @@ group :production do
     # for virus scanning
     #gem 'clamav'
 end
+
+gem 'blacklight', '~> 6.23.0'
+gem 'hydra-head', '~> 11.0.1'
 
 # these are manual updates for vulnerabilities
 gem "bootstrap-sass", ">= 3.4.1"
