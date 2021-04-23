@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4.3'
+gem 'rails', '~> 5.2.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
@@ -92,4 +92,6 @@ gem "bootstrap-sass", ">= 3.4.1"
 gem "rack", ">= 2.0.6"
 gem 'rubyzip','>= 2.0.0'
 gem 'simple_form', '>= 5.0.0'
-gem 'nokogiri', '>= 1.10.9'
+gem 'nokogiri', '>= 1.11.0'
+gem 'oauth', '>= 0.5.5'
+gem 'carrierwave', '>= 1.3.2'
