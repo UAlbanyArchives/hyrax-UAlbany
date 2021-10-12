@@ -562,7 +562,8 @@ GEM
     power_converter (0.1.2)
     public_suffix (4.0.6)
     pul_uv_rails (2.0.1)
-    puma (3.12.6)
+    puma (4.3.9)
+      nio4r (~> 2.0)
     qa (2.3.0)
       activerecord-import
       deprecation
@@ -847,7 +848,7 @@ DEPENDENCIES
   oauth (>= 0.5.5)
   pdfjs_viewer-rails
   pg
-  puma (~> 3.12.6)
+  puma (~> 4.3.9)
   rack (>= 2.0.6)
   rails (~> 5.2.5)
   redis (~> 4.0)
