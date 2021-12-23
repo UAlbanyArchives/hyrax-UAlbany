@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+footer {
+	background-color: #46166B;
+	margin-top: 25px;
+}
+.spc-footer {
+    margin: 50px 0;
+	padding: 20px;
+	color: #EBE6F0;
+	font: 10pt "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.spc-footer a {
+	color: #EBE6F0;
+	text-decoration: underline;
+}
+
+.spc-footer a:hover {
+	color: #fff;
+}
+
+.spc-footer p {
+   margin: 0px;
+   padding: 0px;
+   text-align: left;
+}
+
+
+.footRight {
+	margin-top: 1rem;
+}
+
+.footRight {
+ text-align:left
+}
+
+.footRight img {
+ max-width:300px;
+ margin-bottom:15px
+}
+
+@media (min-width: 992px) {
+	.footLeft{
+		float: left;
+	}
+	.footRight {
+		float: right;
+		margin-top: 0;
+	}
+}
+
+.footLeft .footerLogo img {
+    width: 30px !important;
+    margin-right: 5px !important;
+}
+
+.footLeft .footerLogo {
+    margin-top: 10px !important;
+}

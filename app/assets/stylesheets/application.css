@@ -14,6 +14,7 @@
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
  *= require navbar
+ *= require footer
  */
 
 @media only screen and (min-width: 1500px) {
