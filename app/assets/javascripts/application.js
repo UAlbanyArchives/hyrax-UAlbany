@@ -21,4 +21,3 @@
 
 //= require_tree .
 //= require hyrax
-//= require searchHandler

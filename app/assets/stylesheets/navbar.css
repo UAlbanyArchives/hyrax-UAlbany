@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+	font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+}
+
+.navbar > .container {
+	width: initial;
+	display: flex !important;
+	flex-wrap: wrap;	
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+@media(min-width:576px){.navbar > .container {max-width: 540px;}}
+@media(min-width:768px){.navbar > .container {max-width: 720px; flex-wrap: nowrap; padding-right: 15px; padding-left: 15px;}}
+@media(min-width:992px){.navbar > .container {max-width: 960px;}}
+@media(min-width:1200px){.navbar > .container {max-width: 1140px;}}
+
+.navbar .navbar-brand {
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 0 !important;
+}
+
+.navbar-inverse {
+    background-color: #46166B !important;
+}
+
+.navbar-toggler {
+	padding: 0.25rem 0.75rem;
+	font-size: 1.25rem;
+	line-height: 1;
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 0.25rem;
+}
+
+.navbar-toggle:focus, .navbar-toggle:hover {
+	background-color: #46166B !important;
+}
+
+.navbar-nav {
+	display: flex;
+	flex-direction: column;
+	padding-left: 0;
+	margin: 0;
+	list-style: none;	
+}
+
+@media(min-width:768px){.navbar-nav {flex-direction: row;}}
+
+.navbar div.in {
+	/*display: flex !important;*/
+	flex-basis: auto;
+	flex-grow: 1;
+	align-items: center;
+	padding: 0;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.navbar-nav li .dropdown-toggle {
+	border-radius: 5px;
+	width: 100% !important;
+	outline: 0 !important;
+	white-space: nowrap;
+}
+
+.navbar-collapse > .navbar-nav > li > a {
+	border-radius: 5px;
+}
+
+
+.navbar-inverse .navbar-nav > .nav-item > .nav-link {
+	/*color: #EBE6F0 !important;*/
+	text-decoration: none !important;
+	font: 11pt "Roboto", Helvetica, Arial, sans-serif !important;
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+	width: 100% !important;
+	display: block !important;
+	padding-left: 0.5rem !important;
+}
+
+.navbar-inverse .dropdown-menu a {
+	color: #403a60;
+	text-decoration: none;
+	font: 11pt "Roboto", Helvetica, Arial, sans-serif;
+	/*padding-top: 10px;*/
+	/*padding-bottom: 10px;*/
+	vertical-align: middle;
+}
+
+.navbar-inverse .dropdown-menu .dropdown-divider {
+	border-color: #46166B;
+	/*margin-top: 3px;*/
+	/*margin-bottom: 3px;*/
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-dark .navbar-nav > .open > a:focus, .navbar-dark .navbar-nav > .open > a:hover {
+	background-color: #EBE6F0 !important;
+	color: #403a60 !important;
+	border: none;
+	outline: none;
+}
+
+.navbar-inverse li a {
+	padding: 10px 10px;
+}
+
+.nav > .dropdown.show .caret {
+    border-top: none;
+    border-bottom: 4px solid #eaaa00;
+}
+
+.dropdown-menu a {
+	display: block;
+	padding-top: 8px;
+	padding-bottom: 2px;
+	width: 100% !important;
+	white-space: nowrap;
+}
+
+.navbar-dark .navbar-nav li a:hover{
+	color: #EBE6F0;
+	background-color: #46166B;
+}
+
+.dropdown-menu {
+	background-color: #EBE6F0 !important;
+	top: 95%;
+	left: auto;
+}
+
+.navbar-inverse .navbar-nav .open > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.open, .navbar-dark .navbar-nav .nav-link.active {
+	color: #46166B;
+}
+
+/* logo */
+
+.navbar-logo {
+	background-image: url('grenander/grenanderLogo.png');
+	background-color: transparent;
+	background-position: center left;
+	background-repeat: no-repeat;
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: -0.4rem;
+	margin-bottom: -0.4rem;
+	overflow: hidden;
+	padding-left: 0;
+	padding-right: 0;
+	text-indent: 100%;
+	white-space: nowrap;
+	background-size: contain;
+	background-position: center;
+	flex: 0 0 250px;
+	
+}
+
+@media (min-width: 576px) {
+	.navbar-logo {
+		flex: 0 0 450px;
+		height: 90px;
+	}
+}
+
+@media (min-width: 768px) {
+	.navbar-logo {
+		flex: 0 0 320px;
+		background-color: transparent;
+		background-position: center left;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		height: 70px;
+	}
+}
+
+@media (min-width: 992px) {
+	.navbar-logo {
+		flex: 0 0 500px;
+		height: 100px;
+	}
+}
