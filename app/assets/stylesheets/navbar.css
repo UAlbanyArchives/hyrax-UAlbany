@@ -7,15 +7,15 @@ body {
 .navbar > .container {
 	width: initial;
 	display: flex !important;
-	flex-wrap: wrap;	
+	flex-wrap: wrap;
+	justify-content: space-between;	
 	align-items: center;
-	justify-content: space-between;
 	padding-right: 0;
 	padding-left: 0;
 }
 
 @media(min-width:576px){.navbar > .container {max-width: 540px;}}
-@media(min-width:768px){.navbar > .container {max-width: 720px; flex-wrap: nowrap; padding-right: 15px; padding-left: 15px;}}
+@media(min-width:768px){.navbar > .container {max-width: 720px; flex-wrap: nowrap; padding-right: 15px; padding-left: 15px; justify-content: left;}}
 @media(min-width:992px){.navbar > .container {max-width: 960px;}}
 @media(min-width:1200px){.navbar > .container {max-width: 1140px;}}
 

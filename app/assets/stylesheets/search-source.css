@@ -1,0 +1,181 @@
+/* Source Options menu */
+
+#sidebar h2.facets-heading {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+	font-size: 2.5rem;
+}
+
+.search-sources li.nav-item a {
+	display: none;
+	padding: 0.2rem 1rem;
+}
+
+.more-sources .btn {
+	margin-top: .3rem;
+}
+
+.more-sources .btn:after{
+    content: '-';
+}
+
+.more-sources .btn.collapsed:after{
+    content: '+';
+}
+
+@media (min-width: 992px) {
+	.search-sources li.nav-item a {
+		display: block;
+	}
+	.more-sources {
+		display: none;
+	}
+	.shrink-search-options {
+		min-height: 0;
+	}
+}
+
+#search-sources-menu {
+	display: flex;
+	font-size: 1.7rem;
+}
+
+.flex-column {
+	flex-direction: column !important;
+}
+
+.shrink-search-options {
+	min-height: 150px;
+}
+
+.shrink-search-options .search-sources li.nav-item a {
+	display: none;
+}
+
+.shrink-search-options .more-sources {
+	display: block;
+}
+
+.search-sources li.nav-item a.active {
+	background-image: url('grenander/index.png');
+	background-color: #46166B;
+	background-position: center right;
+	background-repeat: no-repeat;
+	border-left: 5px solid #006c68;
+	border-radius: 0px;
+	display: block;
+	color: #EBE6F0;
+}
+
+.facets-heading {
+	font-size: 1.5rem;
+}
+
+/* Search Box */
+
+.search-source {
+	padding-bottom: 1.2rem;
+}
+
+.search-source .container-fluid {
+	display: flex;
+	flex-wrap: inherit;
+	align-items: center;
+	justify-content: center;
+}
+
+.search-query-form {
+	flex-grow: 1;	
+}
+
+.search-source .search-intro {
+	margin: 0;
+}
+
+.search-source .source-box {
+	background-color: #642a90;
+	min-height: 125px;
+	padding: 1.25rem 1rem 1.25rem 1.25rem;
+	z-index: 9;
+	top: 0px;
+	border-radius: calc(0.5rem - 1px);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	background-image: url('grenander/search-lighten10.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top left;
+}
+
+.search-source .input-group {
+	margin-bottom: 0;
+}
+
+#search-sources-menu {
+  margin-bottom: 0;
+}
+
+.search-row .container .row section .d-flex {
+	height: 100%;
+}
+
+.search-source .search-query-form input {
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.search-source h2.search-intro {
+	display: inline-block;
+	color: #ffffff;
+	text-align: center;
+	margin-right: 25px;
+	margin-left: 20px;
+	font-weight: 300;
+	text-shadow: 3px 3px 5px #46166b;
+}
+
+.search-source .container-fluid {
+	justify-content: center;
+}
+
+.search-source .container-fluid form {
+	flex-grow: 1;
+}
+
+.search-source .btn-primary {
+	background-color: #9e68c7;
+	border-color: #9e68c7;
+}
+
+.search-source .btn-primary:hover,
+.search-source .btn-primary:focus,
+.search-source .btn-primary:active,
+.search-source .btn-primary.active {
+	color: #46166B;
+	background-color: #eaaa00;
+	border-color: #eaaa00;
+}
+
+.search-source .input-group-append button#search:hover, .input-group-append button#search:active {
+	  color: #fff;
+	  background-color: #eaaa00;
+	  border-color: #eaaa00;
+	}
+
+.search-source .input-group-append button#search:focus {
+	box-shadow: 0 0 0 0.2rem #46166B;
+}
+	
+.search-source .input-group-append span:hover, .input-group-append span:active {
+	  color: #fff;
+  }
+
+.form-control:focus {
+	border-color: #46166B;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 6px #46166B;
+}
+
+ /* Search Row Background */
+
+ .search-row {
+ 	/*background-image: url("https://archives.albany.edu/web/sliderImages/default/mpa3.jpg");*/
+ }
