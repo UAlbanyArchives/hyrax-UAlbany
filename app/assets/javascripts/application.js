@@ -21,3 +21,4 @@
 
 //= require_tree .
 //= require hyrax
+//= requure search_sources_menu

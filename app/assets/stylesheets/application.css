@@ -13,15 +13,21 @@
  *= require_tree .
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
+ *= require customStyling
  *= require navbar
  *= require footer
  *= require search-source
+ *= require main
  */
 
 @media only screen and (min-width: 1500px) {
 	.container {
 		width: 1250px;
 	}
+}
+
+.container-fluid {
+	padding: 0;
 }
 
 .navbar {
