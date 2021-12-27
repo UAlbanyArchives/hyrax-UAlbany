@@ -7,6 +7,20 @@
 	margin-bottom: 10px;
 }
 
+.work-type .panel {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
+}
+
+.item-panel > .panel-heading {
+	border: none;
+	box-shadow: none !important;
+	padding: 15px;
+}
+
+.item-panel .panel-body {
+	padding-top: 0;
+}
+
 @media only screen and (min-width: 1500px) {
 	.container {
 		width: 1250px;
@@ -117,6 +131,20 @@ iframe#pdfViewer {
     .no-preview img, .no-preview p {
         display: block;
     }
+}
+
+.arclightBreadcrumbs i.fa {
+	color: #6c757d;
+	margin-right: 15px;
+}
+
+.hierarchy-title {
+	font-size: 2.5rem;
+}
+
+.hierarchy-title small {
+	font-size: 65%;
+	color: #6c757d;
 }
 
 div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
@@ -304,7 +332,7 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
 
 .arclightBreadcrumbs div {
     padding-left: 1.5em;
-    text-indent:-1.5em;
+    text-indent:-0.8em;
 }
 
 .panel-heading .panel-title {
