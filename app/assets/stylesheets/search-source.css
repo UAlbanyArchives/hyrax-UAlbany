@@ -6,6 +6,12 @@
 	font-size: 2.5rem;
 }
 
+#search-sidebar h2.facets-heading {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: 2.5rem;
+}
+
 #sidebar .facets .top-panel-heading {
 	margin-top: 1em;
 	margin-bottom: 0;
@@ -22,6 +28,10 @@
 
 .more-sources {
 	font-size: 1.6rem;
+}
+
+.more-sources #collapseSources ul.nav li.nav-item a.nav-link {
+	padding: 7px 15px;
 }
 
 .more-sources .btn-info:focus {
@@ -54,13 +64,13 @@
 }
 
 @media (min-width: 992px) {
-	.search-sources li.nav-item a {
+	#sidebar .search-sources li.nav-item a {
 		display: block;
 	}
-	.more-sources {
+	#sidebar .more-sources {
 		display: none;
 	}
-	.shrink-search-options {
+	#sidebar .shrink-search-options {
 		min-height: 0;
 	}
 }

@@ -1,14 +1,14 @@
 <div class="search-row">
 	<div class="container-fluid">
-		<div class="row">
-
-			<section id="search-content" class="<%= main_content_classes %> order-last">
-				<%= render partial: 'grenander/search_source' %>
-		    </section>
+		<div class="">
 
 		    <section id="search-sidebar" class="<%= sidebar_classes %> order-first">
 		      <%= render partial: 'grenander/source_options' %>
 		    </section>
+
+		    <section id="search-content" class="<%= main_content_classes %> order-last">
+                      <%= render partial: 'grenander/search_source' %>
+                    </section>
 
 		</div>
 	</div>

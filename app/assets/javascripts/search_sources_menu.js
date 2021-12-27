@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			var target = sourcesMenu.getElementsByClassName("search");
 		} else if (pathname.startsWith("/description")) {
 			var target = sourcesMenu.getElementsByClassName("description");
-		} else if (pathname.startsWith("/catalog")) {
+		} else if (pathname.startsWith("/catalog") || pathname.startsWith("/concern")) {
 			var target = sourcesMenu.getElementsByClassName("catalog");
 		} else if (pathname.startsWith("/history")) {
 			var target = sourcesMenu.getElementsByClassName("history");
