@@ -47,25 +47,16 @@
 	<div class="col-xs-12 col-md-8 col-md-push-4">
 	    <div class="panel item-panel">
 		<div class="panel-heading">
-		<div class="col-xs-12 col-md-4 col-md-push-8">
+		<div class="right-btns">
 			<%= render '/custom_util_links' %>		
-
-			<% raise @presenter.attributes %>
-			<%= link_to hyrax.download_path(file_set),
-                  	data: { turbolinks: false },
-                  	target: :_blank,
-                  	id: "file_download",
-                  	class: "btn btn-default btn-lg",
-                  	data: { label: file_set.id } do %>
-        		<i class="fa fa-file-pdf-o"></i>
-        		<%= t('hyrax.file_set.show.downloadable_content.pdf_link') %>
-		      <% end %>
+			<% if not @presenter.universal_viewer? %>
+				<%= render 'top_download_btns' %>
+			<% end %>
 		</div>
 
-		<div class="col-xs-12 col-md-8 col-md-pull-4 arclightBreadcrumbs">
+		<div class="arclightBreadcrumbs">
                         <%= render 'work_type', presenter: @presenter %>
                 </div>
-		<div class="clearfix"></div>
 		</div>
 
 		<div class="panel-body">

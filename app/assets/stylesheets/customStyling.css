@@ -15,10 +15,40 @@
 	border: none;
 	box-shadow: none !important;
 	padding: 15px;
+	display: flex;
+	align-items: stretch;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	align-content: flex-end;
+	flex-wrap: nowrap;
 }
 
 .item-panel .panel-body {
 	padding-top: 0;
+}
+
+.item-panel .right-btns {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding: 0px 15px;
+}
+
+.item-panel .arclightBreadcrumbs {
+	padding: 0px 15px;
+	flex: 7;
+	flex-basis: max-content;
+}
+
+@media only screen and (max-width: 991px) {
+	.item-panel > .panel-heading {
+		flex-wrap: wrap;
+	}
+	.item-panel .right-btns .top-download-btns {
+		display: none;
+	}
 }
 
 @media only screen and (min-width: 1500px) {

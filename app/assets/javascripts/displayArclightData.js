@@ -53,7 +53,8 @@ $(document).ready(function(){
 			  url: $parentURI,
 			  success: function(data) {
 			  	/*alert(data['response']['document']['normalized_title_ssm']);*/
-			  	$(".arclightReify").children("a").text(data['response']['document']['collection_ssm'][0])
+			  	$(".arclightReify").children("a").text(data['response']['document']['collection_ssm'][0]);
+				$("h5.collection-name").text(data['response']['document']['collection_ssm'][0]);
 			  }
 			});
 		}
