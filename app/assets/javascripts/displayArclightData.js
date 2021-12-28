@@ -18,6 +18,7 @@ $(document).ready(function(){
 						$parentLink.children("a").attr("href", $urlRoot + data['response']['document']['parent_ssm'][i])
 		  			}
 		  			$parentLink.children("a").text(data['response']['document']['parent_unittitles_ssm'][i])
+					$("h5.collection-name").text(data['response']['document']['collection_ssm'][0])
 			  	}
 				$(".arclightRecord").children("a").text(data['response']['document']['normalized_title_ssm'][0]);
 			  }

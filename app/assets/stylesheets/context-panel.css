@@ -9,6 +9,10 @@
   box-shadow: none !important;
 }
 
+.context-panel .desc-title * {
+	margin-top: 0;
+}
+
 .sidebar-collection-title {
     background-image: url("grenander/boxbg.png");
     background-repeat: no-repeat;
@@ -16,11 +20,20 @@
     background-position: top left;
 }
 
+.sidebar-collection-title a {
+	text-decoration: none !important;
+}
+
 .collection-name {
     color: #fff;
     font-weight: 300;
     text-shadow: 3px 3px 5px #46166b;
     font-size: 3rem;
+}
+
+h5.collection-name:hover {
+	text-decoration: none;
+	color: rgba(255,255,255,0.75) !important;
 }
 
 .context-panel h1 {
@@ -34,4 +47,8 @@
 .context-panel .panel-body .desc-title {
 	font-size: 2rem;
 	margin-top: 0px;
+}
+
+.metadataFields .work-show .parent_title {
+    margin-left: 40px;
 }
