@@ -52,6 +52,7 @@
 }
 
 .more-sources .btn {
+	color:#fff;
 	margin-top: .3rem;
 }
 
@@ -116,6 +117,7 @@
 
 .search-source {
 	padding-bottom: 1.2rem;
+	margin-bottom: 0;
 }
 
 .search-source .container-fluid {
@@ -126,7 +128,7 @@
 }
 
 .search-query-form {
-	flex-grow: 1;	
+	flex-grow: 1;
 }
 
 .search-source .search-intro {

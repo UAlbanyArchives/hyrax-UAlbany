@@ -21,15 +21,19 @@
  *= require customStyling
  */
 
+body {
+	margin-bottom: 0;
+}
+
 @media only screen and (min-width: 1500px) {
 	.container {
 		width: 1250px;
 	}
 }
 
-.container-fluid {
+/*.container-fluid {
 	padding: 0;
-}
+}*/
 
 .navbar {
 	border-radius: 0px !important;

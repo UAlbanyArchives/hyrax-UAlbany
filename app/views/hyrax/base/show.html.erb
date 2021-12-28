@@ -42,36 +42,37 @@
 
 
 <div class="row work-type">
-  <div class="col-xs-12" <%= @presenter.microdata_type_to_html %>>
+	<div <%= @presenter.microdata_type_to_html %>>
 
-	<div class="col-xs-12 col-md-8 col-md-push-4">
-	    <div class="panel item-panel">
-		<div class="panel-heading">
-		<div class="right-btns">
-			<%= render '/custom_util_links' %>		
-			<% if not @presenter.universal_viewer? %>
-				<%= render 'top_download_btns' %>
-			<% end %>
-		</div>
+		<div class="col-xs-12 col-md-8 col-md-push-4">
+	    		<div class="panel item-panel">
+				<div class="panel-heading">
+					<div class="right-btns">
+						<%= render '/custom_util_links' %>		
+						<% if not @presenter.universal_viewer? %>
+							<%= render 'top_download_btns' %>
+						<% end %>
+					</div>
 
-		<div class="arclightBreadcrumbs">
-                        <%= render 'work_type', presenter: @presenter %>
-                </div>
-		</div>
+					<div class="arclightBreadcrumbs">
+                        			<%= render 'work_type', presenter: @presenter %>
+                			</div>
+				</div>
 
-		<div class="panel-body">
+				<div class="panel-body">
 
-		<%= render 'workflow_actions_widget', presenter: @presenter %>
+					<%= render 'workflow_actions_widget', presenter: @presenter %>
 
-		<% if @presenter.universal_viewer? %>
-			<div class="">
-              			<%= render 'representative_media', presenter: @presenter, viewer: true %>
-            		</div>
-		<% else %>
-			<div class="text-center">
-              			<%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
-            		</div>
-		<% end %>
+					<% if @presenter.universal_viewer? %>
+						<div class="">
+              						<%= render 'representative_media', presenter: @presenter, viewer: true %>
+            					</div>
+					<% else %>
+						<div class="text-center">
+              						<%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
+            					</div>
+					<% end %>
+				</div>
 		</div>
 	    </div>
         </div>
@@ -99,8 +100,7 @@
             	<%# TODO: we may consider adding these partials in the future %>
             	<%#= render 'sharing_with', presenter: @presenter %>
             	<%#= render 'user_activity', presenter: @presenter %>
-            	</div>
 		</div>
+	    </div>
 	</div>
-
 </div>
