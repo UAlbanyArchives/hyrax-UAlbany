@@ -17,7 +17,7 @@
 
 <% if @code %>
    <i class="fa fa-university"></i>
-   <%= link_to presenter.collecting_area[0], "https://archives.albany.edu/description/repositories/" + @code %>
+   <%= link_to presenter.collecting_area[0], URI.join(Hyrax::Application.config.arclight_url, "/description/repositories/", @code).to_s %>
 <% end %>
 
 <% @collection_uri = presenter.collection_number[0].sub '.', '-' %>
