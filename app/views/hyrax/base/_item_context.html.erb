@@ -18,11 +18,14 @@
 
 <% if presenter.try(:collection) and presenter.try(:collection_number) %>
 	<div class="linearField">Collection</div>
-	<ul class="tabular">
-		<li class="attribute attribute-collection">
+	<div class="collection_context">
+		<h4 class="collection_title">
 			<a itemprop="isPartOf" href="<%= Hyrax::Application.config.arclight_url %>/catalog/<%= presenter.collection_number[0].gsub '.', '-' %>"><%= presenter.collection[0] %></a>
-		</li>
-	</ul>
+		</h4>
+		<div class="parent_description">
+                	<h5>Scope and Contents</h5>
+                </div>
+	</div>
 <% end %>
 
 <%# presenter.attribute_to_html(:collection, render_as: :collection) %>
