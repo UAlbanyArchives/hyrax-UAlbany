@@ -16,8 +16,8 @@
  *= require navbar
  *= require footer
  *= require context-panel
- *= require search-source
  *= require main
+ *= require search-source
  *= require customStyling
  */
 
@@ -39,9 +39,9 @@ body {
 	border-radius: 0px !important;
 }
 
-.btn-primary, .btn-primary * {
+/*.btn-primary, .btn-primary * {
     color: #ffffff !important;
-}
+}*/
 
 .row a {
     color: #642a90;

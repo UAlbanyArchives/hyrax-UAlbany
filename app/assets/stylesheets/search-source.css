@@ -153,6 +153,23 @@
 	margin-bottom: 0;
 }
 
+.search-source .input-group button#search:hover, .input-group button#search:active {
+	color: #fff !important;
+	background-color: #eaaa00 !important;
+	border-color: #eaaa00 !important;
+}
+
+.search-source .btn-primary:hover, .search-source .btn-primary:focus, .search-source .btn-primary:active, .search-source .btn-primary.active {
+	color: #fff !important;
+	background-color: #eaaa00 !important;
+	border-color: #eaaa00 !important;
+}
+
+.search-source .input-group button:focus {
+	box-shadow: 0 0 0 0.2rem #46166B !important;
+	outline: none !important;
+}
+
 #search-sources-menu {
   margin-bottom: 0;
 }
@@ -185,8 +202,8 @@
 }
 
 .search-source .btn-primary {
-	background-color: #9e68c7;
-	border-color: #9e68c7;
+	background-color: #9e68c7 !important;
+	border-color: #9e68c7 !important;
 }
 
 .search-source .btn-primary:hover,
