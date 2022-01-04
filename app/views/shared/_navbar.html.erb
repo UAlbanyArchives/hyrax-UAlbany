@@ -13,18 +13,18 @@
 	        All Collections <span class="caret"></span>
 	      </a>
 	      <div class="dropdown-menu">
-	        <a class="dropdown-item" href="#">About Collections</a>
-	        <a class="dropdown-item" href="#">NY State Modern Political Archive</a>
-	        <a class="dropdown-item" href="#">National Death Penalty Archive</a>
-	        <a class="dropdown-item" href="#">German Intellectual Émigré</a>
-	        <a class="dropdown-item" href="#">University Archives</a>
-	        <a class="dropdown-item" href="#">Mathes Childrens Literature</a>
-	        <a class="dropdown-item" href="#">Business and Literary Manuscripts</a>
-	        <a class="dropdown-item" href="#">Rare Books</a>
-	        <a class="dropdown-item" href="#">Web Archives</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/description" %>">About Collections</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/description/repositories/apap" %>">NY State Modern Political Archive</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/description/repositories/ndpa" %>">National Death Penalty Archive</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/description/repositories/ger" %>">German Intellectual Émigré</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/description/repositories/ua" %>">University Archives</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/books?f[collecting_area_ssim][]=Mathes+Childrens+Literature" %>">Mathes Childrens Literature</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/description/repositories/mss" %>">Business and Literary Manuscripts</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/books" %>">Rare Books</a>
+	        <a class="dropdown-item" href="https://archives.albany.edu/web/webarchives">Web Archives</a>
 	        <div class="dropdown-divider"></div> 
-	        <a class="dropdown-item" href="#">A-Z Complete List of Collections</a>
-	        <a class="dropdown-item" href="#">Subject Guides to Collections</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/description/repositories/all" %>">A-Z Complete List of Collections</a>
+	        <a class="dropdown-item" href="<%= request.base_url + "/description/repositories/sub" %>">Subject Guides to Collections</a>
 	      </div>
 	    </li>
 
