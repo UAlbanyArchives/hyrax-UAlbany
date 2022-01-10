@@ -47,6 +47,10 @@ li.nav-item a:hover {
 	background: #006c68;
 }
 
+.nav .nav-item .dropdown-menu .divider {
+	background-color: #46166B !important;
+}
+
 /* facets */
 
 .page-sidebar .panel-body {
