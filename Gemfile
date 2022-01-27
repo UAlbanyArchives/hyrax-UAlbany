@@ -72,7 +72,7 @@ gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives
 gem 'browse-everything', '< 1.0.0'
 gem 'riiif', '~> 1.1'
 # Sidekiq for background jobs
-gem 'sidekiq', '~> 5.2.0'
+gem 'sidekiq', '~> 6.4.0'
 # pdfjs for displaying PDF files in views
 gem 'pdfjs_viewer-rails'
 # To manage users in the db

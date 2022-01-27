@@ -179,7 +179,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.9)
-    connection_pool (2.2.3)
+    connection_pool (2.2.5)
     crass (1.0.6)
     declarative (0.0.20)
     declarative-option (0.1.0)
@@ -574,8 +574,6 @@ GEM
       rdf
     racc (1.6.0)
     rack (2.2.3)
-    rack-protection (2.1.0)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.6)
@@ -743,11 +741,10 @@ GEM
       rdf-xsd (~> 3.1)
       sparql (~> 3.1)
       sxp (~> 1.1)
-    sidekiq (5.2.7)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack (>= 1.5.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
+    sidekiq (6.4.0)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     signet (0.14.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
@@ -863,7 +860,7 @@ DEPENDENCIES
   rubyzip (>= 2.0.0)
   sass-rails (~> 5.0)
   selenium-webdriver
-  sidekiq (~> 5.2.0)
+  sidekiq (~> 6.4.0)
   simple_form (>= 5.0.0)
   solr_wrapper (>= 0.3)
   spring
