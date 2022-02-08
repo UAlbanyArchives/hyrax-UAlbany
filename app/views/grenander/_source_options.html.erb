@@ -8,21 +8,35 @@
 <% pamphletsURI = URI.join(request.base_url, "books") %>
 <% booksURI = URI.join(request.base_url, "books") %>
 
-<% mathesFacet = Marshal.load(Marshal.dump(request.query_parameters)) %>
-<% pamphletsFacet = Marshal.load(Marshal.dump(request.query_parameters)) %>
-<% booksFacet = Marshal.load(Marshal.dump(request.query_parameters)) %>
+<% if request.query_parameters["q"].nil? %>
+	<% searchParams = {} %>
+	<% arclightParams = {"group": "true"} %>
+	<% hyraxParams = {} %>
+	<% historyParams = {} %>
+	<% mathesParams = {} %>
+	<% pamphletsParams = {} %>
+	<% booksParams = {} %>
+<% else %>
+	<% searchParams = {"q": request.query_parameters["q"]} %>
+	<% arclightParams = {"q": request.query_parameters["q"], "group": "true"} %>
+	<% hyraxParams = {"q": request.query_parameters["q"]} %>
+	<% historyParams = {"q": request.query_parameters["q"]} %>
+	<% mathesParams = {"q": request.query_parameters["q"]} %>
+	<% pamphletsParams = {"q": request.query_parameters["q"]} %>
+	<% booksParams = {"q": request.query_parameters["q"]} %>
+<% end %>
 
-<% mathesFacet["f"] = {"collecting_area_ssim": ["Mathes+Childrens+Literature"]} %>
-<% pamphletsFacet["f"] = {"collecting_area_ssim": ["Political+Pamphlets"]} %>
-<% booksFacet["f"] = {"collecting_area_ssim": ["Rare+Books"]} %>
+<% mathesParams["f"] = {"collecting_area_ssim": ["Mathes+Childrens+Literature"]} %>
+<% pamphletsParams["f"] = {"collecting_area_ssim": ["Political+Pamphlets"]} %>
+<% booksParams["f"] = {"collecting_area_ssim": ["Rare+Books"]} %>
 
-<% searchURI.query = request.query_parameters.to_query %>
-<% arclightURI.query = request.query_parameters.to_query %>
-<% hyraxURI.query = request.query_parameters.to_query %>
-<% historyURI.query = request.query_parameters.to_query %>
-<% mathesURI.query = mathesFacet.to_query %>
-<% pamphletsURI.query = pamphletsFacet.to_query %>
-<% booksURI.query = booksFacet.to_query %>
+<% searchURI.query = searchParams.to_query %>
+<% arclightURI.query = arclightParams.to_query %>
+<% hyraxURI.query = hyraxParams.to_query %>
+<% historyURI.query = historyParams.to_query %>
+<% mathesURI.query = mathesParams.to_query %>
+<% pamphletsURI.query = pamphletsParams.to_query %>
+<% booksURI.query = booksParams.to_query %>
 
 <ul id="search-sources-menu" class="nav nav-pills flex-column search-sources">
   <li class="nav-item">
