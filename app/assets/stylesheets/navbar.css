@@ -69,6 +69,10 @@ body {
 	white-space: nowrap;
 }
 
+.navbar-inverse .container {
+	justify-content: center;
+}
+
 .navbar-collapse > .navbar-nav > li > a {
 	border-radius: 5px;
 }
@@ -77,7 +81,7 @@ body {
 .navbar-inverse .navbar-nav > .nav-item > .nav-link {
 	/*color: #EBE6F0 !important;*/
 	text-decoration: none !important;
-	font: 11pt "Roboto", Helvetica, Arial, sans-serif !important;
+	font: 13pt "Roboto", Helvetica, Arial, sans-serif !important;
 	padding-top: 15px !important;
 	padding-bottom: 15px !important;
 	width: 100% !important;
