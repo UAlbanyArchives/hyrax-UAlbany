@@ -7,11 +7,11 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '= 5.2.6'
+gem 'rails', '= 5.2.6.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
-gem 'puma', '~> 4.3.9'
+gem 'puma', '~> 5.6.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -72,7 +72,7 @@ gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives
 gem 'browse-everything', '< 1.0.0'
 gem 'riiif', '~> 1.1'
 # Sidekiq for background jobs
-gem 'sidekiq', '~> 5.2.0'
+gem 'sidekiq', '~> 6.4.0'
 # pdfjs for displaying PDF files in views
 gem 'pdfjs_viewer-rails'
 # To manage users in the db

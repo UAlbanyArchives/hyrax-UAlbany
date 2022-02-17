@@ -1,5 +1,6 @@
 <div class="top-download-btns">
-<% check_string = @presenter.file_set_presenters[0].title[0].downcase.strip %>
+<% if @presenter.file_set_presenters[0] %>
+	<% check_string = @presenter.file_set_presenters[0].title[0].downcase.strip %>
 
 <% if check_string.end_with? ".pdf" %>
 
@@ -94,5 +95,5 @@
     <% end %>
 
 <% end %>
-
+<% end %>
 </div>

@@ -44,6 +44,11 @@ h5.collection-name:hover {
 	font-size: 2.5rem;
 }
 
+.context-panel .desc-title span.label {
+        font-size: 1.3rem;
+	vertical-align: top;
+}
+
 .context-panel small {
 	color: #6c757d;
 }

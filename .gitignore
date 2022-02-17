@@ -26,7 +26,6 @@ config/blacklight.yml
 config/fedora.yml
 config/solr.yml
 config/database.yml
-config/application.rb
 
 hyraxData/
 lib/import/*
