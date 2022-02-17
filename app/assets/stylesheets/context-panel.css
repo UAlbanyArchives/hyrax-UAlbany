@@ -1,0 +1,74 @@
+.context-panel {
+	border: none !important;
+}
+
+.context-panel .panel-heading {
+  background-color: #642a90;
+  color: #fff;
+  border-radius: 0.25rem 0.25rem 0rem 0rem;
+  box-shadow: none !important;
+}
+
+.context-panel .desc-title * {
+	margin-top: 0;
+}
+
+.sidebar-collection-title {
+    background-image: url("grenander/boxbg.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top left;
+}
+
+.sidebar-collection-title a {
+	text-decoration: none !important;
+}
+
+.collection-name {
+    color: #fff;
+    font-weight: 300;
+    text-shadow: 3px 3px 5px #46166b;
+    font-size: 2.5rem;
+}
+
+h5.collection-name:hover {
+	text-decoration: none;
+	color: rgba(255,255,255,0.75) !important;
+}
+
+.context-panel h1 {
+	margin-top: 0 !important;
+}
+
+.context-panel .desc-title * {
+	font-size: 2.5rem;
+}
+
+.context-panel small {
+	color: #6c757d;
+}
+
+.context-panel .panel-body .desc-title {
+	font-size: 2rem;
+	margin-top: 0px;
+}
+
+.metadataFields .work-show .parent_title {
+    margin-left: 40px;
+}
+
+
+.metadataFields .collection_context .collection_title {
+	margin-bottom: 10px !important;
+	margin-left: 40px;
+	text-transform: initial;
+}
+
+
+.metadataFields .collection_context .collection_title a {
+	border-bottom: 1px solid #f8e1a5;
+}
+
+.metadataFields .work-show u.tabular li.attribute-collecting_area {
+	margin: 10px 0px 15px 0px;
+}

@@ -22,11 +22,10 @@
     <!--<div class="skip-to-content">
       <%= link_to "Skip to Content", "#skip-to-content", data: { turbolinks: false } %>
     </div>-->
-    <%= render '/ua_masthead' %>
-    <%= render '/search_subnav' %>
+    <%= render 'shared/navbar' %>
     <%# content_for(:navbar) %>
     <%= content_for(:precontainer_content) %>
-    <div id="content-wrapper" class="container withSpacer" role="main">
+    <div id="content-wrapper" class="container-fluid" role="main">
       <%= render '/flash_msg' %>
 
       <!--<%= render_breadcrumbs builder: Hyrax::BootstrapBreadcrumbsBuilder %>-->

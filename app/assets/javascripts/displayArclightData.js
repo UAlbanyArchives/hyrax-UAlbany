@@ -1,3 +1,9 @@
+var decodeHTML = function (html) {
+	var txt = document.createElement('textarea');
+	txt.innerHTML = html;
+	return txt.value;
+};
+
 $(document).ready(function(){
 	if ($(".arclightBreadcrumbs")[0]) {
 		if ($(".arclightRecord")[0]) {
@@ -7,19 +13,20 @@ $(document).ready(function(){
 			  dataType: 'json',
 			  url: $arclightURI,
 			  success: function(data) {
-			  	/*alert(data['response']['document']['normalized_title_ssm']);*/
-			  	for (i = 0; i < data['response']['document']['parent_ssm'].length; i++) {
-			  		$query = '.arclightReify:eq(' + String(i) + ')';
+			  	/*alert(data['data']['attributes']['normalized_title_ssm']['attributes']['value'][0]);*/
+			  	for (i = 0; i < data['data']['attributes']['parent_ssim']['attributes']['value'].length; i++) {
+					$query = '.arclightReify:eq(' + String(i) + ')';
 			  		$parentLink = $('.arclightBreadcrumbs').children($query);
 		  			$urlRoot = $parentLink.children("a").attr("href").split("aspace_")[0];
 		  			if ( i == 0 ) {
 						$parentLink.children("a").attr("href", $urlRoot)
 					} else {
-						$parentLink.children("a").attr("href", $urlRoot + data['response']['document']['parent_ssm'][i])
+						$parentLink.children("a").attr("href", $urlRoot + data['data']['attributes']['parent_ssim'][i])
 		  			}
-		  			$parentLink.children("a").text(data['response']['document']['parent_unittitles_ssm'][i])
+		  			$parentLink.children("a").text(data['data']['attributes']['parent_unittitles_ssm']['attributes']['value'][i])
+					$("h5.collection-name").text(data['data']['attributes']['collection_ssm']['attributes']['value'][0])
 			  	}
-				$(".arclightRecord").children("a").text(data['response']['document']['normalized_title_ssm'][0]);
+				$(".arclightRecord").children("a").text(data['data']['attributes']['normalized_title_ssm']['attributes']['value'][0]);
 			  }
 			});
 			$('.parent_context').each(function (index, element) {
@@ -33,11 +40,11 @@ $(document).ready(function(){
 				  context: this,
 				  url: $parentURI,
 				  success: function(data) {
-				  	parent = data['response']['document']
-				  	$(this).children(".parent_title").children(".record_parent").text(parent['normalized_title_ssm'][0])
+				  	parent = data['data']['attributes']
+				  	$(this).children(".parent_title").children(".record_parent").text(parent['normalized_title_ssm']['attributes']['value'][0])
 					if ('scopecontent_ssm' in parent) {
-						for (i = 0; i < parent['scopecontent_ssm'].length; i++) {
-				  			$(this).children(".parent_description").append("<p>" + parent['scopecontent_ssm'][i] + "</p>")
+						for (i = 0; i < parent['scopecontent_ssm']['attributes']['value'].length; i++) {
+				  			$(this).children(".parent_description").append(decodeHTML(parent['scopecontent_ssm']['attributes']['value'][i]))
 				  		}
 				  		$(this).children(".parent_description").css("display", "block");
 				  	}
@@ -51,11 +58,30 @@ $(document).ready(function(){
 			  dataType: 'json',
 			  url: $parentURI,
 			  success: function(data) {
-			  	/*alert(data['response']['document']['normalized_title_ssm']);*/
-			  	$(".arclightReify").children("a").text(data['response']['document']['collection_ssm'][0])
+			  	/*alert(data['data']['attributes']['normalized_title_ssm']['attributes']['value']);*/
+			  	$(".arclightReify").children("a").text(data['data']['attributes']['collection_ssm']['attributes']['value'][0]);
+				$("h5.collection-name").text(data['data']['attributes']['collection_ssm']['attributes']['value'][0]);
 			  }
 			});
 		}
+	}
+	if ($(".collection_title")[0]) {
+		$collectionURI = $(".sidebar-collection-title").children("a").attr("href") + "?format=json";
+		console.log($collectionURI);
+		$.ajax({
+                          type: "GET",
+                          dataType: 'json',
+                          url: $collectionURI,
+                          success: function(data) {
+                                /*alert(data['data']['attributes']['normalized_title_ssm']['attributes']['value']);*/
+				if ('scopecontent_ssm' in data['data']['attributes']) {
+                                        for (i = 0; i < data['data']['attributes']['scopecontent_ssm']['attributes']['value'].length; i++) {
+                                        	$('.collection_context').children(".parent_description").append(decodeHTML(data['data']['attributes']['scopecontent_ssm']['attributes']['value'][i]))
+                                        }
+                                	$('.collection_context').children(".parent_description").css("display", "block");
+                                }
+                	}
+        	});
 	}
 });
 
@@ -67,14 +93,14 @@ $(document).ready(function(){
 				$(this).next("dd").children("a").each(function (index, element) {
 					$parentID = $(this).text();
 					$collectionID = $(this).parent("dd").prev().prev().children("a").text().replace(".", "-");
-					$uri = "https://archives.albany.edu/description/catalog/" + $collectionID + "aspace_" + $parentID + "?format=json"
+					$uri = window.location.protocol + "//" + window.location.hostname + "/description/catalog/" + $collectionID + "aspace_" + $parentID + "?format=json"
 					$.ajax({
 					  type: "GET",
 					  dataType: 'json',
 					  context: this,
 					  url: $uri,
 					  success: function(data) {
-					  	$(this).text(data['response']['document']['title_ssm'][0]);
+					  	$(this).text(data['data']['attributes']['title_ssm']['attributes']['value'][0]);
 					  }
 					});
 				});

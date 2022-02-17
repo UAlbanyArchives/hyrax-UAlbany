@@ -1,3 +1,56 @@
+.gallery > .document .caption .documentHeader .document-title-heading {
+	font-size: 18px !important;
+}
+
+.gallery > .document .caption .documentHeader {
+	border-bottom: 1px solid #f8e1a5;
+	margin-bottom: 10px;
+}
+
+.work-type .panel {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
+}
+
+.item-panel > .panel-heading {
+	border: none;
+	box-shadow: none !important;
+	padding: 15px;
+	display: flex;
+	align-items: stretch;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	align-content: flex-end;
+	flex-wrap: nowrap;
+}
+
+.item-panel .panel-body {
+	padding-top: 0;
+}
+
+.item-panel .right-btns {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding: 0px 15px;
+}
+
+.item-panel .arclightBreadcrumbs {
+	padding: 0px 15px;
+	flex: 7;
+	flex-basis: max-content;
+}
+
+@media only screen and (max-width: 991px) {
+	.item-panel > .panel-heading {
+		flex-wrap: wrap;
+	}
+	.item-panel .right-btns .top-download-btns {
+		display: none;
+	}
+}
+
 @media only screen and (min-width: 1500px) {
 	.container {
 		width: 1250px;
@@ -108,6 +161,20 @@ iframe#pdfViewer {
     .no-preview img, .no-preview p {
         display: block;
     }
+}
+
+.arclightBreadcrumbs i.fa {
+	color: #6c757d;
+	margin-right: 15px;
+}
+
+.hierarchy-title {
+	font-size: 2.5rem;
+}
+
+.hierarchy-title small {
+	font-size: 65%;
+	color: #6c757d;
 }
 
 div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
@@ -295,7 +362,7 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
 
 .arclightBreadcrumbs div {
     padding-left: 1.5em;
-    text-indent:-1.5em;
+    text-indent:-0.8em;
 }
 
 .panel-heading .panel-title {
@@ -360,3 +427,4 @@ div[class^='breadcrumb-indent'], div[class*=' breadcrumb-indent']{
         display: inline-block;
     }
 }
+

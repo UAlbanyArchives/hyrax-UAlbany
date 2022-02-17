@@ -1,7 +1,7 @@
 <% presenter.title.each_with_index do |title, index| %>
   <div class="row">
     <% if presenter.editor? %>
-      <div class="col-sm-8">
+      <div class="col-sm-8 desc-title">
         <h2 itemprop="name">
         <% if index == 0 %>
           <% if presenter.date_created[0].present? %>
@@ -23,7 +23,7 @@
         <%= render "show_actions", presenter: presenter %>
       </div>
     <% else %>
-      <div class="col-sm-12">
+      <div class="col-sm-12 desc-title">
         <% if index == 0 %>
           <% if presenter.date_created[0].present? %>
               <h2 itemprop="name"><%= title %>, <small><%= presenter.date_created[0] %></small>

@@ -1,0 +1,5 @@
+<% if presenter.date_created[0].present? %>
+	<%= presenter.title[0] %>, <small><%= presenter.date_created[0] %></small>
+<% else %>
+	<%= presenter.title[0] %>
+<% end %>

@@ -26,9 +26,9 @@ $(document).ready(function(){
           dataType: 'json',
           url: $collectionURL,
           success: function(collectionData) {
-            $("#dao_collection").val(collectionData['response']['document']['title_ssm'][0])
-            $("#image_collection").val(collectionData['response']['document']['title_ssm'][0])
-            $("#av_collection").val(collectionData['response']['document']['title_ssm'][0])
+            $("#dao_collection").val(collectionData['data']['attributes']['title_ssm']['attributes']['value'][0])
+            $("#image_collection").val(collectionData['data']['attributes']['title_ssm']['attributes']['value'][0])
+            $("#av_collection").val(collectionData['data']['attributes']['title_ssm']['attributes']['value'][0])
           },
           error: function(){
             $("#dao_collection").addClass("has-error")
@@ -48,35 +48,35 @@ $(document).ready(function(){
 			$(".av_collection_number").removeClass("has-error")
 			$(".av_archivesspace_record").removeClass("has-error")
 			$(".sip_collection_number").removeClass("has-error")
-			if ('parent_ssm' in data['response']['document']) {
-			  	for (i = 0; i < data['response']['document']['parent_ssm'].length; i++) {
+			if ('parent_ssim' in data['data']['attributes']) {
+			  	for (i = 0; i < data['data']['attributes']['parent_ssim']['attributes']['value'].length; i++) {
 			  		if (i == 0) {
                         
 			  		} else if (i == 1) {
-			  			$("#dao_record_parent").val(data['response']['document']['parent_ssm'][i].split("_")[1])
-			  			$("#image_record_parent").val(data['response']['document']['parent_ssm'][i].split("_")[1])
-			  			$("#av_record_parent").val(data['response']['document']['parent_ssm'][i].split("_")[1])
+			  			$("#dao_record_parent").val(data['data']['attributes']['parent_ssim']['attributes']['value'][i].split("_")[1])
+			  			$("#image_record_parent").val(data['data']['attributes']['parent_ssim']['attributes']['value'][i].split("_")[1])
+			  			$("#av_record_parent").val(data['data']['attributes']['parent_ssim']['attributes']['value'][i].split("_")[1])
 			  		} else {
 			  			$(".dao_record_parent").find(".add").click()
-			  			$(".dao_record_parent").last().val(data['response']['document']['parent_ssm'][i].split("_")[1])
+			  			$(".dao_record_parent").last().val(data['data']['attributes']['parent_ssim']['attributes']['value'][i].split("_")[1])
 			  			$(".image_record_parent").find(".add").click()
-			  			$(".image_record_parent").last().val(data['response']['document']['parent_ssm'][i].split("_")[1])
+			  			$(".image_record_parent").last().val(data['data']['attributes']['parent_ssim']['attributes']['value'][i].split("_")[1])
 			  			$(".av_record_parent").find(".add").click()
-			  			$(".av_record_parent").last().val(data['response']['document']['parent_ssm'][i].split("_")[1])
+			  			$(".av_record_parent").last().val(data['data']['attributes']['parent_ssim']['attributes']['value'][i].split("_")[1])
 			  		}
 			  	}
 			} else {
-				$("#dao_collection").val(data['response']['document']['collection_ssm'][0].split(",")[0])
-			  	$("#image_collection").val(data['response']['document']['collection_ssm'][0].split(",")[0])
-			  	$("#av_collection").val(data['response']['document']['collection_ssm'][0].split(",")[0])
-			  	$("#sip_collection").val(data['response']['document']['collection_ssm'][0].split(",")[0])
+				$("#dao_collection").val(data['data']['attributes']['collection_ssm']['attributes']['value'][0].split(",")[0])
+			  	$("#image_collection").val(data['data']['attributes']['collection_ssm']['attributes']['value'][0].split(",")[0])
+			  	$("#av_collection").val(data['data']['attributes']['collection_ssm']['attributes']['value'][0].split(",")[0])
+			  	$("#sip_collection").val(data['data']['attributes']['collection_ssm']['attributes']['value'][0].split(",")[0])
 			}
-			$("#dao_collecting_area").val(data['response']['document']['repository_ssm'])
-			$("#image_collecting_area").val(data['response']['document']['repository_ssm'])
-			$("#av_collecting_area").val(data['response']['document']['repository_ssm'])
-			$("#sip_collecting_area").val(data['response']['document']['repository_ssm'])
-		  	$("#dao_date_created").val(data['response']['document']['unitdate_ssm'])
-		  	$("#dao_title").val(data['response']['document']['title_ssm'][0].trim())
+			$("#dao_collecting_area").val(data['data']['document']['repository_ssm']['attributes']['value'])
+			$("#image_collecting_area").val(data['data']['document']['repository_ssm']['attributes']['value'])
+			$("#av_collecting_area").val(data['data']['document']['repository_ssm']['attributes']['value'])
+			$("#sip_collecting_area").val(data['data']['document']['repository_ssm']['attributes']['value'])
+		  	$("#dao_date_created").val(data['data']['document']['unitdate_ssm']['attributes']['value'])
+		  	$("#dao_title").val(data['data']['document']['title_ssm']['attributes']['value'][0].trim())
 		  	$("#arclight_record_lookup").empty()
 			$("#arclight_record_lookup").text("Load Record")
 		  },

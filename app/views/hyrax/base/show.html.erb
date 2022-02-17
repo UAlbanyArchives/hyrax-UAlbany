@@ -1,5 +1,7 @@
 <% provide :page_title, @presenter.page_title %>
 
+<%= render partial: 'grenander/search_row' %>
+
 <%= render 'shared/citations' %>
 
 <% if 1 == 2 %> 
@@ -40,44 +42,65 @@
 
 
 <div class="row work-type">
-  <%= render '/custom_util_links' %>
-  <div class="arclightBreadcrumbs col-sm-6 col-sm-pull-6">
-    <%= render 'work_type', presenter: @presenter %>
-  </div>
-  <div class="col-xs-12">&nbsp;</div>
-  <div class="col-xs-12" <%= @presenter.microdata_type_to_html %>>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <%= render 'work_title', presenter: @presenter %>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <%= render 'workflow_actions_widget', presenter: @presenter %>
-          <% if @presenter.universal_viewer? %>
-            <div class="col-sm-8">
-              <%= render 'representative_media', presenter: @presenter, viewer: true %>
-            </div>
-          <% else %>
-            <div class="col-sm-12 col-md-8 text-center">
-              <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
-            </div>
-          <% end %>
-          <div class="col-sm-12 col-md-4 metadataFields">
-            <%= render 'metadata', presenter: @presenter %>
-            <%= render 'citations', presenter: @presenter %>
-            <%= render 'social_media' %>
-          </div>
-          <div class="col-sm-12">
-            <% if @presenter.editor? %>
-              <%= render 'relationships', presenter: @presenter %>
-            <% end %>
-            <%= render 'items', presenter: @presenter %>
-            <%# TODO: we may consider adding these partials in the future %>
-            <%#= render 'sharing_with', presenter: @presenter %>
-            <%#= render 'user_activity', presenter: @presenter %>
-          </div>
+	<div <%= @presenter.microdata_type_to_html %>>
+
+		<div class="col-xs-12 col-md-8 col-md-push-4">
+	    		<div class="panel item-panel">
+				<div class="panel-heading">
+					<div class="right-btns">
+						<%= render '/custom_util_links' %>		
+						<% if not @presenter.universal_viewer? %>
+							<%= render 'top_download_btns' %>
+						<% end %>
+					</div>
+
+					<div class="arclightBreadcrumbs">
+                        			<%= render 'work_type', presenter: @presenter %>
+                			</div>
+				</div>
+
+				<div class="panel-body">
+
+					<%= render 'workflow_actions_widget', presenter: @presenter %>
+
+					<% if @presenter.universal_viewer? %>
+						<div class="">
+              						<%= render 'representative_media', presenter: @presenter, viewer: true %>
+            					</div>
+					<% else %>
+						<div class="text-center">
+              						<%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
+            					</div>
+					<% end %>
+				</div>
+		</div>
+	    </div>
         </div>
-      </div>
-    </div>
-  </div>
+
+	<div class="col-xs-12 col-md-4 col-md-pull-8">
+	    <div class="panel context-panel">
+		<%= render 'collection-panel-title', presenter: @presenter %>		
+		<div class="panel-body metadataFields">
+			<%= render 'work_title', presenter: @presenter %>
+                	<%= render 'metadata', presenter: @presenter %>
+                	<%= render 'citations', presenter: @presenter %>
+                	<%= render 'social_media' %>
+			<div class="clearfix"></div>
+		</div>
+            </div>
+	</div>
+
+	<div class="col-xs-12">
+            <div class="panel">
+		<div class="panel-body">
+	    	<% if @presenter.editor? %>
+              		<%= render 'relationships', presenter: @presenter %>
+            	<% end %>
+            	<%= render 'items', presenter: @presenter %>
+            	<%# TODO: we may consider adding these partials in the future %>
+            	<%#= render 'sharing_with', presenter: @presenter %>
+            	<%#= render 'user_activity', presenter: @presenter %>
+		</div>
+	    </div>
+	</div>
 </div>

@@ -2,16 +2,16 @@
 class CollectingAreaAttributeRenderer < Hyrax::Renderers::AttributeRenderer
   def attribute_value_to_html(value)
   	if value == "New York State Modern Political Archive"
-  		repo_url = "https://archives.albany.edu/browse/apap.html"
+		@code = "apap"
   	elsif value == "National Death Penalty Archive"
-  		repo_url = "https://archives.albany.edu/browse/91.html"
+		@code = "ndpa"
   	elsif value == "German and Jewish Intellectual Émigré Collections"
-  		repo_url = "https://archives.albany.edu/browse/ger.html"
+  		@code = "ger"
   	elsif value == "Business, Literary, and Local History Manuscripts"
-  		repo_url = "https://archives.albany.edu/browse/mss.html"
+  		@code = "mss"
   	elsif value == "University Archives"
-  		repo_url = "https://archives.albany.edu/web/ua"
+  		@code = "ua"
   	end
-    %(This collection is part of the <a href="#{repo_url}">#{value}</a>)
+    %(This collection is part of the <a href="#{URI.join( Hyrax::Application.config.arclight_url, "/description/repositories/", @code).to_s }">#{value}</a>)
   end
 end

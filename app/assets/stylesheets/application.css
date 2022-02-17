@@ -10,14 +10,20 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require customStyling
- *= require browseNav
- *= require headerNavbar
- *= require searchSubnav
  *= require_tree .
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
+ *= require navbar
+ *= require footer
+ *= require context-panel
+ *= require main
+ *= require search-source
+ *= require customStyling
  */
+
+body {
+	margin-bottom: 0;
+}
 
 @media only screen and (min-width: 1500px) {
 	.container {
@@ -25,13 +31,17 @@
 	}
 }
 
+/*.container-fluid {
+	padding: 0;
+}*/
+
 .navbar {
 	border-radius: 0px !important;
 }
 
-.btn-primary, .btn-primary * {
+/*.btn-primary, .btn-primary * {
     color: #ffffff !important;
-}
+}*/
 
 .row a {
     color: #642a90;

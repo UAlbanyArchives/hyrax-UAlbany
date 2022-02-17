@@ -1,0 +1,109 @@
+body {
+    background: #e2e1e0;
+}
+
+a {
+	color: #642a90;
+}
+
+a:hover {
+	color: #006c68;
+}
+
+.btn-info {
+	background-color: #006c68;
+}
+
+.btn-primary {
+	color: #EBE6F0 !important;
+	background-color: #46166B !important;
+	border-color: #46166B !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary.active:not(:disabled):not(.disabled), .show > .btn-primary.dropdown-toggle {
+	/*color: #46166B;*/
+	background-color: #eaaa00;
+	border-color: #eaaa00;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.active {
+	/*color: #46166B;*/
+	background-color: #eaaa00;
+	border-color: #eaaa00;
+}
+
+#main-container {
+	padding-top: 1rem;
+}
+
+li.nav-item a {
+	color: #46166B;
+}
+
+li.nav-item a:hover {
+	color: #EBE6F0;
+	background: #006c68;
+}
+
+.nav .nav-item .dropdown-menu .divider {
+	background-color: #46166B !important;
+}
+
+/* facets */
+
+.page-sidebar .panel-body {
+	font-size: .85em; 
+	line-height: 1.15em;
+}
+
+.page-sidebar .facet-values .facet-label {
+	padding-bottom: 12px;
+}
+
+.facet-limit-active {
+	border-color: #eaaa00!important;
+	border-top-color: #eaaa00!important;
+	border-bottom-color: #eaaa00!important;
+	border-left-color: #eaaa00!important;
+	border-right-color: #eaaa00!important;
+}
+
+.facet-limit-active .card-header {
+	background-color: #f8e1a5!important;
+}
+
+
+.facet-values li .facet-select {
+	color: #006c68!important;
+}
+
+.facet-values li .selected {
+	color: #006c68!important;
+	font-weight: 700;
+}
+
+.al-sticky-sidebar .card,
+.page-sidebar .card {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary.active:not(:disabled):not(.disabled):focus, .show > .btn-primary.dropdown-toggle:focus {
+	box-shadow: 0 0 0 0.2rem rgba(70, 22, 107, 0.5);
+}
+
+/* pagination */
+
+.pagination .page-item a {
+	color: #46166B; 
+}
+
+.pagination .page-item.active .page-link {
+	background-color: #9e68c7;
+	border-color: #9e68c7;
+}
+
+#searchLabel {
+	display: none;
+}

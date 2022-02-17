@@ -1,0 +1,98 @@
+<div class="top-download-btns">
+<% check_string = @presenter.file_set_presenters[0].title[0].downcase.strip %>
+
+<% if check_string.end_with? ".pdf" %>
+
+		<%= link_to hyrax.download_path(@presenter.file_set_presenters),
+                        data: { turbolinks: false },
+                        target: :_blank,
+                        id: "file_download",
+                        class: "btn btn-default",
+                        data: { label: @presenter.file_set_presenters[0].id } do %>
+                        <i class="fa fa-file-pdf-o"></i>
+                        <%= t('hyrax.file_set.show.downloadable_content.pdf_link') %>
+                <% end %>
+<% elsif check_string.end_with? ".doc" or check_string.end_with? ".docx" %>
+
+
+    <%= link_to hyrax.download_path(@presenter.file_set_presenters) + "&file=pdf",
+                  data: { turbolinks: false },
+                  target: :_blank,
+                  id: "file_download",
+                  class: "btn btn-default",
+                  data: { label: @presenter.file_set_presenters[0].id } do %>
+        <i class="fa fa-file-pdf-o"></i>
+        <%= t('hyrax.file_set.show.downloadable_content.pdf_link') %>
+    <% end %>
+
+    <%= link_to hyrax.download_path(@presenter.file_set_presenters),
+                  data: { turbolinks: false },
+                  target: :_blank,
+                  id: "file_download",
+                  class: "btn btn-default",
+                  data: { label: @presenter.file_set_presenters[0].id } do %>
+                <i class="fa fa-file-word-o"></i>
+	    <%= t('hyrax.file_set.show.downloadable_content.office_link') %>
+    <% end %>
+
+<% elsif check_string.end_with? ".xls" or check_string.end_with? ".xlsx" %>
+
+    <%= link_to hyrax.download_path(@presenter.file_set_presenters) + "&file=pdf",
+                  data: { turbolinks: false },
+                  target: :_blank,
+                  id: "file_download",
+                  class: "btn btn-default",
+                  data: { label: @presenter.file_set_presenters[0].id } do %>
+        <i class="fa fa-file-pdf-o"></i>
+        <%= t('hyrax.file_set.show.downloadable_content.pdf_link') %>
+    <% end %>
+
+    <%= link_to hyrax.download_path(@presenter.file_set_presenters),
+                  data: { turbolinks: false },
+                  target: :_blank,
+                  id: "file_download",
+                  class: "btn btn-default",
+                  data: { label: @presenter.file_set_presenters[0].id } do %>
+                <i class="fa fa-file-excel-o"></i>
+            <%= t('hyrax.file_set.show.downloadable_content.office_link') %>
+    <% end %>
+
+
+<% elsif check_string.end_with? ".ppt" or check_string.end_with? ".pptx" %>
+
+
+    <%= link_to hyrax.download_path(@presenter.file_set_presenters) + "&file=pdf",
+                  data: { turbolinks: false },
+                  target: :_blank,
+                  id: "file_download",
+                  class: "btn btn-default",
+                  data: { label: @presenter.file_set_presenters[0].id } do %>
+	<i class="fa fa-file-pdf-o"></i>
+        <%= t('hyrax.file_set.show.downloadable_content.pdf_link') %>
+    <% end %>
+
+    <%= link_to hyrax.download_path(@presenter.file_set_presenters),
+                  data: { turbolinks: false },
+                  target: :_blank,
+                  id: "file_download",
+                  class: "btn btn-default",
+                  data: { label: @presenter.file_set_presenters[0].id } do %>
+                <i class="fa fa-file-powerpoint-o"></i>
+            <%= t('hyrax.file_set.show.downloadable_content.office_link') %>
+    <% end %>
+
+<% else %>
+
+    <%= link_to hyrax.download_path(@presenter.file_set_presenters),
+                  data: { turbolinks: false },
+                  target: :_blank,
+                  id: "file_download",
+                  class: "btn btn-default",
+                  data: { label: @presenter.file_set_presenters[0].id } do %>
+                <i class="fa fa-download"></i>
+            <%= t('hyrax.file_set.show.downloadable_content.default_link') %>
+    <% end %>
+
+<% end %>
+
+</div>
