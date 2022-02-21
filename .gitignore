@@ -32,6 +32,12 @@ lib/import/*
 lib/complete/*
 fits.log
 
+#ignore static files build by jekyll
+public/index.html
+public/404.html
+public/422.html
+public/500.html
+
 # dotenv
 # TODO Comment out this rule if environment variables can be committed
 .env
