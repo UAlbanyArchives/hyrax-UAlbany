@@ -75,7 +75,7 @@ $(document).ready(function(){
 			$("#image_collecting_area").val(data['data']['attributes']['repository_ssm']['attributes']['value'])
 			$("#av_collecting_area").val(data['data']['attributes']['repository_ssm']['attributes']['value'])
 			$("#sip_collecting_area").val(data['data']['attributes']['repository_ssm']['attributes']['value'])
-		  	$("#dao_date_created").val(data['data']['attributes']['unitdate_ssm']['attributes']['value'])
+		  	$("#dao_date_created").val(data['data']['attributes']['normalized_date_ssm']['attributes']['value'])
 		  	$("#dao_title").val(data['data']['attributes']['title_ssm']['attributes']['value'][0].trim())
 		  	$("#arclight_record_lookup").empty()
 			$("#arclight_record_lookup").text("Load Record")
