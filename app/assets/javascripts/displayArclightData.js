@@ -21,10 +21,10 @@ $(document).ready(function(){
 		  			if ( i == 0 ) {
 						$parentLink.children("a").attr("href", $urlRoot)
 					} else {
-						$parentLink.children("a").attr("href", $urlRoot + data['data']['attributes']['parent_ssim'][i])
+						$parentLink.children("a").attr("href", $urlRoot + data['data']['attributes']['parent_ssim']['attributes']['value'][i])
 		  			}
-		  			$parentLink.children("a").text(data['data']['attributes']['parent_unittitles_ssm']['attributes']['value'][i])
-					$("h5.collection-name").text(data['data']['attributes']['collection_ssm']['attributes']['value'][0])
+		  			$parentLink.children("a").text($("<textarea />").html(data['data']['attributes']['parent_unittitles_ssm']['attributes']['value'][i]).text())
+					$("h5.collection-name").text($("<textarea />").html(data['data']['attributes']['collection_ssm']['attributes']['value'][0]).text())
 			  	}
 				$(".arclightRecord").children("a").text(data['data']['attributes']['normalized_title_ssm']['attributes']['value'][0]);
 			  }
