@@ -26,7 +26,7 @@ $(document).ready(function(){
 		  			$parentLink.children("a").text($("<textarea />").html(data['data']['attributes']['parent_unittitles_ssm']['attributes']['value'][i]).text())
 					$("h5.collection-name").text($("<textarea />").html(data['data']['attributes']['collection_ssm']['attributes']['value'][0]).text())
 			  	}
-				$(".arclightRecord").children("a").text(data['data']['attributes']['normalized_title_ssm']['attributes']['value'][0]);
+				$(".arclightRecord").children("a").text($("<textarea />").html(data['data']['attributes']['normalized_title_ssm']['attributes']['value'][0]).text());
 			  }
 			});
 			$('.parent_context').each(function (index, element) {
