@@ -7,75 +7,75 @@ class SolrDocument
   include Hyrax::SolrDocumentBehavior
 
   def archivesspace_record
-    self[ActiveFedora.index_field_mapper.solr_name('archivesspace_record')]
+    self['archivesspace_record_tesim']
   end
 
   def collecting_area
-    self[ActiveFedora.index_field_mapper.solr_name('collecting_area')]
+    self['collecting_area_tesim']
   end
 
   def collection_number
-    self[ActiveFedora.index_field_mapper.solr_name('collection_number')]
+    self['collection_number_tesim']
   end
 
   def collection
-    self[ActiveFedora.index_field_mapper.solr_name('collection')]
+    self['collection_tesim']
   end
 
   def coverage
-    self[ActiveFedora.index_field_mapper.solr_name('coverage')]
+    self['coverage_tesim']
   end
 
   def record_parent
-    self[ActiveFedora.index_field_mapper.solr_name('record_parent')]
+    self['record_parent_tesim']
   end
 
   def accession
-    self[ActiveFedora.index_field_mapper.solr_name('accession')]
+    self['accession_tesim']
   end
 
   def processing_activity
-    self[ActiveFedora.index_field_mapper.solr_name('processing_activity')]
+    self['processing_activity_tesim']
   end
 
   def extent
-    self[ActiveFedora.index_field_mapper.solr_name('extent')]
+    self['extent_tesim']
   end
 
   def physical_dimensions
-    self[ActiveFedora.index_field_mapper.solr_name('physical_dimensions')]
+    self['physical_dimensions_tesim']
   end
 
   def date_digitized
-    self[ActiveFedora.index_field_mapper.solr_name('date_digitized')]
+    self['date_digitized_tesim']
   end
 
   def master_format
-    self[ActiveFedora.index_field_mapper.solr_name('master_format')]
+    self['master_format_tesim']
   end
 
   def donor_contact
-    self[ActiveFedora.index_field_mapper.solr_name('donor_contact')]
+    self['donor_contact_tesim']
   end
 
   def source_location
-    self[ActiveFedora.index_field_mapper.solr_name('source_location')]
+    self['source_location_tesim']
   end
 
   def transfer_method
-    self[ActiveFedora.index_field_mapper.solr_name('transfer_method')]
+    self['transfer_method_tesim']
   end
 
   def transfer_extent
-    self[ActiveFedora.index_field_mapper.solr_name('transfer_extent')]
+    self['transfer_extent_tesim']
   end
 
   def date_posix
-    self[ActiveFedora.index_field_mapper.solr_name('date_posix')]
+    self['date_posix_tesim']
   end
 
   def bagit_profile_identifier
-    self[ActiveFedora.index_field_mapper.solr_name('bagit_profile_identifier')]
+    self['bagit_profile_identifier_tesim']
   end
 
 
