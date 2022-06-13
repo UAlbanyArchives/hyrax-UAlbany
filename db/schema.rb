@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_24_145355) do
+ActiveRecord::Schema.define(version: 2022_06_13_151111) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -306,9 +306,9 @@ ActiveRecord::Schema.define(version: 2018_08_24_145355) do
   end
 
   create_table "single_use_links", force: :cascade do |t|
-    t.string "downloadKey"
+    t.string "download_key"
     t.string "path"
-    t.string "itemId"
+    t.string "item_id"
     t.datetime "expires"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -346,7 +346,7 @@ ActiveRecord::Schema.define(version: 2018_08_24_145355) do
 
   create_table "sipity_entity_specific_responsibilities", force: :cascade do |t|
     t.integer "workflow_role_id", null: false
-    t.string "entity_id", null: false
+    t.integer "entity_id", null: false
     t.integer "agent_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

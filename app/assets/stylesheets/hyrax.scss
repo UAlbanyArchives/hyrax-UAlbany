@@ -14,3 +14,10 @@
 @import "blacklight_gallery/slideshow";
 @import "blacklight_gallery/osd_viewer";
 @import 'hyrax/hyrax';
+
+
+/* Manually added to fix UV position issue with 3.0.0 update */
+
+.viewer-wrapper iframe {
+  position: initial;
+}

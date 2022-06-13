@@ -17,7 +17,7 @@ class LinearFacetedAttributeRenderer < Hyrax::Renderers::AttributeRenderer
   end
 
   def search_field
-    ERB::Util.h(Solrizer.solr_name(options.fetch(:search_field, field), :facetable, type: :string))
+    ERB::Util.h(ActiveFedora.index_field_mapper.solr_name(options.fetch(:search_field, field), :facetable, type: :string))
   end
 
   def li_value(value)

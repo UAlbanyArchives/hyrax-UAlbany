@@ -13,7 +13,7 @@ rerun.txt
 pickle-email-*.html
 
 public/assets/*
-
+public/uv
 public/index.html
 
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
