@@ -55,6 +55,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # hyrax gems
 gem 'hyrax', '3.4.1'
+gem 'tinymce-rails', '~> 5.10'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
