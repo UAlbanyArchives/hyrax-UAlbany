@@ -520,7 +520,7 @@ GEM
     logging (2.3.1)
       little-plugger (~> 1.1)
       multi_json (~> 1.14)
-    loofah (2.18.0)
+    loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -585,7 +585,7 @@ GEM
       nokogiri (~> 1.6)
       rails (>= 5.0, < 6.2)
       rdf
-    racc (1.6.0)
+    racc (1.6.1)
     rack (2.2.3.1)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
