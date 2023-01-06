@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '= 5.2.7.1'
+gem 'rails', '= 5.2.8.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
@@ -73,19 +73,21 @@ gem 'hydra-derivatives', :git => 'https://github.com/gwiedeman/hydra-derivatives
 gem 'browse-everything', '< 1.0.0'
 gem 'riiif', '~> 1.1'
 # Sidekiq for background jobs
-gem 'sidekiq', '~> 6.4.0'
+gem 'sidekiq', '~> 6.4.1'
 # pdfjs for displaying PDF files in views
 gem 'pdfjs_viewer-rails'
 # To manage users in the db
 gem 'hydra-role-management'
 
-gem 'pg'
+gem 'pg', '1.2.3'
+gem 'psych', '~> 3.3.4'
+
 group :production do
     # for virus scanning
     #gem 'clamav'
 end
 
-gem 'blacklight', '~> 6.23.0'
+gem 'blacklight', '~> 6.25.0'
 gem 'hydra-head', '~> 11.0.1'
 
 # these are manual updates for vulnerabilities
