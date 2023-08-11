@@ -18,14 +18,21 @@ namespace :add do
             accessionData = CSV.parse(file, headers: false, col_sep: "\t", skip_blanks: true)
             
             accessionData.each do |row|
-                id = row[1]
+                url = row[0]
+		#id = row[1]
+		# row[1] id isn't safe because of leading 0s
+		id = url.partition('/').last
                 accession = row[2]
-                obj = Dao.find(id)
+		if Dao.exists?(id)
+                    obj = Dao.find(id)
                 
-                unless obj.accession.include? accession
-                    obj.accession = [accession]
-                    obj.save
-		    puts "\t added accession " + accession + " --> " + row[0]
+                    unless obj.accession.include? accession
+                        obj.accession = [accession]
+                        obj.save
+		        puts "\t added accession " + accession + " --> " + row[0]
+                    end
+                else
+                    puts "\t" + id + " not found. May have been deleted."
                 end
             end
                 
