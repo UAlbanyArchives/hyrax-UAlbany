@@ -16,6 +16,7 @@ gem 'puma', '~> 5.6.4'
 gem 'sass-rails', '~> 6.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
+gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -58,12 +59,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # hyrax gems
 gem 'hyrax', '4.0.0'
 gem 'blacklight', '~> 7.33'
+gem 'bootstrap', '~> 4.0'
+gem 'jquery-rails'
 gem 'tinymce-rails', '~> 5.10'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
 gem 'rsolr', '>= 1.0'
-gem 'jquery-rails'
 gem 'devise', '~> 4'
 gem 'devise-guests', '~> 0.6'
 group :development, :test do

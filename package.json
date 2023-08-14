@@ -3,7 +3,10 @@
   "private": true,
   "repository": "git@github.com:samvera/hyrax.git",
   "dependencies": {
+    "@rails/webpacker": "5.4.4",
     "universalviewer": "^3.0.16",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
     "yarn": "^1.22.19"
   },
   "scripts": {
@@ -13,6 +16,7 @@
     "uv-config": "shx cp ./config/uv/uv.html ./public/uv/uv.html & shx cp ./config/uv/uv-config.json ./public/uv/"
   },
   "devDependencies": {
-    "shx": "^0.3.2"
+    "shx": "^0.3.2",
+    "webpack-dev-server": "^3"
   }
 }
