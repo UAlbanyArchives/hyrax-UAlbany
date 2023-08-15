@@ -21,4 +21,5 @@
 
 //= require_tree .
 //= require hyrax
-//= requure search_sources_menu
+//= require 'grenander/headerAffix'
+//= require 'grenander/searchHandler'

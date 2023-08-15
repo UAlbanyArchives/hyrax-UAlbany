@@ -83,6 +83,10 @@ gem 'hydra-role-management'
 gem 'pg', '1.2.3'
 gem 'psych', '~> 3.3.4'
 
+# shared header, footer, etc.
+#gem 'grenander', git: 'https://github.com/UAlbanyArchives/grenander', branch: 'main'
+gem 'grenander', path: '../grenander'
+
 group :production do
     # for virus scanning
     #gem 'clamav'

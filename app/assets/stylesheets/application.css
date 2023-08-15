@@ -19,6 +19,9 @@
  *= require main
  *= require search-source
  *= require customStyling
+ *= require  'grenander/headerNavbar'
+ *= require  'grenander/browseNav'
+ *= require  'grenander/searchSubnav'
  */
 
 body {

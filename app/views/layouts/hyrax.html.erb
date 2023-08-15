@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="<%= t("hyrax.document_language", default: '') %>" prefix="og:http://ogp.me/ns#">
+    <head>
 
     <%= render partial: 'layouts/head_tag_content' %>
     <%= content_for(:head) %>
@@ -24,10 +25,16 @@
 
   <body>
     <!--<div class="skip-to-content">
-      <%= link_to "Skip to Content", "#skip-to-content", data: { turbolinks: false } %>
+      <%# link_to "Skip to Content", "#skip-to-content", data: { turbolinks: false } %>
     </div>-->
-    <%= render 'shared/navbar' %>
+
+    <!-- pre-grenander navbars -->
+    <%# render 'shared/navbar' %>
     <%# content_for(:navbar) %>
+    
+    <%# render partial: 'shared/header_navbar' %>
+    <%= render partial: 'layouts/grenander/navbar' %>
+
     <%= content_for(:precontainer_content) %>
     <div id="content-wrapper" class="container-fluid" role="main">
       <%= render '/flash_msg' %>
@@ -47,7 +54,8 @@
         <%= content_for?(:content) ? yield(:content) : yield %>
 
     </div><!-- /#content-wrapper -->
-    <%= render 'shared/footer' %>
+    <%# render 'shared/footer' %>
+    <%= render partial: 'layouts/grenander/footer' %>
     <%= render 'shared/modal' %>
   </body>
 </html>
