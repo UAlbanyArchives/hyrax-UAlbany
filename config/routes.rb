@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   end
 
   require 'sidekiq/web'
-  authenticate :user, lambda { |u| u.admin? || u.email == "mwolfe@albany.edu" || u.email == "gwiedeman@albany.edu" } do
+  authenticate :user, lambda { |u| u.admin? || u.email == "mwolfe@albany.edu" || u.email == "mslaff@albany.edu" || u.email == "gwiedeman@albany.edu" } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
