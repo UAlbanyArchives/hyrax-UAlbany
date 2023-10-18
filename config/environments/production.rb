@@ -80,6 +80,9 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
+  # Silence Blacklight 8 deprication warnings
+  Deprecation.default_deprecation_behavior = :silence
+
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
