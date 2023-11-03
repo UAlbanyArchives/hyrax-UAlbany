@@ -111,8 +111,8 @@ namespace :import do
                     item_attributes['title'] = [row[9]]
                     item_attributes['description'] = [row[10]] if row[10].respond_to? :length
                     item_attributes['date_created'] = [row[11]]
-                    item_attributes['resource_type'] = [row[12]].strip
-                    item_attributes['license'] = [row[13]].strip
+                    item_attributes['resource_type'] = [row[12].strip]
+                    item_attributes['license'] = [row[13].strip]
                     item_attributes['rights_statement'] = [row[14]] if row[14].respond_to? :length
                     item_attributes['subject'] = row[15].split('|') if row[15].respond_to? :length
                     
