@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+
+csource 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -72,8 +73,8 @@ group :development, :test do
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'
 end
-
-#gem 'browse-everything'
+# to prevent browse-everything > 1 from requiring browse_everything_providers.yml and crashing (https://github.com/samvera/hyrax/issues/4140)
+#gem 'browse-everything', '< 1.0.0'
 gem 'riiif'
 # Sidekiq for background jobs
 gem 'sidekiq', '~> 6.4.1'

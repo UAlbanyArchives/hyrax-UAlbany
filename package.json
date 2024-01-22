@@ -4,6 +4,7 @@
   "repository": "git@github.com:samvera/hyrax.git",
   "dependencies": {
     "@rails/webpacker": "5.4.4",
+    "popper.js": "^1.16.1",
     "universalviewer": "^3.0.16",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",

@@ -5,7 +5,7 @@ body {
 a {
 	color: #642a90;
 }
-
+/*
 a:hover {
 	color: #006c68;
 }
@@ -21,7 +21,7 @@ a:hover {
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary.active:not(:disabled):not(.disabled), .show > .btn-primary.dropdown-toggle {
-	/*color: #46166B;*/
+	color: #46166B;
 	background-color: #eaaa00;
 	border-color: #eaaa00;
 }
@@ -29,11 +29,11 @@ a:hover {
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.active {
-	/*color: #46166B;*/
+	color: #46166B;
 	background-color: #eaaa00;
 	border-color: #eaaa00;
 }
-
+*/
 #main-container {
 	padding-top: 1rem;
 }

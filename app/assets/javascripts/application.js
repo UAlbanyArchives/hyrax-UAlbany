@@ -18,8 +18,10 @@
 //= require jquery.dataTables
 //= require dataTables.bootstrap4
 //= require blacklight/blacklight
+//= require bootstrap
 
 //= require_tree .
 //= require hyrax
+//= require grenander
 //= require 'grenander/headerAffix'
 //= require 'grenander/searchHandler'
