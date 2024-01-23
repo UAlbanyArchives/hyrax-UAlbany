@@ -18,6 +18,7 @@
 //= require jquery.dataTables
 //= require dataTables.bootstrap4
 //= require blacklight/blacklight
+//= require popper
 //= require bootstrap
 
 //= require_tree .

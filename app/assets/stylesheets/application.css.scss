@@ -27,6 +27,56 @@ body {
 	margin-bottom: 0;
 }
 
+.work-type {
+	margin-top: 0px;
+}
+
+.search-source .btn-primary {
+	background-color: #9e68c7 !important;
+	border-color: #9e68c7 !important;
+}
+
+#file_download {
+	min-width: 10rem;
+}
+
+.btn-primary {
+        color: #EBE6F0 !important;
+        background-color: #46166B !important;
+        border-color: #46166B !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary.active:not(:disabled):not(.disabled), .show > .btn-primary.dropdown-toggle {
+        /*color: #46166B;*/
+        background-color: #eaaa00 !important;
+        border-color: #eaaa00 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.active {
+        background-color: #eaaa00 !important;
+        border-color: #eaaa00 !important;
+}
+
+/* Search sources menu collapsed for item show pages even on desktop */
+#search-sidebar .search-sources li.nav-item a {
+	display: none !important;
+}
+#search-sidebar .search-sources li.nav-item a.active {
+	display: block !important;
+}
+#search-sidebar .more-sources {
+	display: block !important;
+	margin-bottom: 1rem;
+}
+#search-sidebar #search-sources-menu {
+	margin-bottom: 0;
+}
+#search-sidebar .shrink-search-options {
+	min-height: 152px;
+}
+
 @media only screen and (min-width: 1500px) {
 	.container {
 		width: 1250px;
@@ -77,8 +127,8 @@ body {
     color: #ffffff !important;
 }*/
 
-.row a {
-    /*color: #642a90;*/
+.row .arclightBreadcrumbs a {
+    color: #642a90;
 }
 
 a:hover {
@@ -97,11 +147,11 @@ a:hover {
     color: #ffffff;
 }
 
-.panel-body a {
+.card-body a {
     color: #642a90;
 }
 
-.panel-body a:hover {
+.card-body a:hover {
     color: #006c68;
 }
 
