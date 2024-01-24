@@ -27,6 +27,14 @@ body {
 	margin-bottom: 0;
 }
 
+.fa-bars:before {
+	content: none !important;
+}
+
+.navbar-toggler-icon {
+	display: block;
+}
+
 .work-type {
 	margin-top: 0px;
 }
@@ -54,7 +62,7 @@ body {
 }
 
 nav.topbar {
-	padding: 0;
+	padding: 0.5rem 1rem;
 }
 
 #facet-panel-collapse .card {
@@ -183,6 +191,9 @@ nav.topbar {
 
 .dashboard ul.nav-pills li.nav-item a {
 	color: #ffffff;
+}
+.dashboard ul.nav-pills li.active a {
+        color: #000000;
 }
 .dashboard ul.nav-pills li.nav-item a:hover {
         color: #000000;
