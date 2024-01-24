@@ -67,7 +67,7 @@ $(document).ready(function(){
 	}
 	if ($(".collection_title")[0]) {
 		$collectionURI = $(".sidebar-collection-title").children("a").attr("href") + "?format=json";
-		console.log($collectionURI);
+		#console.log($collectionURI);
 		$.ajax({
                           type: "GET",
                           dataType: 'json',
@@ -87,12 +87,16 @@ $(document).ready(function(){
 
 /*on the Search Results page, this will reify the parent id(s) with the correct titles using Arclight*/
 $(document).ready(function(){
+	console.log("test");
 	if ($(".dl-horizontal")[0]) {
 		$('dt').each(function (index, element) {
+			console.log(index);
 			if ($(this).text() == "Parent Record(s):") {
 				$(this).next("dd").children("a").each(function (index, element) {
 					$parentID = $(this).text();
+					console.log($parentID);
 					$collectionID = $(this).parent("dd").prev().prev().children("a").text().replace(".", "-");
+					console.log($collectionID);
 					$uri = window.location.protocol + "//" + window.location.hostname + "/description/catalog/" + $collectionID + "aspace_" + $parentID + "?format=json"
 					$.ajax({
 					  type: "GET",

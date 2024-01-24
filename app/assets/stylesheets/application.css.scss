@@ -31,6 +31,28 @@ body {
 	margin-top: 0px;
 }
 
+.documents-gallery .document .document-metadata {
+	margin: 0px;
+}
+
+.documents-gallery .document {
+	background-color: #fff;
+	margin: 1rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 15px 4px;
+}
+
+.documents-gallery .document .img-thumbnail {
+	width: auto;
+	display: block;
+	margin: auto;
+}
+
+.documents-gallery .thumbnail-container, .documents-gallery .caption {
+	width: 100%;
+}
+
 nav.topbar {
 	padding: 0;
 }

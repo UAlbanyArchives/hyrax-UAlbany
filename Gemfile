@@ -94,3 +94,4 @@ group :production do
 end
 
 # these are manual updates for vulnerabilities
+gem 'openseadragon', '>= 0.2.0'
