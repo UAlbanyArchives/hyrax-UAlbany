@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
 	var pathnameEncoded = window.location.pathname.toLowerCase() + window.location.search.toLowerCase();
 	var pathname = decodeURI(pathnameEncoded);
-	#console.log(pathname);
 	var sourcesMenu = document.getElementById("search-sources-menu");
 	if (sourcesMenu) {
 
@@ -11,8 +10,6 @@ document.addEventListener("DOMContentLoaded", function(){
 		} 
 
 		var searchLabel = document.getElementsByClassName("search-intro");
-		#console.log(pathname);
-		#console.log(pathname.startsWith("/books"));
 		if (pathname.startsWith("/search")) {
 			var target = sourcesMenu.getElementsByClassName("search");
 		} else if (pathname.startsWith("/description")) {
