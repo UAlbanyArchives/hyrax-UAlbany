@@ -59,6 +59,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # hyrax gems
 gem 'hyrax', '4.0.0'
 gem 'blacklight', '~> 7.33'
+gem 'blacklight-gallery', '~> 4.4.0'
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
 gem 'tinymce-rails', '~> 5.10'

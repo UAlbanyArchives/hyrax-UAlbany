@@ -31,6 +31,59 @@ body {
 	margin-top: 0px;
 }
 
+nav.topbar {
+	padding: 0;
+}
+
+#facet-panel-collapse .card {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
+}
+
+#sortAndPerPage .search-widgets .dropdown-item {
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+#sortAndPerPage .search-widgets .dropdown-item.active {
+	background-color: #642a90;
+	color: #fff;
+}
+#sortAndPerPage .search-widgets .dropdown-item.active:hover {
+        background-color: #642a90;
+}
+#sortAndPerPage .search-widgets .dropdown-item:hover {
+        background-color: #006c68;
+	color: #fff !important;
+}
+#sortAndPerPage .search-widgets .btn-outline-secondary.active:hover {
+        background-color: #006c68;
+}
+#sortAndPerPage .search-widgets .btn-outline-secondary.active {
+        color: #fff;
+        background-color: #642a90;
+}
+#sortAndPerPage .search-widgets .btn-outline-secondary {
+	color: #642a90;
+	background-color: #fff;
+	border-color: #ccc;
+}
+
+#sortAndPerPage .search-widgets .btn-outline-secondary:hover {
+	background-color: #e6e6e6;
+	border-color: #adadad;
+}
+
+#sortAndPerPage .search-widgets .btn-outline-secondary:active {
+        background-color: #e6e6e6;
+        border-color: #adadad;
+	box-shadow: inset 0 3px 5px rgba(0,0,0,0.125)
+}
+
+#sortAndPerPage .search-widgets .btn-outline-secondary:focus {
+	background-color: #e6e6e6;
+	border-color: #8c8c8c;
+	outline: #642a90;
+}
+
 .search-source .btn-primary {
 	background-color: #9e68c7 !important;
 	border-color: #9e68c7 !important;

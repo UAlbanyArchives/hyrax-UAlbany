@@ -60,6 +60,10 @@ h5.collection-name:hover {
 	margin-top: 0 !important;
 }
 
+.context-panel .desc-title .badge {
+	font-size: 0.75rem;
+}
+
 .context-panel .desc-title * {
 	font-size: 1.5rem;
 }
