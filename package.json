@@ -3,7 +3,12 @@
   "private": true,
   "repository": "git@github.com:samvera/hyrax.git",
   "dependencies": {
+    "@rails/webpacker": "5.4.4",
+    "babel": "^6.23.0",
+    "popper.js": "^1.16.1",
     "universalviewer": "^3.0.16",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
     "yarn": "^1.22.19"
   },
   "scripts": {
@@ -13,6 +18,8 @@
     "uv-config": "shx cp ./config/uv/uv.html ./public/uv/uv.html & shx cp ./config/uv/uv-config.json ./public/uv/"
   },
   "devDependencies": {
-    "shx": "^0.3.2"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "shx": "^0.3.2",
+    "webpack-dev-server": "^3"
   }
 }

@@ -1,0 +1,321 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require dataTables.bootstrap4
+ *= require_self
+ *= require context-panel
+ *= require main
+ *= require customStyling
+ */
+
+@import "grenander/navbar";
+@import "grenander/footer";
+@import 'grenander/main';
+@import 'grenander/search-source';
+
+body {
+	margin-bottom: 0;
+}
+
+.fa-bars:before {
+	content: none !important;
+}
+
+.navbar-toggler-icon {
+	display: block;
+}
+
+.work-type {
+	margin-top: 0px;
+}
+
+.form-group .control-label {
+	font-weight: bold;
+}
+
+.documents-gallery .document .document-metadata {
+	margin: 0px;
+}
+
+.documents-gallery .document {
+	background-color: #fff;
+	margin: 1rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 15px 4px;
+}
+
+.documents-gallery .document .img-thumbnail {
+	width: auto;
+	display: block;
+	margin: auto;
+}
+
+.documents-gallery .thumbnail-container, .documents-gallery .caption {
+	width: 100%;
+}
+
+nav.topbar {
+	padding: 0.5rem 1rem;
+}
+
+#facet-panel-collapse .card {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
+}
+
+#sortAndPerPage .search-widgets .dropdown-item {
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+#sortAndPerPage .search-widgets .dropdown-item.active {
+	background-color: #642a90;
+	color: #fff;
+}
+#sortAndPerPage .search-widgets .dropdown-item.active:hover {
+        background-color: #642a90;
+}
+#sortAndPerPage .search-widgets .dropdown-item:hover {
+        background-color: #006c68;
+	color: #fff !important;
+}
+#sortAndPerPage .search-widgets .btn-outline-secondary.active:hover {
+        background-color: #006c68;
+}
+#sortAndPerPage .search-widgets .btn-outline-secondary.active {
+        color: #fff;
+        background-color: #642a90;
+}
+#sortAndPerPage .search-widgets .btn-outline-secondary {
+	color: #642a90;
+	background-color: #fff;
+	border-color: #ccc;
+}
+
+#sortAndPerPage .search-widgets .btn-outline-secondary:hover {
+	background-color: #e6e6e6;
+	border-color: #adadad;
+}
+
+#sortAndPerPage .search-widgets .btn-outline-secondary:active {
+        background-color: #e6e6e6;
+        border-color: #adadad;
+	box-shadow: inset 0 3px 5px rgba(0,0,0,0.125)
+}
+
+#sortAndPerPage .search-widgets .btn-outline-secondary:focus {
+	background-color: #e6e6e6;
+	border-color: #8c8c8c;
+	outline: #642a90;
+}
+
+.search-source .btn-primary {
+	background-color: #9e68c7 !important;
+	border-color: #9e68c7 !important;
+}
+
+#file_download {
+	min-width: 10rem;
+}
+
+.btn-primary {
+        color: #EBE6F0 !important;
+        background-color: #46166B !important;
+        border-color: #46166B !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary.active:not(:disabled):not(.disabled), .show > .btn-primary.dropdown-toggle {
+        /*color: #46166B;*/
+        background-color: #eaaa00 !important;
+        border-color: #eaaa00 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.active {
+        background-color: #eaaa00 !important;
+        border-color: #eaaa00 !important;
+}
+
+/* Search sources menu collapsed for item show pages even on desktop */
+#search-sidebar .search-sources li.nav-item a {
+	display: none !important;
+}
+#search-sidebar .search-sources li.nav-item a.active {
+	display: block !important;
+}
+#search-sidebar .more-sources {
+	display: block !important;
+	margin-bottom: 1rem;
+}
+#search-sidebar #search-sources-menu {
+	margin-bottom: 0;
+}
+#search-sidebar .shrink-search-options {
+	min-height: 152px;
+}
+
+@media only screen and (min-width: 1500px) {
+	.container {
+		width: 1250px;
+	}
+}
+
+/*.container-fluid {
+	padding: 0;
+}*/
+
+.navbar {
+	border-radius: 0px !important;
+}
+.navbar-dark {
+	margin-bottom: 1rem;
+}
+
+.search-source .btn-primary:hover, .search-source .btn-primary:focus, .search-source .btn-primary:active, .search-source .btn-primary.active {
+	color: #fff;
+}
+.search-source .btn-primary:focus {
+	box-shadow: 0 0 0 0.2rem #46166B;
+}
+
+.search-source .btn-primary {
+	border-top-left-radius: 0;
+ 	border-bottom-left-radius: 0;
+}
+
+.dashboard ul.nav-pills li.nav-item a {
+	color: #ffffff;
+}
+.dashboard ul.nav-pills li.active a {
+        color: #000000;
+}
+.dashboard ul.nav-pills li.nav-item a:hover {
+        color: #000000;
+}
+#masthead {
+	height: 56px;
+	background-color: #46166B !important;
+}
+#masthead #logo {
+	padding-top: 0px !important;
+}
+#masthead #user_utility_links .show span {
+	color: #46166B !important;
+}
+
+/*.btn-primary, .btn-primary * {
+    color: #ffffff !important;
+}*/
+
+.row .arclightBreadcrumbs a {
+    color: #642a90;
+}
+
+.row .document a {
+    color: #642a90;
+}
+
+.row .document a h3 {
+	font-size: 1.5rem;
+}
+
+a:hover {
+	color: #006c68;
+}
+
+#sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle {
+    color: #642a90;
+} 
+
+/*#sort-dropdown .dropdown-toggle, #per_page-dropdown .dropdown-toggle:hover {
+    color: #006c68;
+} */
+
+.footer a {
+    color: #ffffff;
+}
+
+.card-body a {
+    color: #642a90;
+}
+
+.card-body a:hover {
+    color: #006c68;
+}
+
+.btn:focus {
+    outline: 2px auto #eeb211;
+}
+        
+.btn-default {
+    color: #642a90;
+}
+
+.btn-default:hover {
+    color: #006c68;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #642a90;
+}
+
+.pagination > li > a:hover, .pagination > li > span:hover {
+    color: #006c68;
+}
+
+.pagination .active span {
+    background-color: #642a90;
+}
+
+.pagination .active span:hover {
+    background-color: #642a90;
+}
+
+.page_links a {
+    color: #642a90;
+}
+
+.page_links:hover a {
+    color: #006c68;
+}
+
+#startOverLink {
+    color: #642a90;
+}
+
+#startOverLink:hover {
+    color: #006c68;
+}
+
+.btn-info {
+	background-color: #006c68;
+}
+
+body {
+	background: #e2e1e0;
+	font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+footer {
+	background-color: #46166B;
+	margin-top: 25px;
+}
+
+.footRight img {
+	max-width: 300px;
+	margin-bottom: 15px;
+}
+
+.hideme { display: none; }

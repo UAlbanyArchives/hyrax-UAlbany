@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+        mount BrowseEverything::Engine => '/browse'
   
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
   mount Blacklight::Engine => '/'
@@ -36,7 +37,6 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
