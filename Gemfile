@@ -11,7 +11,7 @@ gem 'rails', '= 6.1.7.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
-gem 'puma', '~> 5.6.4'
+gem 'puma', '~> 5.6.8'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 6.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -77,7 +77,7 @@ end
 #gem 'browse-everything'
 gem 'riiif'
 # Sidekiq for background jobs
-gem 'sidekiq', '~> 6.4.1'
+gem 'sidekiq', '~> 6.5.10'
 # To manage users in the db
 gem 'hydra-role-management'
 
