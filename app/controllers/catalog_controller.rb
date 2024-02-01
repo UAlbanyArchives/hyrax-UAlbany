@@ -76,7 +76,10 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
     config.add_facet_field solr_name("accession", :facetable), label: "Accession", limit: 5
-    config.add_facet_field solr_name('member_of_collection_ids', :symbol), limit: 5, label: 'Collections', helper_method: :collection_title_by_id
+    config.add_facet_field solr_name("record_parent", :facetable), label: "Parent", limit: 5
+    config.add_facet_field "archivesspace_record_tesim", label: "Record", limit: 5
+    #config.add_facet_field "archivesspace_record", label: "Record", limit: 5
+    #config.add_facet_field solr_name('member_of_collection_ids', :symbol), limit: 5, label: 'Collections', helper_method: :collection_title_by_id
 
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
