@@ -73,6 +73,7 @@ group :development, :test do
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'
 end
+gem 'json-canonicalization', '~> 0.4.0'
 
 #gem 'browse-everything'
 gem 'riiif'

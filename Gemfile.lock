@@ -465,7 +465,7 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.6.3)
-    json-canonicalization (0.3.2)
+    json-canonicalization (0.4.0)
     json-ld (3.2.5)
       htmlentities (~> 4.3)
       json-canonicalization (~> 0.3, >= 0.3.2)
@@ -996,6 +996,7 @@ DEPENDENCIES
   hyrax (= 4.0.0)
   jbuilder (~> 2.7)
   jquery-rails
+  json-canonicalization (~> 0.4.0)
   listen (>= 3.3)
   openseadragon (>= 0.2.0)
   pg (= 1.2.3)
