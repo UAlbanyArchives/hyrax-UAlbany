@@ -4,8 +4,11 @@
     <% doc_presenter = index_presenter(document) %>
     <% index_fields(document).each do |field_name, field| -%>
       <% if should_render_index_field? document, field %>
+	<% if field_name == "thumbnail_path_ss" || field_name == "system_modified_dtsi" %>
+	<% else %>
           <dt class="col-xs-12 col-sm-2 text-sm-right"><%= render_index_field_label document, field: field_name %></dt>
           <dd class="col-xs-12 col-sm-10"><%= doc_presenter.field_value field  %></dd>
+        <% end %>
       <% end %>
     <% end %>
     </dl>
