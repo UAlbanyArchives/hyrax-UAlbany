@@ -27,7 +27,7 @@
 //= require grenander
 //= require 'grenander/headerAffix'
 
-var saveBtn = document.querySelector('#simple_form #savewidget #with_files_submit');
+var saveBtn = document.querySelector('#with_files_submit');
 if (saveBtn) {
     saveBtn.removeAttribute('disabled');
 }
