@@ -27,3 +27,9 @@
 //= require grenander
 //= require 'grenander/headerAffix'
 //= require 'grenander/searchHandler'
+
+var saveBtn = document.querySelector('#simple_form #savewidget #with_files_submit');
+if (saveBtn) {
+    saveBtn.removeAttribute('disabled');
+}
+
