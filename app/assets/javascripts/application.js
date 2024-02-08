@@ -12,7 +12,6 @@
 //
 // 
 //
-//= require 'hyrax/save_work/uploaded_files'
 // Required by Blacklight
 //= require jquery
 //= require jquery_ujs
