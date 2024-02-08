@@ -12,10 +12,7 @@
 //
 // 
 //
-var saveBtn = document.querySelector('#with_files_submit');
-if (saveBtn) {
-    saveBtn.removeAttribute('disabled');
-}
+//= require 'hyrax/save_work/uploaded_files'
 // Required by Blacklight
 //= require jquery
 //= require jquery_ujs
