@@ -61,7 +61,7 @@ class CatalogController < ApplicationController
     # Added these
     config.add_facet_field solr_name("collecting_area", :facetable), label: "Collecting Area", limit: 5
     config.add_facet_field solr_name("collection", :facetable), label: "Collection", limit: 5
-    #config.add_facet_field solr_name("collection_number", :facetable), label: "Collection ID", limit: 5
+    config.add_facet_field solr_name("collection_number", :facetable), label: "Collection ID", limit: 5
     config.add_facet_field solr_name("resource_type", :facetable), label: "Resource type", limit: 5
     config.add_facet_field solr_name("subject", :facetable), limit: 5
     config.add_facet_field solr_name("creator", :facetable), label: "Creator", limit: 5    
