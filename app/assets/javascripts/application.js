@@ -12,6 +12,10 @@
 //
 // 
 //
+var saveBtn = document.querySelector('#with_files_submit');
+if (saveBtn) {
+    saveBtn.removeAttribute('disabled');
+}
 // Required by Blacklight
 //= require jquery
 //= require jquery_ujs
@@ -26,9 +30,4 @@
 //= require hyrax
 //= require grenander
 //= require 'grenander/headerAffix'
-
-var saveBtn = document.querySelector('#with_files_submit');
-if (saveBtn) {
-    saveBtn.removeAttribute('disabled');
-}
 
