@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "shx": "^0.3.2",
+    "shx": "^0.3.4",
     "webpack-dev-server": "^3"
   }
 }

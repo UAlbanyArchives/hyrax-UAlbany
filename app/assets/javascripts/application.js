@@ -12,7 +12,6 @@
 //
 // 
 //
-// Required by Blacklight
 //= require jquery
 //= require jquery_ujs
 //= require jquery.dataTables
@@ -22,8 +21,8 @@
 //= require popper
 //= require bootstrap
 
-//= require_tree .
 //= require hyrax
+//= require_tree .
 //= require grenander
 //= require 'grenander/headerAffix'
-
+//= require_self

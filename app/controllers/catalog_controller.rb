@@ -78,6 +78,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("record_parent", :facetable), label: "Parent", limit: 5
     config.add_facet_field "archivesspace_record_tesim", label: "Record", limit: 5
     config.add_facet_field "collection_number_tesim", label: "Collection ID", limit: 5
+    config.add_facet_field "collection_number_sim", label: "Collection ID", limit: 5
     #config.add_facet_field "archivesspace_record", label: "Record", limit: 5
     #config.add_facet_field solr_name('member_of_collection_ids', :symbol), limit: 5, label: 'Collections', helper_method: :collection_title_by_id
 
