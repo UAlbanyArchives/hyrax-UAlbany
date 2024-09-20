@@ -15,5 +15,8 @@ Disallow: /
 User-agent: Bytespider
 Disallow: /
 
+User-agent: TurnitinBot
+Disallow: /
+
 User-agent: *
 Disallow: /patron/
