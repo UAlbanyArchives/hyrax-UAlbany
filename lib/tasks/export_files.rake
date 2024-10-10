@@ -20,16 +20,9 @@ namespace :export do
     puts "Export directory created or already exists: #{export_directory}"
 
     # Attempt to find the object using the provided ID
-    object = nil
-    begin
-      object = Dao.find(id_string)
-    rescue ActiveRecord::RecordNotFound
-      begin
-        object = Image.find(id_string)
-      rescue ActiveRecord::RecordNotFound
-        object = Av.find(id_string) rescue nil
-      end
-    end
+    object = Dao.where(id: id_string).first ||
+             Image.where(id: id_string).first ||
+             Av.where(id: id_string).first
 
     unless object
       puts "No object found with ID: #{id_string}"
