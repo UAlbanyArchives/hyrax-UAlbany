@@ -54,8 +54,23 @@ namespace :export do
     end
 
     # Ensure the license and rights_statement fields are included
-    metadata['license'] = dao.attributes['license'].to_s
-    metadata['rights_statement'] = dao.attributes['rights_statement'].to_s
+    # Check if license is an ActiveTriples::Relation and handle accordingly
+    license_value = dao.attributes['license']
+    if license_value.is_a?(ActiveTriples::Relation)
+      items = license_value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+      metadata['license'] = items.length == 1 ? items.first.to_s : items unless items.empty?
+    else
+      metadata['license'] = license_value.nil? || (license_value.is_a?(String) && license_value.empty?) ? "" : license_value.to_s
+    end
+
+    # Check if rights_statement is an ActiveTriples::Relation and handle accordingly
+    rights_statement_value = dao.attributes['rights_statement']
+    if rights_statement_value.is_a?(ActiveTriples::Relation)
+      items = rights_statement_value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+      metadata['rights_statement'] = items.length == 1 ? items.first.to_s : items unless items.empty?
+    else
+      metadata['rights_statement'] = rights_statement_value.nil? || (rights_statement_value.is_a?(String) && rights_statement_value.empty?) ? "" : rights_statement_value.to_s
+    end
 
     # Write Dao attributes to metadata.yml
     metadata_file_path = File.join(export_directory, "metadata.yml")
