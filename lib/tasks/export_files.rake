@@ -1,5 +1,5 @@
 namespace :export do
-  desc "Export files for a given Dao ID with file extension-based subdirectory"
+  desc "Export files for a given Dao, Image, or Av ID with file extension-based subdirectory"
   task export_files: :environment do
     require 'yaml' # Require YAML for writing the metadata file
 
@@ -19,14 +19,19 @@ namespace :export do
     FileUtils.mkdir_p(export_directory) unless Dir.exist?(export_directory)
     puts "Export directory created or already exists: #{export_directory}"
 
-    # Find the Dao object using the provided ID
-    dao = Dao.find(id_string)
+    # Attempt to find the object using the provided ID
+    object = Dao.find_by(id: id_string) || Image.find_by(id: id_string) || Av.find_by(id: id_string)
+
+    unless object
+      puts "No object found with ID: #{id_string}"
+      exit
+    end
 
     # Prepare metadata for YAML
     metadata = {}
 
     # Collect attributes, ensuring to handle RDF::URI and lists
-    dao.attributes.each do |key, value|
+    object.attributes.each do |key, value|
       next if value.nil? || (value.is_a?(String) && value.empty?) ||
                 (value.respond_to?(:empty?) && value.empty?) ||
                 %w[head tail].include?(key) # Skip head and tail fields
@@ -54,7 +59,7 @@ namespace :export do
     end
 
     # Handle the license field
-    license_value = dao.attributes['license']
+    license_value = object.attributes['license']
     if license_value.is_a?(ActiveTriples::Relation)
       items = license_value.to_a.reject(&:nil?)
       metadata['license'] = if items.empty?
@@ -67,7 +72,7 @@ namespace :export do
     end
 
     # Handle the rights_statement field
-    rights_statement_value = dao.attributes['rights_statement']
+    rights_statement_value = object.attributes['rights_statement']
     if rights_statement_value.is_a?(ActiveTriples::Relation)
       items = rights_statement_value.to_a.reject(&:nil?)
       metadata['rights_statement'] = if items.empty?
@@ -79,7 +84,7 @@ namespace :export do
                                        end
     end
 
-    # Write Dao attributes to metadata.yml
+    # Write attributes to metadata.yml
     metadata_file_path = File.join(export_directory, "metadata.yml")
     File.open(metadata_file_path, 'w') do |metadata_file|
       metadata_file.write(metadata.to_yaml)
@@ -87,10 +92,10 @@ namespace :export do
     puts "Metadata written to #{metadata_file_path}"
 
     # Ensure that all file extensions are the same
-    file_extensions = dao.file_sets.map do |file_set|
+    file_extensions = object.file_sets.map do |file_set|
       # Extract the filename from the file set's title attribute
       filename = file_set.attributes["title"][0]
-      
+
       # Debugging output
       puts "Processing filename: #{filename}"
 
@@ -117,10 +122,10 @@ namespace :export do
     puts "Subdirectory for extension '#{file_extension}' created: #{extension_directory}"
 
     # Iterate over each file set
-    dao.file_sets.each do |file_set|
+    object.file_sets.each do |file_set|
       # Get the file name from the file set's title attribute
       filename = file_set.attributes["title"][0]
-      
+
       # Debugging output
       puts "Exporting file: #{filename}"
 
@@ -142,6 +147,6 @@ namespace :export do
       end
     end
 
-    puts "Export completed for Dao ID #{id_string}."
+    puts "Export completed for ID #{id_string}."
   end
 end
