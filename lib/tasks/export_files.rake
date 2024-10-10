@@ -81,7 +81,7 @@ namespace :export do
     # Iterate over each file set
     dao.file_sets.each do |file_set|
       # Get the file name from the file set's title attribute
-      filename = file_set.attributes["title"]
+      filename = file_set.attributes["title"][0]
       
       # Debugging output
       puts "Exporting file: #{filename}"
