@@ -22,16 +22,52 @@ namespace :export do
     # Find the Dao object using the provided ID
     dao = Dao.find(id_string)
 
+    # Prepare metadata for YAML
+    metadata = {}
+
+    # Collect attributes, ensuring to handle RDF::URI and lists
+    dao.attributes.each do |key, value|
+      next if value.nil? || (value.is_a?(String) && value.empty?) || (value.respond_to?(:empty?) && value.empty?)
+
+      # Handle RDF::URI and convert to string
+      if value.is_a?(RDF::URI)
+        metadata[key] = value.to_s
+      elsif value.is_a?(Array)
+        # If it's an array, include it as-is (YAML will handle arrays)
+        metadata[key] = value.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+      else
+        # Convert all other types to string
+        metadata[key] = value.to_s
+      end
+    end
+
+    # Write Dao attributes to metadata.yml
+    metadata_file_path = File.join(export_directory, "metadata.yml")
+    File.open(metadata_file_path, 'w') do |metadata_file|
+      metadata_file.write(metadata.to_yaml)
+    end
+    puts "Metadata written to #{metadata_file_path}"
+
     # Ensure that all file extensions are the same
     file_extensions = dao.file_sets.map do |file_set|
-      # Extract the filename and extension
+      # Extract the filename from the file set's title attribute
       filename = file_set.attributes["title"][0]
+      
+      # Debugging output
+      puts "Processing filename: #{filename}"
+
+      # Validate filename
+      next if filename.nil? || filename.empty?
+
+      # Extract and return the file extension
       File.extname(filename).downcase.sub('.', '') # Get the file extension without the dot
-    end.uniq
+    end.compact.uniq # Remove nil values and get unique extensions
 
     # If there are multiple unique extensions, raise an error
     if file_extensions.length > 1
       raise "Files have different extensions: #{file_extensions.join(', ')}. Unable to continue."
+    elsif file_extensions.empty?
+      raise "No valid filenames found in the file sets."
     end
 
     # Use the common extension for subdirectory naming
@@ -42,18 +78,14 @@ namespace :export do
     FileUtils.mkdir_p(extension_directory) unless Dir.exist?(extension_directory)
     puts "Subdirectory for extension '#{file_extension}' created: #{extension_directory}"
 
-    # Write Dao attributes to metadata.yml
-    metadata_file_path = File.join(export_directory, "metadata.yml")
-    File.open(metadata_file_path, 'w') do |metadata_file|
-      metadata_file.write(dao.attributes.to_yaml)
-    end
-    puts "Metadata written to #{metadata_file_path}"
-
     # Iterate over each file set
     dao.file_sets.each do |file_set|
       # Get the file name from the file set's title attribute
       filename = file_set.attributes["title"]
       
+      # Debugging output
+      puts "Exporting file: #{filename}"
+
       # Get the binary content from the first file in the file set
       if file_set.files.any?
         binary_content = file_set.files[0].content
