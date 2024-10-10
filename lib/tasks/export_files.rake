@@ -27,13 +27,20 @@ namespace :export do
 
     # Collect attributes, ensuring to handle RDF::URI and lists
     dao.attributes.each do |key, value|
-      next if value.nil? || (value.is_a?(String) && value.empty?) || 
+      next if value.nil? || (value.is_a?(String) && value.empty?) ||
                 (value.respond_to?(:empty?) && value.empty?) ||
                 %w[head tail].include?(key) # Skip head and tail fields
 
       # Handle ActiveTriples::Relation (lists) specifically
       if value.is_a?(ActiveTriples::Relation)
-        metadata[key] = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+        # Always treat record_parent as a list
+        if key == 'record_parent'
+          metadata[key] = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+        else
+          # Check if there's only one item in the relation
+          items = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+          metadata[key] = items.length == 1 ? items.first.to_s : items unless items.empty?
+        end
       # Handle RDF::URI and convert to string
       elsif value.is_a?(RDF::URI)
         metadata[key] = value.to_s
@@ -45,6 +52,10 @@ namespace :export do
         metadata[key] = value.to_s
       end
     end
+
+    # Ensure the license and rights_statement fields are included
+    metadata['license'] = dao.attributes['license'].to_s
+    metadata['rights_statement'] = dao.attributes['rights_statement'].to_s
 
     # Write Dao attributes to metadata.yml
     metadata_file_path = File.join(export_directory, "metadata.yml")
