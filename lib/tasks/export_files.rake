@@ -27,10 +27,15 @@ namespace :export do
 
     # Collect attributes, ensuring to handle RDF::URI and lists
     dao.attributes.each do |key, value|
-      next if value.nil? || (value.is_a?(String) && value.empty?) || (value.respond_to?(:empty?) && value.empty?)
+      next if value.nil? || (value.is_a?(String) && value.empty?) || 
+                (value.respond_to?(:empty?) && value.empty?) ||
+                %w[head tail].include?(key) # Skip head and tail fields
 
+      # Handle ActiveTriples::Relation (lists) specifically
+      if value.is_a?(ActiveTriples::Relation)
+        metadata[key] = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
       # Handle RDF::URI and convert to string
-      if value.is_a?(RDF::URI)
+      elsif value.is_a?(RDF::URI)
         metadata[key] = value.to_s
       elsif value.is_a?(Array)
         # If it's an array, include it as-is (YAML will handle arrays)
@@ -51,7 +56,7 @@ namespace :export do
     # Ensure that all file extensions are the same
     file_extensions = dao.file_sets.map do |file_set|
       # Extract the filename from the file set's title attribute
-      filename = file_set.attributes["title"][0]
+      filename = file_set.attributes["title"]
       
       # Debugging output
       puts "Processing filename: #{filename}"
