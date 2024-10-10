@@ -53,23 +53,30 @@ namespace :export do
       end
     end
 
-    # Ensure the license and rights_statement fields are included
-    # Check if license is an ActiveTriples::Relation and handle accordingly
+    # Handle the license field
     license_value = dao.attributes['license']
     if license_value.is_a?(ActiveTriples::Relation)
-      items = license_value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
-      metadata['license'] = items.length == 1 ? items.first.to_s : items unless items.empty?
-    else
-      metadata['license'] = license_value.nil? || (license_value.is_a?(String) && license_value.empty?) ? "" : license_value.to_s
+      items = license_value.to_a.reject(&:nil?)
+      metadata['license'] = if items.empty?
+                               ""
+                             elsif items.length == 1
+                               items.first.to_s
+                             else
+                               items.map(&:to_s)
+                             end
     end
 
-    # Check if rights_statement is an ActiveTriples::Relation and handle accordingly
+    # Handle the rights_statement field
     rights_statement_value = dao.attributes['rights_statement']
     if rights_statement_value.is_a?(ActiveTriples::Relation)
-      items = rights_statement_value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
-      metadata['rights_statement'] = items.length == 1 ? items.first.to_s : items unless items.empty?
-    else
-      metadata['rights_statement'] = rights_statement_value.nil? || (rights_statement_value.is_a?(String) && rights_statement_value.empty?) ? "" : rights_statement_value.to_s
+      items = rights_statement_value.to_a.reject(&:nil?)
+      metadata['rights_statement'] = if items.empty?
+                                         ""
+                                       elsif items.length == 1
+                                         items.first.to_s
+                                       else
+                                         items.map(&:to_s)
+                                       end
     end
 
     # Write Dao attributes to metadata.yml
