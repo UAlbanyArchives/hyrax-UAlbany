@@ -56,7 +56,7 @@ namespace :export do
     # Ensure that all file extensions are the same
     file_extensions = dao.file_sets.map do |file_set|
       # Extract the filename from the file set's title attribute
-      filename = file_set.attributes["title"]
+      filename = file_set.attributes["title"][0]
       
       # Debugging output
       puts "Processing filename: #{filename}"
