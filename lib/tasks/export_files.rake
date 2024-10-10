@@ -25,7 +25,7 @@ namespace :export do
     # Ensure that all file extensions are the same
     file_extensions = dao.file_sets.map do |file_set|
       # Extract the filename and extension
-      filename = file_set.attributes["title"]
+      filename = file_set.attributes["title"][0]
       File.extname(filename).downcase.sub('.', '') # Get the file extension without the dot
     end.uniq
 
