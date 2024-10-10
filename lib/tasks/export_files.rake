@@ -12,13 +12,6 @@ namespace :export do
       exit
     end
 
-    # Define the export directory path
-    export_directory = "/media/Library/ESPYderivatives/exports/#{id_string}"
-
-    # Create the directory if it doesn't exist
-    FileUtils.mkdir_p(export_directory) unless Dir.exist?(export_directory)
-    puts "Export directory created or already exists: #{export_directory}"
-
     # Attempt to find the object using the provided ID
     object = Dao.where(id: id_string).first ||
              Image.where(id: id_string).first ||
@@ -28,6 +21,20 @@ namespace :export do
       puts "No object found with ID: #{id_string}"
       exit
     end
+
+    # Retrieve the collection_number for the object
+    collection_number = object.attributes['collection_number']&.to_s
+    if collection_number.nil? || collection_number.empty?
+      puts "The collection_number field is missing or empty for ID #{id_string}."
+      exit
+    end
+
+    # Define the export directory path based on collection_number
+    export_directory = "/media/Library/ESPYderivatives/exports/#{id_string}/#{collection_number}"
+
+    # Create the collection-specific directory if it doesn't exist
+    FileUtils.mkdir_p(export_directory) unless Dir.exist?(export_directory)
+    puts "Export directory created or already exists: #{export_directory}"
 
     # Prepare metadata for YAML
     metadata = {}
@@ -48,14 +55,11 @@ namespace :export do
           items = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
           metadata[key] = items.length == 1 ? items.first.to_s : items unless items.empty?
         end
-      # Handle RDF::URI and convert to string
       elsif value.is_a?(RDF::URI)
         metadata[key] = value.to_s
       elsif value.is_a?(Array)
-        # If it's an array, include it as-is (YAML will handle arrays)
         metadata[key] = value.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
       else
-        # Convert all other types to string
         metadata[key] = value.to_s
       end
     end
@@ -100,20 +104,14 @@ namespace :export do
 
     # Ensure that all file extensions are the same
     file_extensions = object.file_sets.map do |file_set|
-      # Extract the filename from the file set's title attribute
       filename = file_set.attributes["title"][0]
-
-      # Debugging output
       puts "Processing filename: #{filename}"
 
-      # Validate filename
       next if filename.nil? || filename.empty?
 
-      # Extract and return the file extension
-      File.extname(filename).downcase.sub('.', '') # Get the file extension without the dot
-    end.compact.uniq # Remove nil values and get unique extensions
+      File.extname(filename).downcase.sub('.', '')
+    end.compact.uniq
 
-    # If there are multiple unique extensions, raise an error
     if file_extensions.length > 1
       raise "Files have different extensions: #{file_extensions.join(', ')}. Unable to continue."
     elsif file_extensions.empty?
@@ -124,26 +122,17 @@ namespace :export do
     file_extension = file_extensions.first
     extension_directory = File.join(export_directory, file_extension)
 
-    # Create the subdirectory for the extension
     FileUtils.mkdir_p(extension_directory) unless Dir.exist?(extension_directory)
     puts "Subdirectory for extension '#{file_extension}' created: #{extension_directory}"
 
-    # Iterate over each file set
     object.file_sets.each do |file_set|
-      # Get the file name from the file set's title attribute
       filename = file_set.attributes["title"][0]
-
-      # Debugging output
       puts "Exporting file: #{filename}"
 
-      # Get the binary content from the first file in the file set
       if file_set.files.any?
         binary_content = file_set.files[0].content
-
-        # Define the file path within the extension directory
         file_path = File.join(extension_directory, filename)
 
-        # Write the binary content to the file
         File.open(file_path, 'wb') do |file|
           file.write(binary_content)
         end
@@ -155,18 +144,18 @@ namespace :export do
     end
 
     # Handle and save the thumbnail if it exists
-    if object.thumbnail&.files&.any?
-      thumbnail_content = object.thumbnail.files[0].content
-      thumbnail_path = File.join(export_directory, "thumbnail.jpg")
-
-      File.open(thumbnail_path, 'wb') do |thumbnail_file|
-        thumbnail_file.write(thumbnail_content)
-      end
-
-      puts "Thumbnail saved as: #{thumbnail_path}"
-    else
-      puts "No thumbnail found for object."
-    end
+    #if object.thumbnail&.files&.any?
+    #  thumbnail_content = object.thumbnail.files[0].content
+    #  thumbnail_path = File.join(export_directory, "thumbnail.jpg")
+    #
+    #  File.open(thumbnail_path, 'wb') do |thumbnail_file|
+    #    thumbnail_file.write(thumbnail_content)
+    #  end
+    #
+    #  puts "Thumbnail saved as: #{thumbnail_path}"
+    #else
+    #  puts "No thumbnail found for object."
+    #end
 
     puts "Export completed for ID #{id_string}."
   end
