@@ -60,6 +60,11 @@ namespace :export do
       end
     end
 
+    # Always include record_parent in the metadata as a list
+    record_parent_value = object.attributes['record_parent']
+    metadata['record_parent'] = record_parent_value.is_a?(ActiveTriples::Relation) ? 
+                                  record_parent_value.to_a.reject(&:nil?) : []
+
     # Handle the license field
     license_value = object.attributes['license']
     if license_value.is_a?(ActiveTriples::Relation)
@@ -147,6 +152,20 @@ namespace :export do
       else
         puts "No files found in file set for #{filename}"
       end
+    end
+
+    # Handle and save the thumbnail if it exists
+    if object.thumbnail&.files&.any?
+      thumbnail_content = object.thumbnail.files[0].content
+      thumbnail_path = File.join(export_directory, "thumbnail.jpg")
+
+      File.open(thumbnail_path, 'wb') do |thumbnail_file|
+        thumbnail_file.write(thumbnail_content)
+      end
+
+      puts "Thumbnail saved as: #{thumbnail_path}"
+    else
+      puts "No thumbnail found for object."
     end
 
     puts "Export completed for ID #{id_string}."
