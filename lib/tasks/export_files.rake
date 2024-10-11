@@ -130,19 +130,21 @@ namespace :export do
 
     object.file_sets.each do |file_set|
       filename = file_set.attributes["title"][0]
-      puts "Exporting file: #{filename}"
+      puts "\tExporting file: #{filename}"
 
       if file_set.files.any?
-        binary_content = file_set.files[0].content
+        binary_stream = file_set.files[0].content # Assuming this returns an IO-like stream
         file_path = File.join(extension_directory, filename)
 
         File.open(file_path, 'wb') do |file|
-          file.write(binary_content)
+          binary_stream.each_chunk(1024 * 1024) do |chunk| # Adjust chunk size as needed
+            file.write(chunk)
+          end
         end
 
         puts "Exported file: #{file_path}"
       else
-        puts "No files found in file set for #{filename}"
+        # Handle case where no files are present
       end
     end
 
