@@ -132,13 +132,15 @@ namespace :export do
       filename = file_set.attributes["title"][0]
       puts "\tExporting file: #{filename}"
 
+      require 'tempfile'
       if file_set.files.any?
-        binary_stream = file_set.files[0].content # Assuming this returns an IO-like stream
-        file_path = File.join(extension_directory, filename)
-
-        File.open(file_path, 'wb') do |file|
-          binary_stream.each_chunk(1024 * 1024) do |chunk| # Adjust chunk size as needed
-            file.write(chunk)
+        binary_content = file_set.files[0].content
+        Tempfile.open do |temp|
+          temp.write(binary_content)
+          temp.rewind
+          file_path = File.join(extension_directory, filename)
+          File.open(file_path, 'wb') do |file|
+            IO.copy_stream(temp, file)
           end
         end
 
