@@ -30,7 +30,7 @@ namespace :export do
     end
 
     # Define the export directory path based on collection_number
-    export_directory = "/media/Library/ESPYderivatives/exports/#{collection_number}/#{id_string}/v1"
+    export_directory = "/media/Library/SPE_DAO/#{collection_number}/#{id_string}/v1"
 
     # Create the collection-specific directory if it doesn't exist
     FileUtils.mkdir_p(export_directory) unless Dir.exist?(export_directory)
