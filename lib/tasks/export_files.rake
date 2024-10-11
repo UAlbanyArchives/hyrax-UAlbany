@@ -30,7 +30,7 @@ namespace :export do
     end
 
     # Define the export directory path based on collection_number
-    export_directory = "/media/Library/ESPYderivatives/exports/#{collection_number}/#{id_string}"
+    export_directory = "/media/Library/ESPYderivatives/exports/#{collection_number}/#{id_string}/v1"
 
     # Create the collection-specific directory if it doesn't exist
     FileUtils.mkdir_p(export_directory) unless Dir.exist?(export_directory)
@@ -81,6 +81,9 @@ namespace :export do
                                items.map(&:to_s)
                              end
     end
+
+    # Get thumbnail file_set id
+    metadata['thumbnail_id'] = object.thumbnail.id
 
     # Handle the rights_statement field
     rights_statement_value = object.attributes['rights_statement']
@@ -142,20 +145,6 @@ namespace :export do
         puts "No files found in file set for #{filename}"
       end
     end
-
-    # Handle and save the thumbnail if it exists
-    #if object.thumbnail&.files&.any?
-    #  thumbnail_content = object.thumbnail.files[0].content
-    #  thumbnail_path = File.join(export_directory, "thumbnail.jpg")
-    #
-    #  File.open(thumbnail_path, 'wb') do |thumbnail_file|
-    #    thumbnail_file.write(thumbnail_content)
-    #  end
-    #
-    #  puts "Thumbnail saved as: #{thumbnail_path}"
-    #else
-    #  puts "No thumbnail found for object."
-    #end
 
     puts "Export completed for ID #{id_string}."
   end
