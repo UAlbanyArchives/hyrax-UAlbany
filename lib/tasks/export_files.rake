@@ -17,7 +17,7 @@ namespace :export do
     # Retrieve the objects based on ID or collection ID
     objects = []
     if id_string
-      puts "Exporting object #{id_string}"...
+      puts "Exporting object #{id_string}..."
       # Find the single object by ID
       objects = [Dao.where(id: id_string).first ||
                  Image.where(id: id_string).first ||
@@ -28,7 +28,7 @@ namespace :export do
       end
     elsif collection_id
       # Find all objects by collection_number
-      puts "Exporting all object from collection #{collection_id}"...
+      puts "Exporting all object from collection #{collection_id}..."
       objects += Dao.where(collection_number: collection_id)
       objects += Image.where(collection_number: collection_id)
       objects += Av.where(collection_number: collection_id)
