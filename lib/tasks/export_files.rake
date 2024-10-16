@@ -128,37 +128,45 @@ namespace :export do
 
       # Process each file and sort them into extension-based folders
       object.file_sets.each do |file_set|
-        filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
-        puts "\t\tExporting file: #{filename}"
+        begin
+          filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
+          puts "\t\tExporting file: #{filename}"
 
-        # Save the file_set_id and filename to the hash
-        file_set_data[file_set.id] = filename
+          file_set_data[file_set.id] = filename
 
-        # Determine the extension and create the subdirectory
-        file_extension = File.extname(filename).downcase.sub('.', '')
-        extension_directory = File.join(export_directory, file_extension)
-        FileUtils.mkdir_p(extension_directory)
+          # Determine the extension and create the subdirectory
+          file_extension = File.extname(filename).downcase.sub('.', '')
+          extension_directory = File.join(export_directory, file_extension)
+          FileUtils.mkdir_p(extension_directory)
 
-        if file_set.files.any?
-          file_path = File.join(extension_directory, filename)
+          if file_set.files.any?
+            file_path = File.join(extension_directory, filename)
 
-          # Open the output file for writing
-          File.open(file_path, 'wb') do |file|
-            # Stream each file's content directly to the output file
-            file_set.files.each do |file|
-              # Ensure each file's content is in the correct encoding
-              binary_content = file.content.force_encoding('ASCII-8BIT')
+            # Write in chunks to avoid memory overload
+            File.open(file_path, 'wb') do |output_file|
+              file_set.files.each do |file|
+                binary_content = file.content.force_encoding('ASCII-8BIT')
 
-              # Write the content to the file
-              file.write(binary_content)
+                # Write in chunks to avoid memory overload
+                buffer_size = 1024 * 1024 # 1MB
+                offset = 0
+                while offset < binary_content.bytesize
+                  chunk = binary_content[offset, buffer_size]
+                  output_file.write(chunk)
+                  offset += buffer_size
+                end
+              end
             end
+
+            puts "\t\tExported file: #{file_path}"
+          else
+            puts "\t\tNo files present for file set ID: #{file_set.id}"
           end
-
-          puts "\t\tExported file: #{file_path}"
-        else
-          # Handle case where no files are present
+        rescue StandardError => e
+          puts "\t\tError processing file set ID #{file_set.id}: #{e.message}"
+          # Optionally log the full error for debugging
+          # logger.error(e.backtrace.join("\n"))
         end
-
       end
 
       # Add list of file set ids to metadata.yml
