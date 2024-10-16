@@ -162,6 +162,9 @@ namespace :export do
           else
             puts "\t\tNo files present for file set ID: #{file_set.id}"
           end
+        rescue NoMemoryError => e
+          puts "\t\tMemory error processing file set ID #{file_set.id}: #{e.message}. Skipping this file set."
+          next # Continue to the next file set
         rescue StandardError => e
           puts "\t\tError processing file set ID #{file_set.id}: #{e.message}"
           # Optionally log the full error for debugging
