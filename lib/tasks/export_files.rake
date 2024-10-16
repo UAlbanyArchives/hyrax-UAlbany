@@ -5,7 +5,7 @@ namespace :export do
 
     # Get the ID string or collection ID from the command line
     id_string = ENV['ID']
-    collection_id = ENV['COLLECTION_ID']
+    collection_id = ENV['COLLECTION']
     force_overwrite = ENV['FORCE'] == 'true'
 
     # Ensure either ID or COLLECTION_ID is provided
@@ -28,7 +28,7 @@ namespace :export do
       end
     elsif collection_id
       # Find all objects by collection_number
-      puts "Exporting all object from collection #{collection_id}..."
+      puts "Exporting all objects from collection #{collection_id}..."
       objects += Dao.where(collection_number: collection_id)
       objects += Image.where(collection_number: collection_id)
       objects += Av.where(collection_number: collection_id)
