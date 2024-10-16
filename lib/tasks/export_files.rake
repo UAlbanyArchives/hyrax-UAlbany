@@ -5,6 +5,7 @@ namespace :export do
 
     # Get the ID string from the command line
     id_string = ENV['ID']
+    force_overwrite = ENV['FORCE'] == 'true'
 
     # Ensure an ID was provided
     if id_string.nil?
@@ -32,8 +33,14 @@ namespace :export do
     # Define the export directory path based on collection_number
     export_directory = "/media/Library/SPE_DAO/#{collection_number}/#{id_string}/v1"
 
+    # Check if the export directory already exists and exit unless FORCE is true
+    if Dir.exist?(export_directory) && !force_overwrite
+      puts "Export directory #{export_directory} already exists. Use 'rake export:export_files ID=<id_string> FORCE=true' to overwrite."
+      exit
+    end
+
     # Create the collection-specific directory if it doesn't exist
-    FileUtils.mkdir_p(export_directory) unless Dir.exist?(export_directory)
+    FileUtils.mkdir_p(export_directory)
     puts "Export directory created or already exists: #{export_directory}"
 
     # Prepare metadata for YAML
@@ -125,7 +132,7 @@ namespace :export do
     file_extension = file_extensions.first
     extension_directory = File.join(export_directory, file_extension)
 
-    FileUtils.mkdir_p(extension_directory) unless Dir.exist?(extension_directory)
+    FileUtils.mkdir_p(extension_directory)
     puts "Subdirectory for extension '#{file_extension}' created: #{extension_directory}"
 
     object.file_sets.each do |file_set|
@@ -151,7 +158,6 @@ namespace :export do
         # Handle case where no files are present
       end
     end
-
 
     puts "Export completed for ID #{id_string}."
   end
