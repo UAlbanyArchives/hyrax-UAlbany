@@ -5,10 +5,10 @@ namespace :export do
 
     # Get the ID string or collection ID from the command line
     id_string = ENV['ID']
-    collection_id = ENV['COLLECTION']
+    collection_id = ENV['COLLECTION_ID']
     force_overwrite = ENV['FORCE'] == 'true'
 
-    # Ensure either ID or COLLECTION is provided
+    # Ensure either ID or COLLECTION_ID is provided
     if id_string.nil? && collection_id.nil?
       puts "Please provide an ID by running 'rake export:export_files ID=<id_string>' or a collection ID with 'COLLECTION_ID=<collection_id>'"
       exit
@@ -17,6 +17,7 @@ namespace :export do
     # Retrieve the objects based on ID or collection ID
     objects = []
     if id_string
+      puts "Exporting object #{id_string}"...
       # Find the single object by ID
       objects = [Dao.where(id: id_string).first ||
                  Image.where(id: id_string).first ||
@@ -27,6 +28,7 @@ namespace :export do
       end
     elsif collection_id
       # Find all objects by collection_number
+      puts "Exporting all object from collection #{collection_id}"...
       objects += Dao.where(collection_number: collection_id)
       objects += Image.where(collection_number: collection_id)
       objects += Av.where(collection_number: collection_id)
@@ -51,13 +53,13 @@ namespace :export do
 
       # Check if the export directory already exists and exit unless FORCE is true
       if Dir.exist?(export_directory) && !force_overwrite
-        puts "Export directory #{export_directory} already exists. Use 'rake export:export_files ID=<id_string> FORCE=true' to overwrite."
+        puts "\tExport directory #{export_directory} already exists. Use 'rake export:export_files ID=<id_string> FORCE=true' to overwrite."
         next
       end
 
       # Create the collection-specific directory if it doesn't exist
       FileUtils.mkdir_p(export_directory)
-      puts "Export directory created or already exists: #{export_directory}"
+      puts "\tExport directory created or already exists: #{export_directory}"
 
       # Prepare metadata for YAML
       metadata = {}
@@ -126,39 +128,22 @@ namespace :export do
       File.open(metadata_file_path, 'w') do |metadata_file|
         metadata_file.write(metadata.to_yaml)
       end
-      puts "Metadata written to #{metadata_file_path}"
+      puts "\tMetadata written to #{metadata_file_path}"
 
-      # Ensure that all file extensions are the same
-      file_extensions = object.file_sets.map do |file_set|
-        filename = file_set.attributes["title"][0]
-        puts "Processing filename: #{filename}"
-
-        next if filename.nil? || filename.empty?
-
-        File.extname(filename).downcase.sub('.', '')
-      end.compact.uniq
-
-      if file_extensions.length > 1
-        raise "Files have different extensions: #{file_extensions.join(', ')}. Unable to continue."
-      elsif file_extensions.empty?
-        raise "No valid filenames found in the file sets."
-      end
-
-      # Use the common extension for subdirectory naming
-      file_extension = file_extensions.first
-      extension_directory = File.join(export_directory, file_extension)
-
-      FileUtils.mkdir_p(extension_directory)
-      puts "Subdirectory for extension '#{file_extension}' created: #{extension_directory}"
-
+      # Process each file and sort them into extension-based folders
       object.file_sets.each do |file_set|
         filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
-        puts "\tExporting file: #{filename}"
+        puts "\t\tExporting file: #{filename}"
+
+        # Determine the extension and create the subdirectory
+        file_extension = File.extname(filename).downcase.sub('.', '')
+        extension_directory = File.join(export_directory, file_extension)
+        FileUtils.mkdir_p(extension_directory)
 
         require 'tempfile'
         if file_set.files.any?
           binary_content = file_set.files[0].content.force_encoding('ASCII-8BIT')
-          file_path = File.join(extension_directory, filename)  # Move file_path here
+          file_path = File.join(extension_directory, filename)
 
           Tempfile.open('tempfile', encoding: 'ASCII-8BIT') do |temp|
             temp.write(binary_content)
@@ -169,13 +154,13 @@ namespace :export do
             end
           end
 
-          puts "Exported file: #{file_path}"  # Now accessible
+          puts "\t\tExported file: #{file_path}"
         else
           # Handle case where no files are present
         end
       end
 
-      puts "Export completed for ID #{id_string}."
+      puts "\tExport completed for ID #{id_string}."
     end
   end
 end
