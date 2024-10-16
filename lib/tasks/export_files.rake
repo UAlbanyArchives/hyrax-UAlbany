@@ -129,26 +129,26 @@ namespace :export do
     puts "Subdirectory for extension '#{file_extension}' created: #{extension_directory}"
 
     object.file_sets.each do |file_set|
-      filename = file_set.attributes["title"][0]
-      puts "\tExporting file: #{filename}"
+    filename = file_set.attributes["title"][0]
+    puts "\tExporting file: #{filename}"
 
-      require 'tempfile'
-      if file_set.files.any?
-        binary_content = file_set.files[0].content
-        Tempfile.open do |temp|
-          temp.write(binary_content)
-          temp.rewind
-          file_path = File.join(extension_directory, filename)
-          File.open(file_path, 'wb') do |file|
-            IO.copy_stream(temp, file)
-          end
+    require 'tempfile'
+    if file_set.files.any?
+      binary_content = file_set.files[0].content.force_encoding('ASCII-8BIT')
+      Tempfile.open do |temp|
+        temp.write(binary_content)
+        temp.rewind
+        file_path = File.join(extension_directory, filename)
+        File.open(file_path, 'wb') do |file|
+          IO.copy_stream(temp, file)
         end
-
-        puts "Exported file: #{file_path}"
-      else
-        # Handle case where no files are present
       end
+
+      puts "Exported file: #{file_path}"
+    else
+      # Handle case where no files are present
     end
+  end
 
     puts "Export completed for ID #{id_string}."
   end
