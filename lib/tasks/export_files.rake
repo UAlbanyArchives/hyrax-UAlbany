@@ -124,12 +124,15 @@ namespace :export do
                                          end
       end
 
-      file_set_ids = []
+      file_set_data = {} # Hash to store file_set_id => filename pairs
+
       # Process each file and sort them into extension-based folders
       object.file_sets.each do |file_set|
-        file_set_ids << file_set.id
         filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
         puts "\t\tExporting file: #{filename}"
+
+        # Save the file_set_id and filename to the hash
+        file_set_data[file_set.id] = filename
 
         # Determine the extension and create the subdirectory
         file_extension = File.extname(filename).downcase.sub('.', '')
@@ -157,7 +160,7 @@ namespace :export do
       end
 
       # Add list of file set ids to metadata.yml
-      metadata["file_sets"] = file_set_ids
+      metadata["file_sets"] = file_set_data
 
       # Write attributes to metadata.yml
       metadata_file_path = File.join(export_directory, "metadata.yml")
