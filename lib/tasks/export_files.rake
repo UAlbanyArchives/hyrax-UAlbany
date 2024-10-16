@@ -64,11 +64,15 @@ namespace :export do
       # Prepare metadata for YAML
       metadata = {}
 
+      # List of metadata fields to exclude from metadata.yml
+      exclude_fields = ["depositor", "access_control_id", "admin_set_id"]
+
       # Collect attributes, ensuring to handle RDF::URI and lists
       object.attributes.each do |key, value|
         next if value.nil? || (value.is_a?(String) && value.empty?) ||
                   (value.respond_to?(:empty?) && value.empty?) ||
-                  %w[head tail].include?(key) # Skip head and tail fields
+                  %w[head tail].include?(key) ||
+                  exclude_fields.include?(key)
 
         # Handle ActiveTriples::Relation (lists) specifically
         if value.is_a?(ActiveTriples::Relation)
@@ -107,9 +111,6 @@ namespace :export do
                                end
       end
 
-      # Get thumbnail file_set id
-      metadata['thumbnail_id'] = object.thumbnail.id
-
       # Handle the rights_statement field
       rights_statement_value = object.attributes['rights_statement']
       if rights_statement_value.is_a?(ActiveTriples::Relation)
@@ -123,15 +124,10 @@ namespace :export do
                                          end
       end
 
-      # Write attributes to metadata.yml
-      metadata_file_path = File.join(export_directory, "metadata.yml")
-      File.open(metadata_file_path, 'w') do |metadata_file|
-        metadata_file.write(metadata.to_yaml)
-      end
-      puts "\tMetadata written to #{metadata_file_path}"
-
+      file_set_ids = []
       # Process each file and sort them into extension-based folders
       object.file_sets.each do |file_set|
+        file_set_ids << file_set.id
         filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
         puts "\t\tExporting file: #{filename}"
 
@@ -159,6 +155,16 @@ namespace :export do
           # Handle case where no files are present
         end
       end
+
+      # Add list of file set ids to metadata.yml
+      metadata["file_sets"] = file_set_ids
+
+      # Write attributes to metadata.yml
+      metadata_file_path = File.join(export_directory, "metadata.yml")
+      File.open(metadata_file_path, 'w') do |metadata_file|
+        metadata_file.write(metadata.to_yaml)
+      end
+      puts "\tMetadata written to #{metadata_file_path}"
 
       puts "\tExport completed for ID #{id_string}."
     end
