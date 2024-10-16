@@ -135,22 +135,23 @@ namespace :export do
       require 'tempfile'
       if file_set.files.any?
         binary_content = file_set.files[0].content.force_encoding('ASCII-8BIT')
-        
+        file_path = File.join(extension_directory, filename)  # Move file_path here
+
         Tempfile.open('tempfile', encoding: 'ASCII-8BIT') do |temp|
           temp.write(binary_content)
           temp.rewind
-          file_path = File.join(extension_directory, filename)
           
           File.open(file_path, 'wb') do |file|
             IO.copy_stream(temp, file)
           end
         end
 
-        puts "Exported file: #{file_path}"
+        puts "Exported file: #{file_path}"  # Now accessible
       else
         # Handle case where no files are present
       end
     end
+
 
     puts "Export completed for ID #{id_string}."
   end
