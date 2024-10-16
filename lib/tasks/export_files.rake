@@ -139,17 +139,18 @@ namespace :export do
         extension_directory = File.join(export_directory, file_extension)
         FileUtils.mkdir_p(extension_directory)
 
-        require 'tempfile'
         if file_set.files.any?
-          binary_content = file_set.files[0].content.force_encoding('ASCII-8BIT')
           file_path = File.join(extension_directory, filename)
 
-          Tempfile.open('tempfile', encoding: 'ASCII-8BIT') do |temp|
-            temp.write(binary_content)
-            temp.rewind
-            
-            File.open(file_path, 'wb') do |file|
-              IO.copy_stream(temp, file)
+          # Open the output file for writing
+          File.open(file_path, 'wb') do |file|
+            # Stream each file's content directly to the output file
+            file_set.files.each do |file|
+              # Ensure each file's content is in the correct encoding
+              binary_content = file.content.force_encoding('ASCII-8BIT')
+
+              # Write the content to the file
+              file.write(binary_content)
             end
           end
 
@@ -157,6 +158,7 @@ namespace :export do
         else
           # Handle case where no files are present
         end
+
       end
 
       # Add list of file set ids to metadata.yml
