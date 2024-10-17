@@ -135,6 +135,14 @@ namespace :export do
           # Determine the extension
           file_extension = File.extname(filename).downcase.sub('.', '')
 
+          # Build file set dict for metadata.yml
+          file_set_data[file_set.id] = filename
+          # Set original_file and original_format
+          if file_set.id == object.representative_id
+            metadata["original_file"] = filename
+            metadata["original_format"] = file_extension
+          end
+
           # Skip video files except for .webm
           next if %w[mov mp4 avi].include?(file_extension) # add more extensions if needed
           # Continue with webm files or other types
@@ -143,14 +151,6 @@ namespace :export do
           # Create the subdirectory for the extension
           extension_directory = File.join(export_directory, file_extension)
           FileUtils.mkdir_p(extension_directory)
-
-          # Build file set dict for metadata.yml
-          file_set_data[file_set.id] = filename
-          # Set original_file and original_format
-          if file_set.id == object.representative_id
-            metadata["original_file"] = filename
-            metadata["original_format"] = file_extension
-          end
 
           if file_set.files.any?
             file_path = File.join(extension_directory, filename)
