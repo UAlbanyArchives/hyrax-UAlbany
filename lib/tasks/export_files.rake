@@ -130,16 +130,23 @@ namespace :export do
       object.file_sets.each do |file_set|
         begin
           filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
+          puts "\t\tProcessing file: #{filename}"
+
+          # Determine the extension
+          file_extension = File.extname(filename).downcase.sub('.', '')
+
+          # Skip video files except for .webm
+          next if %w[mov mp4 avi].include?(file_extension) # add more extensions if needed
+          # Continue with webm files or other types
           puts "\t\tExporting file: #{filename}"
 
-          # Determine the extension and create the subdirectory
-          file_extension = File.extname(filename).downcase.sub('.', '')
+          # Create the subdirectory for the extension
           extension_directory = File.join(export_directory, file_extension)
           FileUtils.mkdir_p(extension_directory)
 
           # Build file set dict for metadata.yml
           file_set_data[file_set.id] = filename
-          # set original_file and original_format
+          # Set original_file and original_format
           if file_set.id == object.representative_id
             metadata["original_file"] = filename
             metadata["original_format"] = file_extension
@@ -177,6 +184,7 @@ namespace :export do
           # logger.error(e.backtrace.join("\n"))
         end
       end
+
 
       # Add list of file set ids to metadata.yml
       metadata["file_sets"] = file_set_data
