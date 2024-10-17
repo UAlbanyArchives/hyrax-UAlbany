@@ -132,12 +132,18 @@ namespace :export do
           filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
           puts "\t\tExporting file: #{filename}"
 
-          file_set_data[file_set.id] = filename
-
           # Determine the extension and create the subdirectory
           file_extension = File.extname(filename).downcase.sub('.', '')
           extension_directory = File.join(export_directory, file_extension)
           FileUtils.mkdir_p(extension_directory)
+
+          # Build file set dict for metadata.yml
+          file_set_data[file_set.id] = filename
+          # set original_file and original_format
+          if file_set.id == object.representative_id
+            metadata["original_file"] = filename
+            metadata["original_format"] = file_extension
+          end
 
           if file_set.files.any?
             file_path = File.join(extension_directory, filename)
