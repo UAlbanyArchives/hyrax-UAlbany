@@ -67,6 +67,14 @@ namespace :export do
       # List of metadata fields to exclude from metadata.yml
       exclude_fields = ["depositor", "access_control_id", "admin_set_id"]
 
+      # Field renaming map
+      rename_fields = {
+        "subject" => "subjects"
+      }
+
+      # Fields to place at the bottom of the YAML
+      bottom_fields = ["date_uploaded", "date_modified"]
+
       # Collect attributes, ensuring to handle RDF::URI and lists
       object.attributes.each do |key, value|
         next if value.nil? || (value.is_a?(String) && value.empty?) ||
@@ -74,24 +82,31 @@ namespace :export do
                   %w[head tail].include?(key) ||
                   exclude_fields.include?(key)
 
-        # Handle ActiveTriples::Relation (lists) specifically
-        if value.is_a?(ActiveTriples::Relation)
-          # Always treat record_parent as a list
+        # Rename the key if needed
+        key = rename_fields[key] || key
+
+        case value
+        when ActiveTriples::Relation
+          items = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
           if key == 'record_parent'
-            metadata[key] = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+            metadata[key] = items # Always treat record_parent as a list
           else
-            # Check if there's only one item in the relation
-            items = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
             metadata[key] = items.length == 1 ? items.first.to_s : items unless items.empty?
           end
-        elsif value.is_a?(RDF::URI)
+        when RDF::URI
           metadata[key] = value.to_s
-        elsif value.is_a?(Array)
-          metadata[key] = value.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+        when Array
+          filtered_items = value.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+          metadata[key] = filtered_items unless filtered_items.empty?
         else
           metadata[key] = value.to_s
         end
       end
+
+      # Move the fields in `bottom_fields` to the bottom of the YAML
+      metadata = metadata.sort_by { |key, _| bottom_fields.include?(key) ? 1 : 0 }.to_h
+
+
 
       # Always include record_parent in the metadata as a list
       record_parent_value = object.attributes['record_parent']
