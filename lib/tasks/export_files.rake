@@ -40,6 +40,7 @@ namespace :export do
       begin
         # Perform Solr query
         solr_url = "https://solr2020.library.albany.edu:8984/solr/hyrax/select?q=collection_number_sim:#{collection_id}&rows=#{rows}&start=#{start}&wt=json"
+        puts "\tQuerying page #{start} for #{collection_id}..."
         uri = URI(solr_url)
         response = Net::HTTP.get(uri)
         json_response = JSON.parse(response)
@@ -64,12 +65,22 @@ namespace :export do
 
     # Iterate over each object ID and perform the export
     object_ids.each do |object_id|
-      # Try to find the object in order of preference
-      object = Dao.find(object_id) || Image.find(object_id) || Av.find(object_id)
+      object = nil
 
-      if object.nil?
-        puts "No object found with ID: #{object_id}"
-        next
+      # Try to find the object in the order of Dao, Image, Av
+      begin
+        object = Dao.find(object_id)
+      rescue ActiveFedora::ObjectNotFoundError, ActiveFedora::ModelMismatch
+        begin
+          object = Image.find(object_id)
+        rescue ActiveFedora::ObjectNotFoundError, ActiveFedora::ModelMismatch
+          begin
+            object = Av.find(object_id)
+          rescue ActiveFedora::ObjectNotFoundError
+            puts "No object found with ID: #{object_id}"
+            #next
+          end
+        end
       end
 
       # Retrieve the collection_number and ID for the object
@@ -91,7 +102,6 @@ namespace :export do
 
       # Create the collection-specific directory if it doesn't exist
       FileUtils.mkdir_p(export_directory)
-      puts "\tExport directory created or already exists: #{export_directory}"
 
       # Prepare metadata for YAML
       metadata = {}
@@ -176,7 +186,7 @@ namespace :export do
       object.file_sets.each do |file_set|
         begin
           filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
-          puts "\t\tProcessing file: #{filename}"
+          puts "\tProcessing file: #{filename}"
 
           # Determine the extension
           file_extension = File.extname(filename).downcase.sub('.', '')
@@ -196,7 +206,7 @@ namespace :export do
           # Skip video files except for .webm
           next if %w[mov mp4 avi].include?(file_extension) # add more extensions if needed
           # Continue with webm files or other types
-          puts "\t\tExporting file: #{filename}"
+          puts "\tExporting file: #{filename}"
 
           # Create the subdirectory for the extension
           extension_directory = File.join(export_directory, file_extension)
@@ -221,7 +231,7 @@ namespace :export do
               end
             end
 
-            puts "\t\tFile exported: #{file_path}"
+            puts "\tFile exported: #{file_path}"
             successful_exports += 1
 
             if collection_id
@@ -231,12 +241,12 @@ namespace :export do
             end
           end
         rescue NoMemoryError => e
-          puts "\t\tMemory error processing file set ID #{file_set.id}: #{e.message}. Skipping this file set."
+          puts "\tMemory error processing file set ID #{file_set.id}: #{e.message}. Skipping this file set."
           #next # Continue to the next file set
         rescue StandardError => e
-          puts "\t\tError processing file set ID #{file_set.id}: #{e.message}"
+          puts "\tError processing file set ID #{file_set.id}: #{e.message}"
         rescue => e
-          puts "\t\tError processing file #{file_set.id}: #{e.message}"
+          puts "\tError processing file #{file_set.id}: #{e.message}"
           next
         end
       end
@@ -247,7 +257,7 @@ namespace :export do
       # Write metadata to YAML
       metadata_file = File.join(export_directory, 'metadata.yml')
       File.open(metadata_file, 'w') { |f| f.write(metadata.to_yaml) }
-      #puts "\t\tMetadata exported to: #{metadata_file}"
+      #puts "\tMetadata exported to: #{metadata_file}"
 
     end # End of object_ids.each
     if collection_id
