@@ -98,11 +98,7 @@ namespace :export do
         case value
         when ActiveTriples::Relation
           items = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
-          if key == 'record_parent'
-            metadata[key] = items # Always treat record_parent as a list
-          else
-            metadata[key] = items.length == 1 ? items.first.to_s : items unless items.empty?
-          end
+          metadata[key] = items.length == 1 ? items.first.to_s : items unless items.empty?
         when RDF::URI
           metadata[key] = value.to_s
         when Array
@@ -115,13 +111,6 @@ namespace :export do
 
       # Move the fields in `bottom_fields` to the bottom of the YAML
       metadata = metadata.sort_by { |key, _| bottom_fields.include?(key) ? 1 : 0 }.to_h
-
-
-
-      # Always include record_parent in the metadata as a list
-      record_parent_value = object.attributes['record_parent']
-      metadata['record_parent'] = record_parent_value.is_a?(ActiveTriples::Relation) ? 
-                                    record_parent_value.to_a.reject(&:nil?) : []
 
       # Handle the license field
       license_value = object.attributes['license']
