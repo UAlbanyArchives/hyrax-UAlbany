@@ -1,7 +1,8 @@
 namespace :export do
   desc "Export files for a given Dao, Image, or Av ID or for a collection ID with file extension-based subdirectory"
   task export_files: :environment do
-    require 'yaml' # Require YAML for writing the metadata file
+    require 'yaml'
+    require 'fileutils'
 
     # Get the ID string or collection ID from the command line
     id_string = ENV['ID']
@@ -13,6 +14,10 @@ namespace :export do
       puts "Please provide an ID by running 'rake export:export_files ID=<id_string>' or a collection ID with 'COLLECTION_ID=<collection_id>'"
       exit
     end
+
+    log_directory = "/media/Library/ESPYderivatives/export_logs"
+    FileUtils.mkdir_p(log_directory)
+    log_file = File.join(log_directory, "#{collection_id || id_string}.log")
 
     # Retrieve the objects based on ID or collection ID
     objects = []
@@ -36,7 +41,10 @@ namespace :export do
         puts "No objects found with collection ID: #{collection_id}"
         exit
       end
+      File.open(log_file, 'a') { |f| f.puts("Attempting to export #{objects.count} objects for #{collection_id}...") }
     end
+
+    successful_exports = 0
 
     # Iterate over each object and perform the export
     objects.each do |object|
@@ -65,11 +73,13 @@ namespace :export do
       metadata = {}
 
       # List of metadata fields to exclude from metadata.yml
-      exclude_fields = ["depositor", "access_control_id", "admin_set_id"]
+      exclude_fields = ["depositor", "access_control_id", "admin_set_id", "lease_id", "embargo_id"]
 
       # Field renaming map
       rename_fields = {
-        "subject" => "subjects"
+        "subject" => "subjects",
+        "accession" => "preservation_package",
+        "date_uploaded" => "date_published"
       }
 
       # Fields to place at the bottom of the YAML
@@ -154,8 +164,12 @@ namespace :export do
           file_set_data[file_set.id] = filename
           # Set original_file and original_format
           if file_set.id == object.representative_id
-            metadata["original_file"] = filename
-            metadata["original_format"] = file_extension
+            metadata["original_file_legacy"] = filename
+            if filename.downcase.end_with?('.pdf')
+              metadata["behavior"] = "paged"
+            else
+              metadata["behavior"] = "individuals"
+            end
           end
 
           # Skip video files except for .webm
@@ -209,9 +223,16 @@ namespace :export do
       File.open(metadata_file_path, 'w') do |metadata_file|
         metadata_file.write(metadata.to_yaml)
       end
-      puts "\tMetadata written to #{metadata_file_path}"
+      #puts "\tMetadata written to #{metadata_file_path}"
 
       puts "\tExport completed for ID #{id_string}."
+      successful_exports += 1
+      File.open(log_file, 'a') { |f| f.puts("\t --> Exported #{id_string} successfully") }
+    end
+    if collection_id
+      File.open(log_file, 'a') do |f|
+        f.puts("Total successful exports: #{successful_exports} for collection #{collection_id}")
+      end
     end
   end
 end
