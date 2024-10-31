@@ -208,29 +208,53 @@ namespace :export do
             # Write in chunks to avoid memory overload
             File.open(file_path, 'wb') do |output_file|
               file_set.files.each do |file|
-                binary_content = file.content
-                output_file.write(binary_content)
+                binary_content = file.content.force_encoding('ASCII-8BIT')
+
+                # Write in chunks to avoid memory overload
+                buffer_size = 1024 * 1024 # 1MB
+                offset = 0
+                while offset < binary_content.bytesize
+                  chunk = binary_content[offset, buffer_size]
+                  output_file.write(chunk)
+                  offset += buffer_size
+                end
               end
             end
 
             puts "\t\tFile exported: #{file_path}"
             successful_exports += 1
-          end
 
+            if collection_id
+              File.open(log_file, 'a') { |f| f.puts("\t --> Exported #{id_string} successfully") }
+            else
+              File.open(log_file, 'a') { |f| f.puts("Exported #{id_string} successfully") }
+            end
+          end
+        rescue NoMemoryError => e
+          puts "\t\tMemory error processing file set ID #{file_set.id}: #{e.message}. Skipping this file set."
+          #next # Continue to the next file set
+        rescue StandardError => e
+          puts "\t\tError processing file set ID #{file_set.id}: #{e.message}"
         rescue => e
           puts "\t\tError processing file #{file_set.id}: #{e.message}"
           next
         end
       end
 
+      # Add list of file set ids to metadata.yml
+      metadata["file_sets"] = file_set_data
+
       # Write metadata to YAML
       metadata_file = File.join(export_directory, 'metadata.yml')
       File.open(metadata_file, 'w') { |f| f.write(metadata.to_yaml) }
-      puts "\t\tMetadata exported to: #{metadata_file}"
+      #puts "\t\tMetadata exported to: #{metadata_file}"
 
     end # End of object_ids.each
-
+    if collection_id
+      File.open(log_file, 'a') do |f|
+        f.puts("Total successful exports: #{successful_exports} for collection #{collection_id}")
+      end
+    end
     puts "Successfully exported #{successful_exports} files."
-    puts "Logs are saved in: #{log_file}" if log_file
   end
 end
