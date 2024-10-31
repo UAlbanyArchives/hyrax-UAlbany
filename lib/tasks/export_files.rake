@@ -29,7 +29,7 @@ namespace :export do
         puts "No object found with ID: #{id_string}"
         exit
       end
-      log_file = File.join(log_directory, "#{object.attributes['collection_number']}.log")
+      log_file = File.join(log_directory, "#{objects[0].attributes['collection_number']}.log")
     elsif collection_id
       # Find all objects by collection_number
       puts "Exporting all objects from collection #{collection_id}..."
