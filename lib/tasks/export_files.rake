@@ -73,7 +73,7 @@ namespace :export do
       metadata = {}
 
       # List of metadata fields to exclude from metadata.yml
-      exclude_fields = ["record_parent", "depositor", "access_control_id", "admin_set_id", "lease_id", "embargo_id"]
+      exclude_fields = ["record_parent", "thumbnail_id", "depositor", "access_control_id", "admin_set_id", "lease_id", "embargo_id"]
 
       # Field renaming map
       rename_fields = {
