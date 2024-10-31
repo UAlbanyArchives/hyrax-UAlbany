@@ -83,7 +83,7 @@ namespace :export do
       }
 
       # Fields to place at the bottom of the YAML
-      bottom_fields = ["date_uploaded", "date_modified"]
+      bottom_fields = ["date_published", "date_modified"]
 
       # Collect attributes, ensuring to handle RDF::URI and lists
       object.attributes.each do |key, value|
@@ -125,28 +125,36 @@ namespace :export do
 
       # Handle the license field
       license_value = object.attributes['license']
-      if license_value.is_a?(ActiveTriples::Relation)
-        items = license_value.to_a.reject(&:nil?)
-        metadata['license'] = if items.empty?
-                                 ""
-                               elsif items.length == 1
-                                 items.first.to_s
-                               else
-                                 items.map(&:to_s)
-                               end
-      end
+      license_items = license_value.is_a?(ActiveTriples::Relation) ? license_value.to_a.reject(&:nil?) : []
+      metadata['license'] = if license_items.empty?
+                               ""
+                             elsif license_items.length == 1
+                               license_items.first.to_s
+                             else
+                               license_items.map(&:to_s)
+                             end
 
-      # Handle the rights_statement field
-      rights_statement_value = object.attributes['rights_statement']
-      if rights_statement_value.is_a?(ActiveTriples::Relation)
-        items = rights_statement_value.to_a.reject(&:nil?)
-        metadata['rights_statement'] = if items.empty?
-                                           ""
-                                         elsif items.length == 1
-                                           items.first.to_s
+      # Replace "http://" with "https://" in license, if it exists
+      metadata['license'] = metadata['license'].gsub('http://', 'https://') unless metadata['license'].nil?
+
+      # If license is empty or "Unknown", handle rights_statement; otherwise, skip it
+      if metadata['license'].empty? || metadata['license'] == "Unknown"
+        # Set default license to "Unknown" if it’s empty
+        metadata['license'] = "Unknown" if metadata['license'].empty?
+
+        # Handle the rights_statement field
+        rights_statement_value = object.attributes['rights_statement']
+        rights_statement_items = rights_statement_value.is_a?(ActiveTriples::Relation) ? rights_statement_value.to_a.reject(&:nil?) : []
+        metadata['rights_statement'] = if rights_statement_items.empty?
+                                           "https://rightsstatements.org/page/InC-EDU/1.0/"
+                                         elsif rights_statement_items.length == 1
+                                           rights_statement_items.first.to_s
                                          else
-                                           items.map(&:to_s)
+                                           rights_statement_items.map(&:to_s)
                                          end
+
+        # Replace "http://" with "https://" in rights_statement, if it exists
+        metadata['rights_statement'] = metadata['rights_statement'].gsub('http://', 'https://') unless metadata['rights_statement'].nil?
       end
 
       file_set_data = {} # Hash to store file_set_id => filename pairs
