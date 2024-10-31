@@ -65,7 +65,7 @@ namespace :export do
     # Iterate over each object ID and perform the export
     object_ids.each do |object_id|
       # Try to find the object in order of preference
-      object = Dao.find_by(id: object_id) || Image.find_by(id: object_id) || Av.find_by(id: object_id)
+      object = Dao.find(object_id) || Image.find(object_id) || Av.find(object_id)
 
       if object.nil?
         puts "No object found with ID: #{object_id}"
