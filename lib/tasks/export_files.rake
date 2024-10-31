@@ -31,7 +31,9 @@ namespace :export do
       log_file = File.join(log_directory, "#{id_string}.log")
     elsif collection_id
       # Query Solr for all object IDs by collection_number
+      log_file = File.join(log_directory, "#{collection_id}.log")
       puts "Exporting all objects from collection #{collection_id}..."
+      File.open(log_file, 'a') { |f| f.puts("Exporting all objects from collection #{collection_id}...") }
       start = 0
       rows = 100
 
@@ -55,7 +57,6 @@ namespace :export do
         puts "No objects found with collection ID: #{collection_id}"
         exit
       end
-      log_file = File.join(log_directory, "#{collection_id}.log")
       File.open(log_file, 'a') { |f| f.puts("Attempting to export #{object_ids.count} objects for #{collection_id}...") }
     end
 
