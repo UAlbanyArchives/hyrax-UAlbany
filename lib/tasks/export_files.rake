@@ -17,8 +17,6 @@ namespace :export do
 
     log_directory = "/media/Library/ESPYderivatives/export_logs"
     FileUtils.mkdir_p(log_directory)
-    log_file = File.join(log_directory, "#{collection_id || id_string}.log")
-
     # Retrieve the objects based on ID or collection ID
     objects = []
     if id_string
@@ -31,6 +29,7 @@ namespace :export do
         puts "No object found with ID: #{id_string}"
         exit
       end
+      log_file = File.join(log_directory, "#{object.attributes['collection_number']}.log")
     elsif collection_id
       # Find all objects by collection_number
       puts "Exporting all objects from collection #{collection_id}..."
@@ -41,6 +40,7 @@ namespace :export do
         puts "No objects found with collection ID: #{collection_id}"
         exit
       end
+      log_file = File.join(log_directory, "#{collection_id}.log")
       File.open(log_file, 'a') { |f| f.puts("Attempting to export #{objects.count} objects for #{collection_id}...") }
     end
 
