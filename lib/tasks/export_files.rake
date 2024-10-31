@@ -19,25 +19,19 @@ namespace :export do
 
     log_directory = "/media/Library/ESPYderivatives/export_logs"
     FileUtils.mkdir_p(log_directory)
-    
-    objects = []
+
+    # Initialize an array to hold object IDs
+    object_ids = []
     log_file = nil
 
     if id_string
       puts "Exporting object #{id_string}..."
-      # Find the single object by ID
-      objects = [Dao.where(id: id_string).first ||
-                 Image.where(id: id_string).first ||
-                 Av.where(id: id_string).first].compact
-      if objects.empty?
-        puts "No object found with ID: #{id_string}"
-        exit
-      end
-      log_file = File.join(log_directory, "#{objects[0].attributes['collection_number']}.log")
+      # Add the single object ID to the array
+      object_ids << id_string
+      log_file = File.join(log_directory, "#{id_string}.log")
     elsif collection_id
       # Query Solr for all object IDs by collection_number
       puts "Exporting all objects from collection #{collection_id}..."
-      objects_ids = []
       start = 0
       rows = 100
 
@@ -51,27 +45,32 @@ namespace :export do
         docs = json_response['response']['docs']
 
         # Collect IDs from the current page
-        objects_ids += docs.map { |doc| doc['id'] }
+        object_ids += docs.map { |doc| doc['id'] }
 
         # Paginate if more results exist
         start += rows
       end while start < num_found
 
-      # Fetch objects from the database using the collected IDs
-      objects = Dao.where(id: objects_ids) + Image.where(id: objects_ids) + Av.where(id: objects_ids)
-
-      if objects.empty?
+      if object_ids.empty?
         puts "No objects found with collection ID: #{collection_id}"
         exit
       end
       log_file = File.join(log_directory, "#{collection_id}.log")
-      File.open(log_file, 'a') { |f| f.puts("Attempting to export #{objects.count} objects for #{collection_id}...") }
+      File.open(log_file, 'a') { |f| f.puts("Attempting to export #{object_ids.count} objects for #{collection_id}...") }
     end
 
     successful_exports = 0
 
-    # Iterate over each object and perform the export
-    objects.each do |object|
+    # Iterate over each object ID and perform the export
+    object_ids.each do |object_id|
+      # Try to find the object in order of preference
+      object = Dao.find_by(id: object_id) || Image.find_by(id: object_id) || Av.find_by(id: object_id)
+
+      if object.nil?
+        puts "No object found with ID: #{object_id}"
+        next
+      end
+
       # Retrieve the collection_number and ID for the object
       collection_number = object.attributes['collection_number']&.to_s
       id_string = object.id.to_s
@@ -228,7 +227,7 @@ namespace :export do
       File.open(metadata_file, 'w') { |f| f.write(metadata.to_yaml) }
       puts "\t\tMetadata exported to: #{metadata_file}"
 
-    end # End of objects.each
+    end # End of object_ids.each
 
     puts "Successfully exported #{successful_exports} files."
     puts "Logs are saved in: #{log_file}" if log_file
