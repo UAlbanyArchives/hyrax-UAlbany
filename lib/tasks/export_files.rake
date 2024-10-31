@@ -224,7 +224,11 @@ namespace :export do
 
       puts "\tExport completed for ID #{id_string}."
       successful_exports += 1
-      File.open(log_file, 'a') { |f| f.puts("\t --> Exported #{id_string} successfully") }
+      if collection_id
+        File.open(log_file, 'a') { |f| f.puts("\t --> Exported #{id_string} successfully") }
+      else
+        File.open(log_file, 'a') { |f| f.puts("Exported #{id_string} successfully") }
+      end
     end
     if collection_id
       File.open(log_file, 'a') do |f|
