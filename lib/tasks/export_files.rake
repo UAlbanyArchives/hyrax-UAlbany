@@ -3,6 +3,8 @@ namespace :export do
   task export_files: :environment do
     require 'yaml'
     require 'fileutils'
+    require 'net/http'
+    require 'json'
 
     # Get the ID string or collection ID from the command line
     id_string = ENV['ID']
@@ -17,8 +19,10 @@ namespace :export do
 
     log_directory = "/media/Library/ESPYderivatives/export_logs"
     FileUtils.mkdir_p(log_directory)
-    # Retrieve the objects based on ID or collection ID
+    
     objects = []
+    log_file = nil
+
     if id_string
       puts "Exporting object #{id_string}..."
       # Find the single object by ID
@@ -31,11 +35,31 @@ namespace :export do
       end
       log_file = File.join(log_directory, "#{objects[0].attributes['collection_number']}.log")
     elsif collection_id
-      # Find all objects by collection_number
+      # Query Solr for all object IDs by collection_number
       puts "Exporting all objects from collection #{collection_id}..."
-      objects += Dao.where(collection_number: collection_id)
-      objects += Image.where(collection_number: collection_id)
-      objects += Av.where(collection_number: collection_id)
+      objects_ids = []
+      start = 0
+      rows = 100
+
+      begin
+        # Perform Solr query
+        solr_url = "https://solr2020.library.albany.edu:8984/solr/hyrax/select?q=collection_number_sim:#{collection_id}&rows=#{rows}&start=#{start}&wt=json"
+        uri = URI(solr_url)
+        response = Net::HTTP.get(uri)
+        json_response = JSON.parse(response)
+        num_found = json_response['response']['numFound']
+        docs = json_response['response']['docs']
+
+        # Collect IDs from the current page
+        objects_ids += docs.map { |doc| doc['id'] }
+
+        # Paginate if more results exist
+        start += rows
+      end while start < num_found
+
+      # Fetch objects from the database using the collected IDs
+      objects = Dao.where(id: objects_ids) + Image.where(id: objects_ids) + Av.where(id: objects_ids)
+
       if objects.empty?
         puts "No objects found with collection ID: #{collection_id}"
         exit
@@ -184,56 +208,29 @@ namespace :export do
             # Write in chunks to avoid memory overload
             File.open(file_path, 'wb') do |output_file|
               file_set.files.each do |file|
-                binary_content = file.content.force_encoding('ASCII-8BIT')
-
-                # Write in chunks to avoid memory overload
-                buffer_size = 1024 * 1024 # 1MB
-                offset = 0
-                while offset < binary_content.bytesize
-                  chunk = binary_content[offset, buffer_size]
-                  output_file.write(chunk)
-                  offset += buffer_size
-                end
+                binary_content = file.content
+                output_file.write(binary_content)
               end
             end
 
-            puts "\t\tExported file: #{file_path}"
-          else
-            puts "\t\tNo files present for file set ID: #{file_set.id}"
+            puts "\t\tFile exported: #{file_path}"
+            successful_exports += 1
           end
-        rescue NoMemoryError => e
-          puts "\t\tMemory error processing file set ID #{file_set.id}: #{e.message}. Skipping this file set."
-          next # Continue to the next file set
-        rescue StandardError => e
-          puts "\t\tError processing file set ID #{file_set.id}: #{e.message}"
-          # Optionally log the full error for debugging
-          # logger.error(e.backtrace.join("\n"))
+
+        rescue => e
+          puts "\t\tError processing file #{file_set.id}: #{e.message}"
+          next
         end
       end
 
+      # Write metadata to YAML
+      metadata_file = File.join(export_directory, 'metadata.yml')
+      File.open(metadata_file, 'w') { |f| f.write(metadata.to_yaml) }
+      puts "\t\tMetadata exported to: #{metadata_file}"
 
-      # Add list of file set ids to metadata.yml
-      metadata["file_sets"] = file_set_data
+    end # End of objects.each
 
-      # Write attributes to metadata.yml
-      metadata_file_path = File.join(export_directory, "metadata.yml")
-      File.open(metadata_file_path, 'w') do |metadata_file|
-        metadata_file.write(metadata.to_yaml)
-      end
-      #puts "\tMetadata written to #{metadata_file_path}"
-
-      puts "\tExport completed for ID #{id_string}."
-      successful_exports += 1
-      if collection_id
-        File.open(log_file, 'a') { |f| f.puts("\t --> Exported #{id_string} successfully") }
-      else
-        File.open(log_file, 'a') { |f| f.puts("Exported #{id_string} successfully") }
-      end
-    end
-    if collection_id
-      File.open(log_file, 'a') do |f|
-        f.puts("Total successful exports: #{successful_exports} for collection #{collection_id}")
-      end
-    end
+    puts "Successfully exported #{successful_exports} files."
+    puts "Logs are saved in: #{log_file}" if log_file
   end
 end
