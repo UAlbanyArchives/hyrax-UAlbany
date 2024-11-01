@@ -155,7 +155,7 @@ namespace :export do
             begin
               # Retrieve the binary content directly
               file_set.files.each do |file|
-                if object.encoding == Encoding::ASCII_8BIT
+                if file.content.encoding == Encoding::ASCII_8BIT
                   # Write the binary content to a file in binary mode
                   File.open(file_path, 'wb') do |output_file|
                     output_file.write(file.content)
