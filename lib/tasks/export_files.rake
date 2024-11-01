@@ -111,8 +111,7 @@ namespace :export do
 
       license_value = object.attributes['license']
       license_items = license_value.is_a?(ActiveTriples::Relation) ? license_value.to_a.reject(&:nil?) : []
-      metadata['license'] = license_items.empty? ? "" : license_items.map(&:to_s)
-      metadata['license'] = metadata['license'].gsub('http://', 'https://') unless metadata['license'].nil?
+      metadata['license'] = license_items.empty? ? "" : license_items.map(&:to_s).join(", ")
 
       if metadata['license'].empty? || metadata['license'] == "Unknown"
         metadata['license'] = "Unknown" if metadata['license'].empty?
@@ -157,13 +156,15 @@ namespace :export do
               # Retrieve the binary content directly
               file_set.files.each do |file|
                 # Ensure we retrieve the binary content correctly
+                puts file.content.class
                 binary_content = file.content
 
                 # If binary_content is a String, it may need encoding conversion
-                if binary_content.is_a?(String)
-                  # Handle encoding issues if necessary
-                  binary_content = binary_content.force_encoding('ASCII-8BIT') if binary_content.encoding != Encoding::BINARY
-                end
+                #if binary_content.is_a?(String)
+                #  # Handle encoding issues if necessary
+                #  binary_content = binary_content.force_encoding('ASCII-8BIT') if binary_content.encoding != Encoding::BINARY
+                #end
+                puts binary_content.class
 
                 # Write the binary content to a file in binary mode
                 File.open(file_path, 'wb') do |output_file|
