@@ -81,9 +81,9 @@ namespace :export do
       FileUtils.mkdir_p(export_directory)
 
       metadata = {}
-      exclude_fields = ["record_parent", "thumbnail_id", "depositor", "access_control_id", "admin_set_id", "lease_id", "embargo_id"]
-      rename_fields = { "subject" => "subjects", "accession" => "preservation_package", "date_uploaded" => "date_published" }
-      bottom_fields = ["date_published", "date_modified"]
+      exclude_fields = ["record_parent", "thumbnail_id", "depositor", "access_control_id", "admin_set_id", "lease_id", "embargo_id", "date_modified"]
+      rename_fields = { "subject" => "subjects", "accession" => "preservation_package", "date_uploaded" => "date_published", "date_created" => "date_display" }
+      bottom_fields = ["date_published"]
 
       object.attributes.each do |key, value|
         next if value.nil? || (value.is_a?(String) && value.empty?) ||
@@ -107,6 +107,7 @@ namespace :export do
         end
       end
 
+      metadata["date_structured"] = ""
       metadata = metadata.sort_by { |key, _| bottom_fields.include?(key) ? 1 : 0 }.to_h
 
       license_value = object.attributes['license']
@@ -118,8 +119,8 @@ namespace :export do
 
         rights_statement_value = object.attributes['rights_statement']
         rights_statement_items = rights_statement_value.is_a?(ActiveTriples::Relation) ? rights_statement_value.to_a.reject(&:nil?) : []
-        metadata['rights_statement'] = rights_statement_items.empty? ? "https://rightsstatements.org/page/InC-EDU/1.0/" : rights_statement_items.map(&:to_s)
-        metadata['rights_statement'] = metadata['rights_statement'].gsub('http://', 'https://') unless metadata['rights_statement'].nil?
+        metadata['rights_statement'] = rights_statement_items.empty? ? "https://rightsstatements.org/page/InC-EDU/1.0/" : rights_statement_items.map(&:to_s).join(', ')
+        metadata['rights_statement'] = metadata['rights_statement'].gsub('http://', 'https://')
       end
 
       file_set_data = {}
