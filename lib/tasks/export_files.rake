@@ -126,7 +126,7 @@ namespace :export do
       file_set_data = {}
       object.file_sets.each do |file_set|
         begin
-          filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
+          filename = file_set.attributes["title"][0]#.dup.force_encoding('ASCII-8BIT')
           puts "\tProcessing file: #{filename}"
 
           # Determine the extension
