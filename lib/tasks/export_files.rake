@@ -154,20 +154,8 @@ namespace :export do
             # Only rescue errors in this specific file-writing block
             begin
               # Retrieve the binary content directly
-              file_set.files.each do |file|
-                # Ensure we retrieve the binary content correctly
-                binary_content = file.content
-
-                # If binary_content is a String, check its encoding
-                if binary_content.is_a?(String)
-                  # Convert to ASCII-8BIT if it's not already binary
-                  binary_content = binary_content.force_encoding('ASCII-8BIT') unless binary_content.encoding == Encoding::BINARY
-                end
-
-                # Write the binary content to a file in binary mode
-                File.open(file_path, 'wb') do |output_file|
-                  output_file.write(binary_content)
-                end
+              File.open(file_path, 'wb') do |output_file|
+                output_file.write(file_set[0].content)
               end
 
               puts "\tFile exported: #{file_path}"
@@ -187,6 +175,9 @@ namespace :export do
           end
         end
       end
+
+      # Add list of file set ids to metadata.yml
+      metadata["file_sets"] = file_set_data
       
       # Write attributes to metadata.yml
       metadata_file_path = File.join(export_directory, "metadata.yml")
