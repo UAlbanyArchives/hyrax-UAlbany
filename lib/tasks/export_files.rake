@@ -92,7 +92,7 @@ namespace :export do
       end
 
       # Define the export directory path based on collection_number and ID
-      export_directory = "/media/Library/SPE_DAO/#{collection_number}/#{id_string}/v1"
+      export_directory = "/media/Library/SPE_DAO/#{collection_number}/#{id_string}"
 
       # Check if the export directory already exists and exit unless FORCE is true
       if Dir.exist?(export_directory) && !force_overwrite
