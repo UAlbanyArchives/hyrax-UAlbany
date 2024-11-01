@@ -156,19 +156,17 @@ namespace :export do
               # Retrieve the binary content directly
               file_set.files.each do |file|
                 # Ensure we retrieve the binary content correctly
-                #puts file.content.class
-                #binary_content = file.content
+                binary_content = file.content
 
-                # If binary_content is a String, it may need encoding conversion
-                #if binary_content.is_a?(String)
-                #  # Handle encoding issues if necessary
-                #  binary_content = binary_content.force_encoding('ASCII-8BIT') if binary_content.encoding != Encoding::BINARY
-                #end
-                #puts binary_content.class
+                # If binary_content is a String, check its encoding
+                if binary_content.is_a?(String)
+                  # Convert to ASCII-8BIT if it's not already binary
+                  binary_content = binary_content.force_encoding('ASCII-8BIT') unless binary_content.encoding == Encoding::BINARY
+                end
 
                 # Write the binary content to a file in binary mode
-                File.open(file_path, 'w') do |output_file|
-                  output_file.write(file.content)
+                File.open(file_path, 'wb') do |output_file|
+                  output_file.write(binary_content)
                 end
               end
 
@@ -189,6 +187,16 @@ namespace :export do
           end
         end
       end
+      
+      # Write attributes to metadata.yml
+      metadata_file_path = File.join(export_directory, "metadata.yml")
+      File.open(metadata_file_path, 'w') do |metadata_file|
+        metadata_file.write(metadata.to_yaml)
+      end
+      puts "\tMetadata written to #{metadata_file_path}"
+
+      puts "\tExport completed for ID #{id_string}."
+
     end
   end
 end
