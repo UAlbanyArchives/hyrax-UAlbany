@@ -154,16 +154,13 @@ namespace :export do
 
             # Only rescue errors in this specific file-writing block
             begin
-              # Open the output file in binary mode
-              File.open(file_path, 'wb') do |output_file|
-                file_set.files.each do |file|
-                  binary_content = file.content
+              # Retrieve the binary content directly and write it all at once
+              file_set.files.each do |file|
+                binary_content = file.content
 
-                  # Stream directly in chunks if content length is available
-                  buffer_size = 1024 * 1024 # 1MB
-                  while chunk = binary_content.read(buffer_size)
-                    output_file.write(chunk)
-                  end
+                # Write the binary content to a file in binary mode directly
+                File.open(file_path, 'wb') do |output_file|
+                  output_file.write(binary_content)
                 end
               end
 
