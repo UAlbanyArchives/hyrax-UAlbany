@@ -172,10 +172,10 @@ namespace :export do
 
             rescue NoMemoryError => e
               puts "Memory error encountered while exporting #{filename}: #{e.message}. Skipping file."
-              next
+              #next
             rescue StandardError => e
               puts "Error encountered while exporting #{filename}: #{e.message}. Skipping file."
-              next
+              #next
             end
           end
         end
