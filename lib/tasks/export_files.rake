@@ -154,8 +154,13 @@ namespace :export do
             # Only rescue errors in this specific file-writing block
             begin
               # Retrieve the binary content directly
-              File.open(file_path, 'wb') do |output_file|
-                output_file.write(file_set[0].content)
+              file_set.files.each do |file|
+                if object.encoding == Encoding::ASCII_8BIT
+                  # Write the binary content to a file in binary mode
+                  File.open(file_path, 'wb') do |output_file|
+                    output_file.write(file.content)
+                  end
+                end
               end
 
               puts "\tFile exported: #{file_path}"
