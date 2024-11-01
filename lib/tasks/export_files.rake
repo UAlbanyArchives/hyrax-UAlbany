@@ -154,11 +154,18 @@ namespace :export do
 
             # Only rescue errors in this specific file-writing block
             begin
-              # Retrieve the binary content directly and write it all at once
+              # Retrieve the binary content directly
               file_set.files.each do |file|
+                # Ensure we retrieve the binary content correctly
                 binary_content = file.content
 
-                # Write the binary content to a file in binary mode directly
+                # If binary_content is a String, it may need encoding conversion
+                if binary_content.is_a?(String)
+                  # Handle encoding issues if necessary
+                  binary_content = binary_content.force_encoding('ASCII-8BIT') if binary_content.encoding != Encoding::BINARY
+                end
+
+                # Write the binary content to a file in binary mode
                 File.open(file_path, 'wb') do |output_file|
                   output_file.write(binary_content)
                 end
@@ -173,6 +180,9 @@ namespace :export do
 
             rescue NoMemoryError => e
               puts "Memory error encountered while exporting #{filename}: #{e.message}. Skipping file."
+              next
+            rescue StandardError => e
+              puts "Error encountered while exporting #{filename}: #{e.message}. Skipping file."
               next
             end
           end
