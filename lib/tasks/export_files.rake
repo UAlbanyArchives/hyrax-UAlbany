@@ -6,12 +6,10 @@ namespace :export do
     require 'net/http'
     require 'json'
 
-    # Get the ID string or collection ID from the command line
     id_string = ENV['ID']
     collection_id = ENV['COLLECTION']
     force_overwrite = ENV['FORCE'] == 'true'
 
-    # Ensure either ID or COLLECTION_ID is provided
     if id_string.nil? && collection_id.nil?
       puts "Please provide an ID by running 'rake export:export_files ID=<id_string>' or a collection ID with 'COLLECTION_ID=<collection_id>'"
       exit
@@ -20,37 +18,25 @@ namespace :export do
     log_directory = "/media/Library/ESPYderivatives/export_logs"
     FileUtils.mkdir_p(log_directory)
 
-    # Initialize an array to hold object IDs
     object_ids = []
     log_file = nil
 
     if id_string
-      puts "Exporting object #{id_string}..."
-      # Add the single object ID to the array
       object_ids << id_string
       log_file = File.join(log_directory, "#{id_string}.log")
     elsif collection_id
-      # Query Solr for all object IDs by collection_number
       log_file = File.join(log_directory, "#{collection_id}.log")
-      puts "Exporting all objects from collection #{collection_id}..."
-      File.open(log_file, 'a') { |f| f.puts("Exporting all objects from collection #{collection_id}...") }
       start = 0
       rows = 100
 
       begin
-        # Perform Solr query
         solr_url = "https://solr2020.library.albany.edu:8984/solr/hyrax/select?q=collection_number_sim:#{collection_id}&rows=#{rows}&start=#{start}&wt=json"
-        puts "\tQuerying page #{start} for #{collection_id}..."
         uri = URI(solr_url)
         response = Net::HTTP.get(uri)
         json_response = JSON.parse(response)
         num_found = json_response['response']['numFound']
         docs = json_response['response']['docs']
-
-        # Collect IDs from the current page
         object_ids += docs.map { |doc| doc['id'] }
-
-        # Paginate if more results exist
         start += rows
       end while start < num_found
 
@@ -58,16 +44,12 @@ namespace :export do
         puts "No objects found with collection ID: #{collection_id}"
         exit
       end
-      File.open(log_file, 'a') { |f| f.puts("Attempting to export #{object_ids.count} objects for #{collection_id}...") }
     end
 
     successful_exports = 0
 
-    # Iterate over each object ID and perform the export
     object_ids.each do |object_id|
       object = nil
-
-      # Try to find the object in the order of Dao, Image, Av
       begin
         object = Dao.find(object_id)
       rescue ActiveFedora::ObjectNotFoundError, ActiveFedora::ModelMismatch
@@ -78,12 +60,11 @@ namespace :export do
             object = Av.find(object_id)
           rescue ActiveFedora::ObjectNotFoundError
             puts "No object found with ID: #{object_id}"
-            #next
+            next
           end
         end
       end
 
-      # Retrieve the collection_number and ID for the object
       collection_number = object.attributes['collection_number']&.to_s
       id_string = object.id.to_s
       if collection_number.nil? || collection_number.empty?
@@ -91,42 +72,25 @@ namespace :export do
         next
       end
 
-      # Define the export directory path based on collection_number and ID
       export_directory = "/media/Library/SPE_DAO/#{collection_number}/#{id_string}"
-
-      # Check if the export directory already exists and exit unless FORCE is true
       if Dir.exist?(export_directory) && !force_overwrite
         puts "\tExport directory #{export_directory} already exists. Use 'rake export:export_files ID=<id_string> FORCE=true' to overwrite."
         next
       end
 
-      # Create the collection-specific directory if it doesn't exist
       FileUtils.mkdir_p(export_directory)
 
-      # Prepare metadata for YAML
       metadata = {}
-
-      # List of metadata fields to exclude from metadata.yml
       exclude_fields = ["record_parent", "thumbnail_id", "depositor", "access_control_id", "admin_set_id", "lease_id", "embargo_id"]
-
-      # Field renaming map
-      rename_fields = {
-        "subject" => "subjects",
-        "accession" => "preservation_package",
-        "date_uploaded" => "date_published"
-      }
-
-      # Fields to place at the bottom of the YAML
+      rename_fields = { "subject" => "subjects", "accession" => "preservation_package", "date_uploaded" => "date_published" }
       bottom_fields = ["date_published", "date_modified"]
 
-      # Collect attributes, ensuring to handle RDF::URI and lists
       object.attributes.each do |key, value|
         next if value.nil? || (value.is_a?(String) && value.empty?) ||
                   (value.respond_to?(:empty?) && value.empty?) ||
                   %w[head tail].include?(key) ||
                   exclude_fields.include?(key)
 
-        # Rename the key if needed
         key = rename_fields[key] || key
 
         case value
@@ -143,46 +107,23 @@ namespace :export do
         end
       end
 
-      # Move the fields in `bottom_fields` to the bottom of the YAML
       metadata = metadata.sort_by { |key, _| bottom_fields.include?(key) ? 1 : 0 }.to_h
 
-      # Handle the license field
       license_value = object.attributes['license']
       license_items = license_value.is_a?(ActiveTriples::Relation) ? license_value.to_a.reject(&:nil?) : []
-      metadata['license'] = if license_items.empty?
-                               ""
-                             elsif license_items.length == 1
-                               license_items.first.to_s
-                             else
-                               license_items.map(&:to_s)
-                             end
-
-      # Replace "http://" with "https://" in license, if it exists
+      metadata['license'] = license_items.empty? ? "" : license_items.map(&:to_s)
       metadata['license'] = metadata['license'].gsub('http://', 'https://') unless metadata['license'].nil?
 
-      # If license is empty or "Unknown", handle rights_statement; otherwise, skip it
       if metadata['license'].empty? || metadata['license'] == "Unknown"
-        # Set default license to "Unknown" if it’s empty
         metadata['license'] = "Unknown" if metadata['license'].empty?
 
-        # Handle the rights_statement field
         rights_statement_value = object.attributes['rights_statement']
         rights_statement_items = rights_statement_value.is_a?(ActiveTriples::Relation) ? rights_statement_value.to_a.reject(&:nil?) : []
-        metadata['rights_statement'] = if rights_statement_items.empty?
-                                           "https://rightsstatements.org/page/InC-EDU/1.0/"
-                                         elsif rights_statement_items.length == 1
-                                           rights_statement_items.first.to_s
-                                         else
-                                           rights_statement_items.map(&:to_s)
-                                         end
-
-        # Replace "http://" with "https://" in rights_statement, if it exists
+        metadata['rights_statement'] = rights_statement_items.empty? ? "https://rightsstatements.org/page/InC-EDU/1.0/" : rights_statement_items.map(&:to_s)
         metadata['rights_statement'] = metadata['rights_statement'].gsub('http://', 'https://') unless metadata['rights_statement'].nil?
       end
 
-      file_set_data = {} # Hash to store file_set_id => filename pairs
-
-      # Process each file and sort them into extension-based folders
+      file_set_data = {}
       object.file_sets.each do |file_set|
         begin
           filename = file_set.attributes["title"][0].dup.force_encoding('ASCII-8BIT')
@@ -193,19 +134,15 @@ namespace :export do
 
           # Build file set dict for metadata.yml
           file_set_data[file_set.id] = filename
+
           # Set original_file and original_format
           if file_set.id == object.representative_id
             metadata["original_file_legacy"] = filename
-            if filename.downcase.end_with?('.pdf')
-              metadata["behavior"] = "paged"
-            else
-              metadata["behavior"] = "individuals"
-            end
+            metadata["behavior"] = filename.downcase.end_with?('.pdf') ? "paged" : "individuals"
           end
 
           # Skip video files except for .webm
           next if %w[mov mp4 avi].include?(file_extension) # add more extensions if needed
-          # Continue with webm files or other types
           puts "\tExporting file: #{filename}"
 
           # Create the subdirectory for the extension
@@ -215,56 +152,35 @@ namespace :export do
           if file_set.files.any?
             file_path = File.join(extension_directory, filename)
 
-            # Write in chunks to avoid memory overload
-            File.open(file_path, 'wb') do |output_file|
-              file_set.files.each do |file|
-                binary_content = file.content.force_encoding('ASCII-8BIT')
+            # Only rescue errors in this specific file-writing block
+            begin
+              # Open the output file in binary mode
+              File.open(file_path, 'wb') do |output_file|
+                file_set.files.each do |file|
+                  binary_content = file.content
 
-                # Write in chunks to avoid memory overload
-                buffer_size = 1024 * 1024 # 1MB
-                offset = 0
-                while offset < binary_content.bytesize
-                  chunk = binary_content[offset, buffer_size]
-                  output_file.write(chunk)
-                  offset += buffer_size
+                  # Stream directly in chunks if content length is available
+                  buffer_size = 1024 * 1024 # 1MB
+                  while chunk = binary_content.read(buffer_size)
+                    output_file.write(chunk)
+                  end
                 end
               end
-            end
 
-            puts "\tFile exported: #{file_path}"
-            successful_exports += 1
+              puts "\tFile exported: #{file_path}"
+              successful_exports += 1
 
-            if collection_id
-              File.open(log_file, 'a') { |f| f.puts("\t --> Exported #{id_string} successfully") }
-            else
-              File.open(log_file, 'a') { |f| f.puts("Exported #{id_string} successfully") }
+              # Log the successful export
+              log_msg = collection_id ? "\t --> Exported #{id_string} successfully" : "Exported #{id_string} successfully"
+              File.open(log_file, 'a') { |f| f.puts(log_msg) }
+
+            rescue NoMemoryError => e
+              puts "Memory error encountered while exporting #{filename}: #{e.message}. Skipping file."
+              next
             end
           end
-        rescue NoMemoryError => e
-          puts "\tMemory error processing file set ID #{file_set.id}: #{e.message}. Skipping this file set."
-          #next # Continue to the next file set
-        rescue StandardError => e
-          puts "\tError processing file set ID #{file_set.id}: #{e.message}"
-        rescue => e
-          puts "\tError processing file #{file_set.id}: #{e.message}"
-          next
         end
       end
-
-      # Add list of file set ids to metadata.yml
-      metadata["file_sets"] = file_set_data
-
-      # Write metadata to YAML
-      metadata_file = File.join(export_directory, 'metadata.yml')
-      File.open(metadata_file, 'w') { |f| f.write(metadata.to_yaml) }
-      #puts "\tMetadata exported to: #{metadata_file}"
-
-    end # End of object_ids.each
-    if collection_id
-      File.open(log_file, 'a') do |f|
-        f.puts("Total successful exports: #{successful_exports} for collection #{collection_id}")
-      end
     end
-    puts "Successfully exported #{successful_exports} files."
   end
 end
