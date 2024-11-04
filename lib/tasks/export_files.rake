@@ -85,25 +85,33 @@ namespace :export do
       rename_fields = { "subject" => "subjects", "accession" => "preservation_package", "date_uploaded" => "date_published", "date_created" => "date_display" }
       bottom_fields = ["date_published"]
 
-      object.attributes.each do |key, value|
-        next if value.nil? || (value.is_a?(String) && value.empty?) ||
-                  (value.respond_to?(:empty?) && value.empty?) ||
-                  %w[head tail].include?(key) ||
-                  exclude_fields.include?(key)
+      # Check for visibility and log if it's not open
+      if object.attributes['visibility'] && object.attributes['visibility'] != "open"
+        metadata['visibility'] = "closed"
+        log_msg = "Skipping file export for #{object.id}, visibility not open"
+        File.open(log_file, 'a') { |f| f.puts(log_msg) }
+      else
+        # Process other attributes
+        object.attributes.each do |key, value|
+          next if value.nil? || (value.is_a?(String) && value.empty?) ||
+                    (value.respond_to?(:empty?) && value.empty?) ||
+                    %w[head tail].include?(key) ||
+                    exclude_fields.include?(key)
 
-        key = rename_fields[key] || key
+          key = rename_fields[key] || key
 
-        case value
-        when ActiveTriples::Relation
-          items = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
-          metadata[key] = items.length == 1 ? items.first.to_s : items unless items.empty?
-        when RDF::URI
-          metadata[key] = value.to_s
-        when Array
-          filtered_items = value.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
-          metadata[key] = filtered_items unless filtered_items.empty?
-        else
-          metadata[key] = value.to_s
+          case value
+          when ActiveTriples::Relation
+            items = value.to_a.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+            metadata[key] = items.length == 1 ? items.first.to_s : items unless items.empty?
+          when RDF::URI
+            metadata[key] = value.to_s
+          when Array
+            filtered_items = value.reject { |v| v.nil? || (v.is_a?(String) && v.empty?) }
+            metadata[key] = filtered_items unless filtered_items.empty?
+          else
+            metadata[key] = value.to_s
+          end
         end
       end
 
