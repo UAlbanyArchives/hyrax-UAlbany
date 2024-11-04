@@ -153,13 +153,13 @@ namespace :export do
           # Skip exporting non-open files
           if object.attributes['visibility'] != "open"
             log_msg = "\t! Skipping file export for #{object.id}, visibility not open"
-            log_msg << collection_id ? "\t --> Exported #{id_string} successfully" : "Exported #{id_string} successfully"
+            log_msg << (collection_id ? "\t --> Exported #{id_string} successfully" : "Exported #{id_string} successfully")
             File.open(log_file, 'a') { |f| f.puts(log_msg) }
 
           # Skip video files except for .webm
           elsif %w[mov mp4 avi].include?(file_extension) # add more extensions if needed
             log_msg = "\t! Skipping video file export for #{object.id}"
-            log_msg << collection_id ? "\t --> Exported #{id_string} successfully" : "Exported #{id_string} successfully"
+            log_msg << (collection_id ? "\t --> Exported #{id_string} successfully" : "Exported #{id_string} successfully")
             File.open(log_file, 'a') { |f| f.puts(log_msg) }
 
           else
