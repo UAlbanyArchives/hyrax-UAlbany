@@ -141,6 +141,9 @@ namespace :export do
             metadata["behavior"] = filename.downcase.end_with?('.pdf') ? "paged" : "individuals"
           end
 
+          # Skip exporting non-open files
+          next if object.attributes['visibility'] != "open"
+
           # Skip video files except for .webm
           next if %w[mov mp4 avi].include?(file_extension) # add more extensions if needed
           puts "\tExporting file: #{filename}"
