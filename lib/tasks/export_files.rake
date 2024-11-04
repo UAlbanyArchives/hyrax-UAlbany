@@ -85,18 +85,20 @@ namespace :export do
       rename_fields = { "subject" => "subjects", "accession" => "preservation_package", "date_uploaded" => "date_published", "date_created" => "date_display" }
       bottom_fields = ["date_published"]
 
-      # Check for visibility and log if it's not open
-      if object.attributes['visibility'] && object.attributes['visibility'] != "open"
-        metadata['visibility'] = "closed"
-        log_msg = "Skipping file export for #{object.id}, visibility not open"
-        File.open(log_file, 'a') { |f| f.puts(log_msg) }
-      else
-        # Process other attributes
-        object.attributes.each do |key, value|
-          next if value.nil? || (value.is_a?(String) && value.empty?) ||
-                    (value.respond_to?(:empty?) && value.empty?) ||
-                    %w[head tail].include?(key) ||
-                    exclude_fields.include?(key)
+
+      # Process other attributes
+      object.attributes.each do |key, value|
+        next if value.nil? || (value.is_a?(String) && value.empty?) ||
+                  (value.respond_to?(:empty?) && value.empty?) ||
+                  %w[head tail].include?(key) ||
+                  exclude_fields.include?(key)
+
+        # Check for visibility and log if it's not open
+        if key == 'visibility' && value != "open"
+          metadata['visibility'] = "closed"
+          log_msg = "\t! Skipping file export for #{object.id}, visibility not open"
+          File.open(log_file, 'a') { |f| f.puts(log_msg) }
+        else
 
           key = rename_fields[key] || key
 
@@ -114,6 +116,7 @@ namespace :export do
           end
         end
       end
+      
 
       metadata["date_structured"] = ""
       metadata = metadata.sort_by { |key, _| bottom_fields.include?(key) ? 1 : 0 }.to_h
