@@ -96,8 +96,6 @@ namespace :export do
         # Check for visibility and log if it's not open
         if key == 'visibility' && value != "open"
           metadata['visibility'] = "closed"
-          log_msg = "\t! Skipping file export for #{object.id}, visibility not open"
-          File.open(log_file, 'a') { |f| f.puts(log_msg) }
         else
 
           key = rename_fields[key] || key
@@ -153,44 +151,51 @@ namespace :export do
           end
 
           # Skip exporting non-open files
-          next if object.attributes['visibility'] != "open"
+          if object.attributes['visibility'] != "open"
+            log_msg = "\t! Skipping file export for #{object.id}, visibility not open"
+            File.open(log_file, 'a') { |f| f.puts(log_msg) }
 
           # Skip video files except for .webm
-          next if %w[mov mp4 avi].include?(file_extension) # add more extensions if needed
-          puts "\tExporting file: #{filename}"
+          elsif %w[mov mp4 avi].include?(file_extension) # add more extensions if needed
+            log_msg = "\t! Skipping video file export for #{object.id}"
+            File.open(log_file, 'a') { |f| f.puts(log_msg) }
 
-          # Create the subdirectory for the extension
-          extension_directory = File.join(export_directory, file_extension)
-          FileUtils.mkdir_p(extension_directory)
+          else
+            puts "\tExporting file: #{filename}"
 
-          if file_set.files.any?
-            file_path = File.join(extension_directory, filename)
+            # Create the subdirectory for the extension
+            extension_directory = File.join(export_directory, file_extension)
+            FileUtils.mkdir_p(extension_directory)
 
-            # Only rescue errors in this specific file-writing block
-            begin
-              # Retrieve the binary content directly
-              file_set.files.each do |file|
-                if file.content.encoding == Encoding::ASCII_8BIT
-                  # Write the binary content to a file in binary mode
-                  File.open(file_path, 'wb') do |output_file|
-                    output_file.write(file.content)
+            if file_set.files.any?
+              file_path = File.join(extension_directory, filename)
+
+              # Only rescue errors in this specific file-writing block
+              begin
+                # Retrieve the binary content directly
+                file_set.files.each do |file|
+                  if file.content.encoding == Encoding::ASCII_8BIT
+                    # Write the binary content to a file in binary mode
+                    File.open(file_path, 'wb') do |output_file|
+                      output_file.write(file.content)
+                    end
                   end
                 end
+
+                puts "\tFile exported: #{file_path}"
+                successful_exports += 1
+
+                # Log the successful export
+                log_msg = collection_id ? "\t --> Exported #{id_string} successfully" : "Exported #{id_string} successfully"
+                File.open(log_file, 'a') { |f| f.puts(log_msg) }
+
+              rescue NoMemoryError => e
+                puts "Memory error encountered while exporting #{filename}: #{e.message}. Skipping file."
+                #next
+              rescue StandardError => e
+                puts "Error encountered while exporting #{filename}: #{e.message}. Skipping file."
+                #next
               end
-
-              puts "\tFile exported: #{file_path}"
-              successful_exports += 1
-
-              # Log the successful export
-              log_msg = collection_id ? "\t --> Exported #{id_string} successfully" : "Exported #{id_string} successfully"
-              File.open(log_file, 'a') { |f| f.puts(log_msg) }
-
-            rescue NoMemoryError => e
-              puts "Memory error encountered while exporting #{filename}: #{e.message}. Skipping file."
-              #next
-            rescue StandardError => e
-              puts "Error encountered while exporting #{filename}: #{e.message}. Skipping file."
-              #next
             end
           end
         end
