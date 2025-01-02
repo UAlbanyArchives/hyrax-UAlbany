@@ -28,7 +28,7 @@ namespace :export do
     elsif collection_id
       collection_ids << collection_id
     end
-
+    puts collection_ids
     object_ids = []
     if id_string
       object_ids << id_string
