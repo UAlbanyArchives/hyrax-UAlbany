@@ -24,7 +24,7 @@ $(document).ready(function(){
 						$parentLink.children("a").attr("href", $urlRoot + data['data']['attributes']['parent_ssim']['attributes']['value'][i])
 		  			}
 		  			$parentLink.children("a").text($("<textarea />").html(data['data']['attributes']['parent_unittitles_ssm']['attributes']['value'][i]).text())
-					$("h5.collection-name").text($("<textarea />").html(data['data']['attributes']['collection_ssm']['attributes']['value'][0]).text())
+					$("h5.collection-name").text($("<textarea />").html(data['data']['attributes']['collection_ssim']['attributes']['value']).text())
 			  	}
 				$(".arclightRecord").children("a").text($("<textarea />").html(data['data']['attributes']['normalized_title_ssm']['attributes']['value'][0]).text());
 			  }
@@ -59,8 +59,8 @@ $(document).ready(function(){
 			  url: $parentURI,
 			  success: function(data) {
 			  	/*alert(data['data']['attributes']['normalized_title_ssm']['attributes']['value']);*/
-			  	$(".arclightReify").children("a").text(data['data']['attributes']['collection_ssm']['attributes']['value'][0]);
-				$("h5.collection-name").text(data['data']['attributes']['collection_ssm']['attributes']['value'][0]);
+			  	$(".arclightReify").children("a").text(data['data']['attributes']['collection_ssim']['attributes']['value']);
+				$("h5.collection-name").text(data['data']['attributes']['collection_ssim']['attributes']['value']);
 			  }
 			});
 		}
