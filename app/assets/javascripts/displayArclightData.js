@@ -26,7 +26,7 @@ $(document).ready(function(){
 		  			$parentLink.children("a").text($("<textarea />").html(data['data']['attributes']['parent_unittitles_ssm']['attributes']['value'][i]).text())
 					$("h5.collection-name").text($("<textarea />").html(data['data']['attributes']['collection_ssim']['attributes']['value']).text())
 			  	}
-				$(".arclightRecord").children("a").text($("<textarea />").html(data['data']['attributes']['normalized_title_ssm']['attributes']['value'][0]).text());
+				$(".arclightRecord").children("a").text($("<textarea />").html(data['data']['attributes']['normalized_title_ssm']['attributes']['value']).text());
 			  }
 			});
 			$('.parent_context').each(function (index, element) {
@@ -41,7 +41,7 @@ $(document).ready(function(){
 				  url: $parentURI,
 				  success: function(data) {
 				  	parent = data['data']['attributes']
-				  	$(this).children(".parent_title").children(".record_parent").text(parent['normalized_title_ssm']['attributes']['value'][0])
+				  	$(this).children(".parent_title").children(".record_parent").text(parent['normalized_title_ssm']['attributes']['value'])
 					if ('scopecontent_ssm' in parent) {
 						for (i = 0; i < parent['scopecontent_ssm']['attributes']['value'].length; i++) {
 				  			$(this).children(".parent_description").append(decodeHTML(parent['scopecontent_ssm']['attributes']['value'][i]))
@@ -101,7 +101,7 @@ $(document).ready(function(){
 					  url: $uri,
 					  success: function(data) {
 						/*console.log(data['data']['attributes']['title_ssm']['attributes']['value'][0]);*/
-					  	$(this).text(data['data']['attributes']['title_ssm']['attributes']['value'][0]);
+					  	$(this).text(data['data']['attributes']['title_ssm']['attributes']['value']);
 					  }
 					});
 				});
