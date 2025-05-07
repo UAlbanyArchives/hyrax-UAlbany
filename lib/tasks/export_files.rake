@@ -86,7 +86,7 @@ namespace :export do
         next
       end
 
-      export_directory = "/media/Library/SPE_DAO/#{collection_number}/#{id_string}"
+      export_directory = "/media/Library/SPE_DAO/aa_migration/#{collection_number}/#{id_string}"
       if Dir.exist?(export_directory) && !force_overwrite
         puts "\tExport directory #{export_directory} already exists. Use 'rake export:export_files ID=<id_string> FORCE=true' to overwrite."
         next
