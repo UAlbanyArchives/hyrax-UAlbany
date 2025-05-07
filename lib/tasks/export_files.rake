@@ -43,7 +43,7 @@ namespace :export do
         rows = 100
 
         begin
-          solr_url = "https://solr2020.library.albany.edu:8984/solr/hyrax/select?q=collection_number_sim:#{collection_id}&rows=#{rows}&start=#{start}&wt=json"
+          solr_url = "https://solr2020.library.albany.edu:8984/solr/hyrax/select?fq=system_modified_dtsi:[2025-01-01T00:00:00Z TO 2025-04-30T23:59:59Z]&rows=#{rows}&start=#{start}&wt=json"
           uri = URI(solr_url)
           response = Net::HTTP.get(uri)
           json_response = JSON.parse(response)
